@@ -71,7 +71,7 @@ privacy:
     respectDoNotTrack: yes
     useSessionStorage: no
   twitter:
-    disable: no
+    disable: yes
     enableDNT: yes
     simple: no
 markup:
