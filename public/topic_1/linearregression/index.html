@@ -2,9 +2,9 @@
 <html lang="en-us">
   <head><link rel="icon" href="/favicon_main.svg"><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta property="og:url"  content="https://ozturkfemre.netlify.app/credits/" />
-    <meta property="og:type" content="article" /><meta property="og:title" content="Credits" /><meta property="og:description" content="" /><meta property="og:image:width"  content="375" />
-        <meta property="og:image:height" content="250" /><meta property="og:image" content="https://ozturkfemre.netlify.app/images/sum_hu2319ed292ea941f25cfb6ae89784bf56_55250_600x0_resize_box_3.png" /><title>Fatih Emre Ozturk - Credits</title>
+<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta property="og:url"  content="https://ozturkfemre.netlify.app/topic_1/linearregression/" />
+    <meta property="og:type" content="article" /><meta property="og:title" content="Linear Regression(OLS) Project" /><meta property="og:description" content="Trying to predict the wages of workers in the Mid-Atlantic region using a classical linear regression model" /><meta property="og:image:width"  content="375" />
+        <meta property="og:image:height" content="250" /><meta property="og:image" content="https://ozturkfemre.netlify.app/images/sum_hu2319ed292ea941f25cfb6ae89784bf56_55250_600x0_resize_box_3.png" /><title>Fatih Emre Ozturk - Linear Regression(OLS) Project</title>
 
     
 <link href="https://fonts.googleapis.com/css?family=Source&#43;Code&#43;Pro" rel="stylesheet">
@@ -125,12 +125,166 @@
   <div class="container">
     <div class="columns">
       <div class="column is-centered-tablet-portrait">
-        <h1 class="title is-2 section-title">Credits</h1>
+        <h1 class="title is-2 section-title">Linear Regression(OLS) Project</h1>
         <h5 class="subtitle is-5 is-muted"></h5>
         <div class="divider"></div>
         
         <section class="section content has-text-justified">
-          <p>Theme is builded by <a href="https://github.com/PippoRJ">Roberto Jordaney.</a></p>
+          <hr>
+<p>description: In this study, I tried to predict the wages of workers in the Mid-Atlantic region using a classical linear regression model. The data set is not very suitable for linear regression. Since most of the regression analysis studies on the internet are done with data sets that are quite suitable for regression, I hope that this study can give an idea about how to act when faced with a difficult data set to work with. All coding is done in R. Both Turkish and English .Rmd and .R files are available.</p>
+<p>link</p>
+<hr>
+<h2 id="aim-of-the-projecthttpsgithubcomozturkfemreclassical_linear_regression">Aim of <a href="https://github.com/ozturkfemre/classical_linear_regression">the Project</a></h2>
+<p>In this study, I tried to estimate the wages of workers in the Mid-Atlantic region using a classical linear regression model. The data set is not very suitable for linear regression. Since most of the regression analysis studies on the internet are done with data sets that are quite suitable for regression, I hope that this study can give an idea about how to act when faced with a difficult data set to work with. All coding is done in R. Both <a href="https://github.com/ozturkfemre/classical_linear_regression/blob/main/TR/TR_report.Rmd">Turkish</a> and <a href="https://github.com/ozturkfemre/classical_linear_regression/blob/main/ENG/ENG_report.Rmd">English</a> .Rmd and .R files are available..</p>
+<h2 id="dataset-information">Dataset Information</h2>
+<p>The <a href="https://www.re3data.org/repository/r3d100011860">dataset</a> is taken from the <code>ISLR</code> package. The dataset contains information about wage and other information for a group of 3000 male workers in the Mid-Atlantic Region. There are 11 variables in the dataset. While 9 of the 11 variables are independent variables, there are 2 dependent variables. One is the salary of workers and the other is log(wage). The information of all variables can be found in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>year</td>
+<td>Year that wage information was recorded</td>
+</tr>
+<tr>
+<td>age</td>
+<td>Age of worker</td>
+</tr>
+<tr>
+<td>maritl</td>
+<td>A factor with levels <code>1. Never Married</code> <code>2. Married</code> <code>3. Widowed</code> <code>4. Divorced</code> and <code>5. Separated</code> indicating marital status</td>
+</tr>
+<tr>
+<td>race</td>
+<td>A factor with levels <code>1. White</code> <code>2. Black</code> <code>3. Asian</code> and <code>4. Other</code> indicating race</td>
+</tr>
+<tr>
+<td>education</td>
+<td>A factor with levels <code>1. &lt; HS Grad</code> <code>2. HS Grad</code> <code>3. Some College</code> <code>4. College Grad</code> and <code>5. Advanced Degree</code> indicating education level</td>
+</tr>
+<tr>
+<td>region</td>
+<td>Region of the country (mid-atlantic only)</td>
+</tr>
+<tr>
+<td>jobclass</td>
+<td>A factor with levels <code>1. Industrial</code> and <code>2. Information</code> indicating type of job</td>
+</tr>
+<tr>
+<td>health</td>
+<td>A factor with levels <code>1. &lt;=Good</code> and <code>2. &gt;=Very Good</code> indicating health level of worker</td>
+</tr>
+<tr>
+<td>health_ins</td>
+<td>A factor with levels <code>1. Yes</code> and <code>2. No</code> indicating whether worker has health insurance</td>
+</tr>
+<tr>
+<td>logwage</td>
+<td>Log of workers wage</td>
+</tr>
+<tr>
+<td>wage</td>
+<td>Workers raw wage</td>
+</tr>
+</tbody>
+</table>
+<h2 id="study">Study</h2>
+<p>The study section consists of eight parts:</p>
+<ol>
+<li>
+<p>Descriptive Statistics</p>
+</li>
+<li>
+<p>The First Model(contains all independent variables)</p>
+</li>
+<li>
+<p>Variable Selection</p>
+</li>
+<li>
+<p>Assumption Check</p>
+</li>
+<li>
+<p>Regression Diagnosis</p>
+</li>
+<li>
+<p>Model Development</p>
+</li>
+<li>
+<p>Assumption Check</p>
+</li>
+<li>
+<p>Conclusion</p>
+</li>
+</ol>
+<h3 id="descriptive-statistics">Descriptive Statistics</h3>
+<p>In the descriptive statistics section, descriptive statistics of each variable were analysed. These analyses were made separately for categorical and numerical variables.</p>
+<h4 id="data-visualization">Data Visualization</h4>
+<p>In this section, boxplots of numerical variables are analysed first. Plots are interpreted in detail. Then, the boxplots of the dependent variables according to the levels of the categorical variables are also drawn. In this way, it was examined whethere there is a linear relationship between ordinal variables and dependent variables. Then, pairplot was drawn in order to have an idea about the relationship between numerical variables and the dependent variable. In addition, correlation analysis was also performed. Finally, the distributions of the two variables that are likely to be the dependent variable were analysed and it was decided which variable to choose.</p>
+<h3 id="the-first-model">The First Model</h3>
+<p>In this section, the full model was created with all variables in the data set. Model Validity was checked with F hypothesis test. Finally, Coefficient analysis was performed.</p>
+<h3 id="variable-selection">Variable Selection</h3>
+<p>In this section, the best subset selection method is used to decide which variables are included in the best three models. Best subset selection involves fitting all possible subsets of the predictor variables and selecting the best model based on some criteria, such as the Akaike information criterion (AIC), the Bayesian information criterion (BIC) or CP. Then, the best of the three model options was selected with performance metrics such as RMSE and MAE.</p>
+<h3 id="assumption-check">Assumption Check</h3>
+<p>The following assumptions were checked in this section:</p>
+<ol>
+<li>
+<p><strong>Multicollinearity</strong> which can be stated as the independent variables should not be highly correlated with each other. This checked by computing VIF.</p>
+</li>
+<li>
+<p><strong>Normality</strong> which can be stated as the errors should be normally distributed. This checked by examining a histogram of the residuals, a normal probability plot of the residuals, and hypothesis tests.</p>
+</li>
+<li>
+<p><strong>Homoscedasticity</strong> which can be stated as the variance of the errors should be constant across all levels of the independent variable(s). This checked by plotting the residuals against the predicted values and BP hypothesis test.</p>
+</li>
+</ol>
+<h3 id="regression-diagnosis">Regression Diagnosis</h3>
+<p>In this section, the performance of the model was checked. Some improvements to be made in the model development section were decided by applying the following procedures:</p>
+<ol>
+<li>
+<p><strong>Outliers</strong> which are the observation that are far from the other observations in the dataset. They identified by examining scatterplot of the standardized residuals against the fitted values.</p>
+</li>
+<li>
+<p><strong>Leverage</strong> which is a measure of how far an observation is from the mean of the independent variables. Since an observation with high leverage may have a large influence on the model, they identified by examining scatterplot of the standardized residuals against the fitted values.</p>
+</li>
+<li>
+<p><strong>Cook&rsquo;s Distance</strong> which is a measure of the influence of each observation on the regression model. Since large values of Cook&rsquo;s distance indicate that the corresponding observation has a large influence on the model, it needs to be examined.</p>
+</li>
+</ol>
+<h3 id="model-development">Model Development</h3>
+<p>In this section, efforts were made to ensure that the model meets the assumptions by applying the following steps:</p>
+<ol>
+<li>
+<p><strong>Data manipulation:</strong> not all levels of some categorical variables were significant. Therefore, changes were made to the data to exclude the insignificant variables from the model.</p>
+</li>
+<li>
+<p><strong>Normalization:</strong> non-normal distribution of the dependent variable may cause errors to be non-normally distributed. For this reason, some transformations were applied to the dependent variable and normal distribution was attempted.</p>
+</li>
+<li>
+<p><strong>Outliers:</strong> Outliers were removed from the data set and the model was improved.</p>
+</li>
+</ol>
+<h3 id="assumpiton-check">Assumpiton Check</h3>
+<p>In this section, it is checked whether the model reconstructed after the changes made in the data set meets the assumptions. Although normality and multicolinearity assumptions were met, homoscedasticity assumption was not met.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>As a result of all these analyses:</p>
+<ul>
+<li>
+<p>The assurance of normality of the dependent variable in the model increased the values of Rsquare and Adj.Rsquare, but it was still not possible to ensure the assumptions.</p>
+</li>
+<li>
+<p>To ensure these assumptions, the observations that were detected as outliers based on standardized errors were removed from the data set and a new model was established. When hypothesis tests were applied in this model, it was noticed that the assumptions were still not met despite the approximation.</p>
+</li>
+<li>
+<p>It was also noticed in the descriptive statistics that there was no linear relationship between the variables. The only relationship we could say was linear was between the dependent variable and education. Therefore, it may be more logical to try this data set with non-linear regression models.</p>
+</li>
+<li>
+<p>Adding new independent variables that could have a linear relationship with the wage variable might also be logical.</p>
+</li>
+</ul>
 
         </section>
       </div>

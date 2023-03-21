@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><link rel="icon" href="/favicon_main.svg"><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta property="og:url"  content="https://ozturkfemre.netlify.app/post/kmeans/" />
+    <meta property="og:type" content="article" /><meta property="og:title" content="Unsupervised Learning in R | k-means" /><meta property="og:description" content="Implementation of k-means in R" /><meta property="og:image:width"  content="375" />
+        <meta property="og:image:height" content="250" /><meta property="og:image" content="https://ozturkfemre.netlify.app/images/sum_hu2319ed292ea941f25cfb6ae89784bf56_55250_600x0_resize_box_3.png" /><title>Fatih Emre Ozturk - Unsupervised Learning in R | k-means</title>
+
+    
+<link href="https://fonts.googleapis.com/css?family=Source&#43;Code&#43;Pro" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source&#43;Code&#43;Pro" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source&#43;Code&#43;Pro" rel="stylesheet"><link rel="stylesheet" type="text/css" href="/css/style.cefb89a0a078dee69d33abe22f41791a896708f5a323b1187fa5e3dd8566e0cb.css" integrity="sha256-zvuJoKB43uadM6viL0F5GolnCPWjI7EYf6Xj3YVm4Ms=">
+<link rel="stylesheet" type="text/css" href="/css/monokai-sublime.9.15.8.min.91376415864fdd3a92be524052267afece4bdb1bb8c6c754f5e60c5ac28e93be.css" integrity="sha256-kTdkFYZP3TqSvlJAUiZ6/s5L2xu4xsdU9eYMWsKOk74=">
+<link rel="stylesheet" type="text/css" href="/css/all.min.2d91c07e15fc26f2697117b326256c0a2b0586dd12a15c622a53cd47a9e54a1d.css" integrity="sha256-LZHAfhX8JvJpcRezJiVsCisFht0SoVxiKlPNR6nlSh0=">
+<link rel="stylesheet" type="text/css" href="/css/refresh.ccfd23f8053a1571a3e474a6877f42a6a1924c6bbf1b64c7704b49a0353b4650.css" integrity="sha256-zP0j&#43;AU6FXGj5HSmh39CpqGSTGu/G2THcEtJoDU7RlA=">
+<link rel="stylesheet" type="text/css" href="/css/devicon.min.149016fbf45c8bc157d6f55ce3ee875feaa3f90446bf7d151fbc16a9f21a8859.css" integrity="sha256-FJAW&#43;/Rci8FX1vVc4&#43;6HX&#43;qj&#43;QRGv30VH7wWqfIaiFk=">
+    
+
+  </head>
+  <body>
+     
+
+    <div id="preloader">
+      <div id="status"></div>
+    </div><nav class="navbar is-fresh is-transparent no-shadow" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+
+      
+      
+      
+      <a class="navbar-item">
+        <div class="menu-icon-wrapper left-menu-icon-wrapper" style="visibility: visible;">
+          <svg width="1000px" height="1000px">
+            <path class="path1" d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800"></path>
+            <path class="path2" d="M 300 500 L 700 500"></path>
+            <path class="path3" d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200"></path>
+          </svg>
+          <button id="menu-icon-trigger" class="menu-icon-trigger"></button>
+        </div>
+        <div class="navbar-item left-menu-icon-wrapper">
+          Tags
+        </div>
+      </a>
+
+      <div class="navbar-item is-expanded"></div>
+      <a class="navbar-item is-hidden-desktop">  
+        <div data-target="navbar-menu" class="navbar-item right-menu-icon-wrapper is-hidden-desktop">
+          Menu
+        </div>
+        <div data-target="navbar-menu" class="menu-icon-wrapper right-menu-icon-wrapper" style="visibility: visible;">
+          <svg width="1000px" height="1000px">
+            <path class="path1" d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800"></path>
+            <path class="path2" d="M 300 500 L 700 500"></path>
+            <path class="path3" d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200"></path>
+          </svg>
+          <button id="menu-icon-trigger" class="menu-icon-trigger"></button>
+        </div>
+      </a>
+    </div><div id="navbar-menu" class="navbar-menu is-static">
+      
+      <div class="navbar-end">
+        <a href="/about/" class="navbar-item is-secondary">About Me</a><a href="/topic_2/" class="navbar-item is-secondary">Technical Training</a><a href="/post/" class="navbar-item is-secondary">Posts</a><a href="/topic_1/" class="navbar-item is-secondary">Projects</a>
+        
+        
+        
+        
+        
+        
+        
+      </div>
+    </div>
+  </div>
+</nav>
+<nav id="navbar-clone" class="navbar is-fresh is-transparent" role="navigation" aria-label="main navigation">
+  <div class="container">
+      <div class="navbar-brand">
+  
+        
+        
+        
+        <a class="navbar-item">
+          <div class="menu-icon-wrapper left-menu-icon-wrapper" style="visibility: visible;">
+            <svg width="1000px" height="1000px">
+              <path class="path1" d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800"></path>
+              <path class="path2" d="M 300 500 L 700 500"></path>
+              <path class="path3" d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200"></path>
+            </svg>
+            <button id="menu-icon-trigger" class="menu-icon-trigger"></button>
+          </div>
+          <div class="navbar-item left-menu-icon-wrapper">
+            Tags
+          </div>
+        </a>
+  
+        <div class="navbar-item is-expanded"></div>
+        <a class="navbar-item is-hidden-desktop">  
+          <div data-target="cloned-navbar-menu" class="navbar-item right-menu-icon-wrapper is-hidden-desktop">
+            Menu
+          </div>
+          <div data-target="cloned-navbar-menu" class="menu-icon-wrapper right-menu-icon-wrapper" style="visibility: visible;">
+            <svg width="1000px" height="1000px">
+              <path class="path1" d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800"></path>
+              <path class="path2" d="M 300 500 L 700 500"></path>
+              <path class="path3" d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200"></path>
+            </svg>
+            <button id="menu-icon-trigger" class="menu-icon-trigger"></button>
+          </div>
+        </a>
+      </div><div id="cloned-navbar-menu" class="navbar-menu is-static">
+        <div class="navbar-end"><a href="/about/" class="navbar-item is-secondary">About Me</a><a href="/topic_2/" class="navbar-item is-secondary">Technical Training</a><a href="/post/" class="navbar-item is-secondary">Posts</a><a href="/topic_1/" class="navbar-item is-secondary">Projects</a>
+          
+          
+          
+
+          
+          
+          
+        
+        </div>
+      </div>
+    </div>
+  </nav>
+<section class="section is-medium">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-centered-tablet-portrait">
+        <h1 class="title is-2 section-title">Unsupervised Learning in R | k-means</h1>
+        <h5 class="subtitle is-5 is-muted"></h5>
+        <div class="divider"></div>
+        
+        <section class="section content has-text-justified">
+          <hr>
+<p>In the second post of the unsupervised statistical learning in R series, I will share with you the k-means clustering algorithm. I believe, at first, it is beneficial to define what clustering is, before explaining k-means clustering. Clustering can be defined as partitioning observation in a data set according to their similarity. We expect that observations in the same cluster to be similar as much as possible. Conversely, observations in the different clusters need to be dissimilar. What do we mean by this <em>similarity</em>? Similarity in the clustering algorithms are calculating as distance. Observations which are closest to each other are considered as the similar observations. There are more than 30 metrics that can bu used to calculate distance between two points. However, Euclidean and Manhattan distance are the most widely used distance metrics.</p>
+<hr>
+<h3 id="what-isk-means">What is k-means?</h3>
+<p>The center of each cluster, or centroid, in k-means clustering corresponds to the mean of the points allocated to the cluster. The fundamental principle of k-means clustering is to define clusters with the goal of minimizing total intra-cluster variation, also referred to as total within-cluster variation. Various k-means algorithms are available. The common approach is the Hartigan-Wong algorithm (1979), which sums the squared distances between items and the matching centroid to determine the total within-cluster variation[1],[2],[3]. The most crucial point in k-means is to decide the cluster number k. There are lots of methods to determine optimum number of cluster, however, you can see the most common ones in <a href="https://medium.com/@ozturkfemre/unsupervised-learning-determination-of-cluster-number-be8842cdb11">here</a>.</p>
+<p>Mathematical formula of the k-means is as follows:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*VHABEGVOjy9ZiTKz2l5XOA.png" alt=""></p>
+<p>where:</p>
+<ul>
+<li>
+<p>xi is a data point belonging to the cluster Ck</p>
+</li>
+<li>
+<p>μk is the mean value of the points assigned to the cluster Ck</p>
+</li>
+</ul>
+<h4 id="step-bystep">Step by Step</h4>
+<p>The steps to perform k-means clustering are:</p>
+<p><strong>Step 1:</strong></p>
+<p>Select k, the number of clusters, that you want to form in the data. As I mentioned before, there are lots of methods to determine the optimal number of clusters. You can see the <a href="https://medium.com/@ozturkfemre/unsupervised-learning-determination-of-cluster-number-be8842cdb11">first post </a>of this series for detailed information about optimal cluster number determination.</p>
+<p><strong>Step 2:</strong></p>
+<p>Select k random points from the dataset as the initial centroids (cluster center).</p>
+<p>As first assume we have a data like the follows:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*pJDM6rCwC9L5JipM" alt=""></p>
+<p>We need to select a random points to be cluster center. This will look like the following:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*CSgBnWMfH9x0nF-m" alt=""></p>
+<p><strong>Step 3:</strong></p>
+<p>Assign each observation to the cluster whose centroid is closest to it. We will start to assign each point as follows.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*sdznnu0uK86FnD9P" alt=""></p>
+<p>At the end of this step, our process will look like the follows.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*Necb5b0iV-aWdofa" alt=""></p>
+<p><strong>Step 4:</strong></p>
+<p>Recalculate the centroids as the mean of all the observations in each cluster. Consider the last step. All of the points in the data is clustered. At this step, we are calculating the new centroids as follows.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*N_2eU_8ZhPeeaL-F" alt=""></p>
+<p><strong>Step 5:</strong></p>
+<p>Repeat steps 3 and 4 until the cluster assignments no longer change or reach a maximum number of iterations. At the end of these iterations our clustering will look like the follows:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*6G4K1Pq9PgTCPfaH" alt=""></p>
+<hr>
+<h3 id="data-preparation-fork-means">Data Preparation for k-means</h3>
+<p>In general, the data preparation for a cluster analysis in unsupervised learning should go as follows:</p>
+<ol>
+<li>
+<p>Missing values in the data should be eliminated/estimated.</p>
+</li>
+<li>
+<p>To make variables comparable, the data must be scaled or normalized. The process of standardization entails altering the variables so that their means are 0 and standard deviations are 1.[4]</p>
+</li>
+<li>
+<p>PCA can help to enhance the performance of a clustering algorithm by transforming the data into a new coordinate system that better separates the underlying clusters. This can lead to more accurate and meaningful results, especially for datasets with complex structures. [5]</p>
+</li>
+<li>
+<p>PCA can be used to reduce the number of features in a high-dimensional dataset, which can help improve the performance of a clustering algorithm. By reducing the dimensionality, PCA can also help to reduce noise and eliminate multicollinearity in the data, making it easier to interpret the results of a clustering analysis.[6]</p>
+</li>
+</ol>
+<hr>
+<h3 id="k-means-inr">k-means in R</h3>
+<p>There are many packages and functions available to implement the k-means algorithm in R. In this article, I will show you the <code>kmeans</code> function in the <code>stats</code>package and the <code>eclust</code>function in the <code>factoextra</code>package. I will use <a href="https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+%28diagnostic%29">Breast Cancer Wisconsin</a> dataset from the UCI Machine Learning Repository.</p>
+<p>The dataset contains information about tumor cells. The task in this project was to extract the variable containing the information labeled as benign or malignant from the dataset and cluster the tumors as benign or malignant using clustering algorithms. There are 569 observations and 32 variables in the dataset. However, some variables are mean of the other variables. Thus, these variables are removed from the dataset. Moreover, ID and variable about class information is also removed. Given the high correlation between pairs of variables and the high dimensionality, I applied PCA to the dataset. I have not included this step as it is not the subject of this paper.</p>
+<p>If you read the first post, you will remember that I compared cluster number determination methods on the same dataset. All methods predominantly suggested two cluster numbers. That is why I will cluster the data for 2 clusters.</p>
+<p>We do clustering with the <code>kmeans</code>function and then we store the clustering result in the <code>km_data</code>object. Then we print this object with the <code>print</code>function.</p>
+<pre><code>km_data &lt;- kmeans(df, # data to cluster
+                  2, # k, cluster number
+                  nstart=25 # number of iteration
+                  ) 
+print(km_data)
+
+K-means clustering with 2 clusters of sizes 398, 171
+
+Cluster means:
+        PC1         PC2
+1  1.289695 -0.03214799
+2 -3.001746  0.07482399
+
+Clustering vector:
+  [1] 2 2 2 2 2 2 2 2 2 2 1 2 2 1 2 2 1 2 2 1 1 1 2 2 2 2 2 2 2 2 2 1 2 2 2 2 1 1 1 1 1 1 2 1 1 2 1 1 1 1 1 1 1 2 1 1 2 2 1 1 1 1 2 1 1 2 1 1
+ [69] 1 1 2 1 2 1 1 1 1 2 2 1 1 1 2 2 1 2 1 2 1 2 1 1 1 1 2 2 1 1 1 1 1 1 1 1 1 2 1 1 2 1 1 1 2 1 1 1 1 2 2 1 1 2 2 1 1 1 1 2 2 2 1 2 2 1 2 1
+[137] 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 2 1 1 1 2 1 1 1 1 2 2 1 2 1 1 1 2 1 1 1 2 1 1 1 1 2 1 1 2 2 1 1 1 1 1 1 1 1 2 1 1 1 2 1 2 2 2 1 1 2 2 2
+[205] 1 1 1 1 1 1 2 1 2 2 2 1 1 1 2 2 1 1 1 2 1 1 1 1 1 2 2 1 1 2 1 1 2 2 1 2 1 1 1 1 2 1 1 1 1 1 2 1 2 2 2 1 2 2 2 2 2 1 2 1 2 2 1 1 1 1 1 1
+[273] 2 1 1 1 1 1 1 1 2 1 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 2 1 2 1 1 1 1 2 2 2 1 1 1 1 2 1 2 1 2
+[341] 1 1 1 2 1 1 1 1 1 1 1 2 2 1 1 1 1 1 1 1 1 1 1 1 1 2 2 1 2 2 2 1 2 2 1 2 1 1 1 2 1 1 1 1 1 1 1 1 1 2 1 1 2 2 1 1 1 1 1 1 2 1 1 1 1 1 1 1
+[409] 2 1 1 1 1 1 1 1 1 2 1 1 1 2 1 1 1 1 1 1 1 1 2 1 2 2 1 1 1 1 1 1 1 2 1 1 2 1 2 1 1 2 1 2 1 1 1 1 1 1 1 1 2 2 1 1 1 1 1 1 2 1 1 1 1 1 1 1
+[477] 1 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 2 1 1 1 1 1 2 2 1 2 1 2 2 1 1 1 1 2 1 1 2 1 1 1 2 2 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 2 1 2 1 1 1 1 1 1 1 1
+[545] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 1 2 1
+
+Within cluster sum of squares by cluster:
+[1] 1121.768 1216.540
+ (between_SS / total_SS =  48.5 %)
+</code></pre>
+<p>When we examine the output, we first see how many elements there are for each cluster. It is noticed that there are 398 observations in the first cluster and 171 observations in the second cluster. It is possible to say that this is unbalanced. Then the cluster means section appears. In this section, we see the values taken by the centroids of each cluster. Since k-means takes the centroids as the mean of the cluster, it would not be wrong to say that we see the means of the clusters. In the clustering vector section, we see to which cluster each observation in the dataset is assigned. Each clustering algorithm assigns cluster names as 1,2,3&hellip;. The last section shows the within cluster sum of squares values for each cluster. This is an important value for the explanatory power of clustering. We want it to be as high as possible.</p>
+<p>Of course, it is quite possible to make a more detailed comment on this output. But this is not our only option. We can visualize the clustering result with the <code>fviz_cluster</code> function in the <code>factoextra</code> package. Since the factoextra package uses the <code>ggplot2</code> package for all visualizations, you can make the same changes to the ggplot2 plots that you can make to the graphs you plot with the fviz_cluster function.</p>
+<pre><code>library(factoextra)
+fviz_cluster(km_data,# clustering result 
+             data = pcadata, # data 
+             ellipse.type = &quot;convex&quot;, 
+             star.plot = TRUE, 
+             repel = TRUE, 
+             ggtheme = theme_minimal()
+) 
+</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*WYloUhMHjri_B-AbijSYVw.png" alt=""></p>
+<p>It may be possible to interpret this plot as follows:</p>
+<ul>
+<li>
+<p>Separation can be observed only in PC1 dimension.</p>
+</li>
+<li>
+<p>Within sum of square of the cluster 2 is much than the cluster 1.</p>
+</li>
+<li>
+<p>The reason of this needs to be the difference between observation numbers of the clusters.</p>
+</li>
+<li>
+<p>There is no visible overlap between clusters.</p>
+</li>
+</ul>
+<p>It is also possible to cluster data with <code>eclust</code>function from <code>factoextra package.</code></p>
+<pre><code>k2m_data &lt;- factoextra::eclust(df, # data
+                               &quot;kmeans&quot;, # clustering algorithm
+                               k = 2, # cluster number
+                               nstart = 25, # iteration number
+                               graph = F)
+k2m_data
+
+K-means clustering with 2 clusters of sizes 171, 398
+
+Cluster means:
+        PC1         PC2
+1 -3.001746  0.07482399
+2  1.289695 -0.03214799
+
+Clustering vector:
+  [1] 1 1 1 1 1 1 1 1 1 1 2 1 1 2 1 1 2 1 1 2 2 2 1 1 1 1 1 1 1 1 1 2 1 1 1 1 2 2 2 2 2 2 1 2 2 1 2 2 2 2 2 2 2 1 2 2 1 1 2 2 2 2 1 2 2 1 2 2
+ [69] 2 2 1 2 1 2 2 2 2 1 1 2 2 2 1 1 2 1 2 1 2 1 2 2 2 2 1 1 2 2 2 2 2 2 2 2 2 1 2 2 1 2 2 2 1 2 2 2 2 1 1 2 2 1 1 2 2 2 2 1 1 1 2 1 1 2 1 2
+[137] 2 2 1 2 2 2 2 2 2 2 1 2 2 2 2 2 1 2 2 2 1 2 2 2 2 1 1 2 1 2 2 2 1 2 2 2 1 2 2 2 2 1 2 2 1 1 2 2 2 2 2 2 2 2 1 2 2 2 1 2 1 1 1 2 2 1 1 1
+[205] 2 2 2 2 2 2 1 2 1 1 1 2 2 2 1 1 2 2 2 1 2 2 2 2 2 1 1 2 2 1 2 2 1 1 2 1 2 2 2 2 1 2 2 2 2 2 1 2 1 1 1 2 1 1 1 1 1 2 1 2 1 1 2 2 2 2 2 2
+[273] 1 2 2 2 2 2 2 2 1 2 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 1 2 1 2 2 2 2 1 1 1 2 2 2 2 1 2 1 2 1
+[341] 2 2 2 1 2 2 2 2 2 2 2 1 1 2 2 2 2 2 2 2 2 2 2 2 2 1 1 2 1 1 1 2 1 1 2 1 2 2 2 1 2 2 2 2 2 2 2 2 2 1 2 2 1 1 2 2 2 2 2 2 1 2 2 2 2 2 2 2
+[409] 1 2 2 2 2 2 2 2 2 1 2 2 2 1 2 2 2 2 2 2 2 2 1 2 1 1 2 2 2 2 2 2 2 1 2 2 1 2 1 2 2 1 2 1 2 2 2 2 2 2 2 2 1 1 2 2 2 2 2 2 1 2 2 2 2 2 2 2
+[477] 2 2 2 1 2 2 2 2 2 2 2 1 2 2 2 2 1 2 2 2 2 2 1 1 2 1 2 1 1 2 2 2 2 1 2 2 1 2 2 2 1 1 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 1 2 1 2 2 2 2 2 2 2 2
+[545] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 2 1 2
+
+Within cluster sum of squares by cluster:
+[1] 1216.540 1121.768
+ (between_SS / total_SS =  48.5 %)
+
+Available components:
+
+ [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;      
+[10] &quot;clust_plot&quot;   &quot;silinfo&quot;      &quot;nbclust&quot;      &quot;data&quot;   
+</code></pre>
+<p>If you examine the output of the k2m_data object, you can see that it gives almost the same output as the kmeans function. There will be other information that you can get from the clustering done with the <code>eclust</code>function. For example, with <code>k2m_data$silinfo</code> you can get the silhouette values for each observation. This can help you to question the validity of your clustering. In addition, you can also plot the clustering plot without the need for the fviz_cluster function. There are two ways to do this.</p>
+<p>At first you can change graph argument in the function as follows:</p>
+<pre><code>k2m_data &lt;- factoextra::eclust(pcadata, 
+                               &quot;kmeans&quot;,
+                               k = 2, 
+                               nstart = 25, 
+                               graph = T)
+</code></pre>
+<p>You can also reach the plot with the following code:</p>
+<pre><code>k2m_data$clust_plot
+</code></pre>
+<p>At the end, you will have a plot like the follows:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*VS5TXdAnXl7EDyHOZ8u-Xw.png" alt=""></p>
+<hr>
+<p><strong>References</strong></p>
+<p>[1] Hartigan, John A., Manchek A. Wong. Algorithm AS 136: A k-means clustering algorithm. Journal of the royal statistical society. series c (applied statistics) 28., 100&ndash;108, 1979</p>
+<p>[2] Kassambara, Alboukadel. Practical guide to cluster analysis in R: Unsupervised machine learning. Vol. 1. Sthda, 2017.</p>
+<p>[3] James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2013). An introduction to statistical learning (Vol. 112, p. 18). New York: springer.</p>
+<p>[4] Kassambara, Alboukadel. Practical guide to cluster analysis in R: Unsupervised machine learning. Vol. 1. Sthda, 2017.</p>
+<p>[5] Ben-Hur, Asa, and Isabelle Guyon. Detecting stable clusters using principal component analysis. Functional genomics. Humana press, 159&ndash;182, 2003.</p>
+<p>[6] Ding, Chris, and Xiaofeng He. K-means clustering via principal component analysis. Proceedings of the twenty-first international conference on Machine learning. 2004.</p>
+
+        </section>
+      </div>
+    </div>
+  </div>  
+  </section>
+<footer class="footer footer-dark">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <img src="/footer.svg" alt="">
+        
+      </div>
+      
+    <div class="column">
+        <div class="footer-column">
+          <div class="footer-header">
+              <h3>Website</h3>
+          </div>
+          <ul class="link-list"><li><a href="/credits/">
+                  <span class="icon"><i class="fa fa-cube"></i></span>
+                  Credits
+                </a></li>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    
+      
+      <div class="column">
+        <div class="footer-column">
+          <div class="footer-header">
+              <h3>Contacts</h3>
+          </div>
+          <ul class="link-list">
+            
+            <li>
+              <a href="https://www.linkedin.com/https://www.linkedin.com/in/ozturkfemre/" target="_blank">
+                <span class="icon"><i class="fab fa-linkedin"></i></span>
+                
+                  linkedIn
+                
+              </a>
+            </li>
+            
+            
+            <li>
+              <a href="https://github.com/https://github.com/ozturkfemre" target="_blank">
+                <span class="icon"><i class="fab fa-github-square"></i></span>
+                
+                  github
+                
+              </a>
+            </li>
+                         
+            
+            <li>
+              <a href="mailto:ozturkfemre@gmail.com" target="_blank">
+                <span class="icon"><i class="fa fa-envelope"></i></span>
+                
+                  email
+                
+              </a>
+            </li>
+            
+                   
+                   
+            
+            
+                         
+       
+          </ul>
+        </div>
+      </div>
+      
+
+      
+      <div class="column">
+        <div class="footer-column">
+          <div class="footer-header">
+              <h3>Copyright</h3>
+          </div>
+          <ul class="link-list">
+            <li>
+              <a>
+                <span class="icon"><i class="fa fa-copyright"></i></span>
+                PippoRJ - 2021
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+
+    </div>
+  </div>
+</footer>
+    <div id="backtotop"><a href="#"></a></div><div class="sidebar scroll">
+  <div class="sidebar-header"><img src="/sidebar.svg" alt="">
+    
+    <a class="sidebar-close" href="javascript:void(0);">
+      <i data-feather="x"></i>
+    </a>
+  </div>
+  <div class="inner">
+    <ul class="sidebar-menu">
+      <li class="no-children"><div class="columns">
+              <table width="100%">  
+                <tr>
+                  <td class="">
+                    <span class="icon"><i class="fa fa-cubes"></i></span>
+                    All Tags
+                  </td>
+                  <td class="has-text-right" >
+                      
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </a></ul>
+  </div>
+</div>
+<script src="/js/jquery-2.2.4.893e90f6230962e42231635df650f20544ad22affc3ee396df768eaa6bc5a6a2.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="></script>
+  <script src="/js/feather.4.22.0.1ab07abeb9975f283f6b5f29451981be680fbf77ea778f991d457511d210476a.js" integrity="sha256-GrB6vrmXXyg/a18pRRmBvmgPv3fqd4&#43;ZHUV1EdIQR2o="></script>
+  <script src="/js/modernizr-3.6.0.e013a1e54e3c19d83537ba42b900d34451e5e4b2e789be27a02ac9b152edb741.js" integrity="sha256-4BOh5U48Gdg1N7pCuQDTRFHl5LLnib4noCrJsVLtt0E="></script>
+  <script src="/js/refresh.62c1a9b7d85bcf4d944cd585a01dfa8fb15112a7d2cf9fb819db20493bfe7484.js" integrity="sha256-YsGpt9hbz02UTNWFoB36j7FREqfSz5&#43;4GdsgSTv&#43;dIQ="></script><script>
+  window.MathJax = {
+    loader: {
+      load: ['core', 'input/tex-base', 'output/chtml'],  
+      source: {
+        'core': '\/js\/mathjax\/core.d48fedf25c74c54fa6bf79646de92b02155872bdc4f5f7d0bbfc662523d8b4f5.js',
+        'input/tex-base': '\/js\/mathjax\/tex-base.1b68b8741dfc54e8f7222f88bea8ffcfc57ac54b2a2d8f4edf6800aa44d49441.js',
+        'output/chtml': '\/js\/mathjax\/chtml.926cd166e0f8c1f8a566a718d60c9c58a2b7142b156d30d5f02cec7c3b0ad60a.js',
+        'output/chtml/fonts/tex': '\/js\/mathjax\/tex_out.b8b2bb939c0dae84bf1390bfe6d32af13e83f647cdac01d544d2a7a517477e9d.js'
+      },
+    },
+    chtml: {
+      fontURL: '/fonts' 
+    },
+  };
+</script><script src="/js/mathjax/startup.234a2513e6bdbc1eee06ca19abceca30fe4034e82afb373c08274c1ba2feb1a6.js" integrity="sha256-I0olE&#43;a9vB7uBsoZq87KMP5ANOgq&#43;zc8CCdMG6L&#43;saY="></script>
+  <script src="/js/highlight.9.18.1.b1c58829c55afcc1f568022af4b08ed8976da404d2990b7535bd8e19c0e3310c.js" integrity="sha256-scWIKcVa/MH1aAIq9LCO2JdtpATSmQt1Nb2OGcDjMQw="></script>
+  <script src="/js/highlightjs-line-numbers.2.7.0.min.ddfe282e07b7ec1ed069c23f92c7c8216ddb3f1879c4e962d37fd52adbd15a05.js" integrity="sha256-3f4oLge37B7QacI/ksfIIW3bPxh5xOli03/VKtvRWgU="></script><script>
+  hljs.initHighlightingOnLoad();
+  hljs.initLineNumbersOnLoad();
+  document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('.codeinline').forEach((block) => {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+</body>
+</html>

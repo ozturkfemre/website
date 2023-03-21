@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><link rel="icon" href="/favicon_main.svg"><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta property="og:url"  content="https://ozturkfemre.netlify.app/post/unsupervisedlearning/" />
+    <meta property="og:type" content="article" /><meta property="og:title" content="Unsupervised Learning in R | Determination of Cluster Number" /><meta property="og:description" content="Comparison of the methods to determine the optimal number of clusters." /><meta property="og:image:width"  content="375" />
+        <meta property="og:image:height" content="250" /><meta property="og:image" content="https://ozturkfemre.netlify.app/images/sum_hu2319ed292ea941f25cfb6ae89784bf56_55250_600x0_resize_box_3.png" /><title>Fatih Emre Ozturk - Unsupervised Learning in R | Determination of Cluster Number</title>
+
+    
+<link href="https://fonts.googleapis.com/css?family=Source&#43;Code&#43;Pro" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source&#43;Code&#43;Pro" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source&#43;Code&#43;Pro" rel="stylesheet"><link rel="stylesheet" type="text/css" href="/css/style.cefb89a0a078dee69d33abe22f41791a896708f5a323b1187fa5e3dd8566e0cb.css" integrity="sha256-zvuJoKB43uadM6viL0F5GolnCPWjI7EYf6Xj3YVm4Ms=">
+<link rel="stylesheet" type="text/css" href="/css/monokai-sublime.9.15.8.min.91376415864fdd3a92be524052267afece4bdb1bb8c6c754f5e60c5ac28e93be.css" integrity="sha256-kTdkFYZP3TqSvlJAUiZ6/s5L2xu4xsdU9eYMWsKOk74=">
+<link rel="stylesheet" type="text/css" href="/css/all.min.2d91c07e15fc26f2697117b326256c0a2b0586dd12a15c622a53cd47a9e54a1d.css" integrity="sha256-LZHAfhX8JvJpcRezJiVsCisFht0SoVxiKlPNR6nlSh0=">
+<link rel="stylesheet" type="text/css" href="/css/refresh.ccfd23f8053a1571a3e474a6877f42a6a1924c6bbf1b64c7704b49a0353b4650.css" integrity="sha256-zP0j&#43;AU6FXGj5HSmh39CpqGSTGu/G2THcEtJoDU7RlA=">
+<link rel="stylesheet" type="text/css" href="/css/devicon.min.149016fbf45c8bc157d6f55ce3ee875feaa3f90446bf7d151fbc16a9f21a8859.css" integrity="sha256-FJAW&#43;/Rci8FX1vVc4&#43;6HX&#43;qj&#43;QRGv30VH7wWqfIaiFk=">
+    
+
+  </head>
+  <body>
+     
+
+    <div id="preloader">
+      <div id="status"></div>
+    </div><nav class="navbar is-fresh is-transparent no-shadow" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+
+      
+      
+      
+      <a class="navbar-item">
+        <div class="menu-icon-wrapper left-menu-icon-wrapper" style="visibility: visible;">
+          <svg width="1000px" height="1000px">
+            <path class="path1" d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800"></path>
+            <path class="path2" d="M 300 500 L 700 500"></path>
+            <path class="path3" d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200"></path>
+          </svg>
+          <button id="menu-icon-trigger" class="menu-icon-trigger"></button>
+        </div>
+        <div class="navbar-item left-menu-icon-wrapper">
+          Tags
+        </div>
+      </a>
+
+      <div class="navbar-item is-expanded"></div>
+      <a class="navbar-item is-hidden-desktop">  
+        <div data-target="navbar-menu" class="navbar-item right-menu-icon-wrapper is-hidden-desktop">
+          Menu
+        </div>
+        <div data-target="navbar-menu" class="menu-icon-wrapper right-menu-icon-wrapper" style="visibility: visible;">
+          <svg width="1000px" height="1000px">
+            <path class="path1" d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800"></path>
+            <path class="path2" d="M 300 500 L 700 500"></path>
+            <path class="path3" d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200"></path>
+          </svg>
+          <button id="menu-icon-trigger" class="menu-icon-trigger"></button>
+        </div>
+      </a>
+    </div><div id="navbar-menu" class="navbar-menu is-static">
+      
+      <div class="navbar-end">
+        <a href="/about/" class="navbar-item is-secondary">About Me</a><a href="/topic_2/" class="navbar-item is-secondary">Technical Training</a><a href="/post/" class="navbar-item is-secondary">Posts</a><a href="/topic_1/" class="navbar-item is-secondary">Projects</a>
+        
+        
+        
+        
+        
+        
+        
+      </div>
+    </div>
+  </div>
+</nav>
+<nav id="navbar-clone" class="navbar is-fresh is-transparent" role="navigation" aria-label="main navigation">
+  <div class="container">
+      <div class="navbar-brand">
+  
+        
+        
+        
+        <a class="navbar-item">
+          <div class="menu-icon-wrapper left-menu-icon-wrapper" style="visibility: visible;">
+            <svg width="1000px" height="1000px">
+              <path class="path1" d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800"></path>
+              <path class="path2" d="M 300 500 L 700 500"></path>
+              <path class="path3" d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200"></path>
+            </svg>
+            <button id="menu-icon-trigger" class="menu-icon-trigger"></button>
+          </div>
+          <div class="navbar-item left-menu-icon-wrapper">
+            Tags
+          </div>
+        </a>
+  
+        <div class="navbar-item is-expanded"></div>
+        <a class="navbar-item is-hidden-desktop">  
+          <div data-target="cloned-navbar-menu" class="navbar-item right-menu-icon-wrapper is-hidden-desktop">
+            Menu
+          </div>
+          <div data-target="cloned-navbar-menu" class="menu-icon-wrapper right-menu-icon-wrapper" style="visibility: visible;">
+            <svg width="1000px" height="1000px">
+              <path class="path1" d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800"></path>
+              <path class="path2" d="M 300 500 L 700 500"></path>
+              <path class="path3" d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200"></path>
+            </svg>
+            <button id="menu-icon-trigger" class="menu-icon-trigger"></button>
+          </div>
+        </a>
+      </div><div id="cloned-navbar-menu" class="navbar-menu is-static">
+        <div class="navbar-end"><a href="/about/" class="navbar-item is-secondary">About Me</a><a href="/topic_2/" class="navbar-item is-secondary">Technical Training</a><a href="/post/" class="navbar-item is-secondary">Posts</a><a href="/topic_1/" class="navbar-item is-secondary">Projects</a>
+          
+          
+          
+
+          
+          
+          
+        
+        </div>
+      </div>
+    </div>
+  </nav>
+<section class="section is-medium">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-centered-tablet-portrait">
+        <h1 class="title is-2 section-title">Unsupervised Learning in R | Determination of Cluster Number</h1>
+        <h5 class="subtitle is-5 is-muted"></h5>
+        <div class="divider"></div>
+        
+        <section class="section content has-text-justified">
+          <p>I plan to write many series of articles in my medium journey that I started with <a href="https://medium.com/@ozturkfemre/data-visualization-with-base-r-a3d6d4e2acdc">data visualization</a>. In addition to series such as Unsupervised Statistical Learning, Supervised Statistical Learning, Math for Data Science, Statistics and Probability, I will also touch on the intersection of my undergraduate degree in philosophy and data science. In this way, I think I can support analytical and critical thinking for the individual who is on a data science journey. I will also have some articles that I plan to combine culture and data science.</p>
+<p>In this regard, I am with you with the first post of the first series, Unsupervised Statistical Learning. In this post, I will talk about the methods to determine the optimal number of clusters. In this post, as in every other post, I will talk about what methods mean, what they are used for and how to do it step by step. I will run all methods in R by using the k-means clustering algorithm and always use the same dataset (<a href="https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+%28diagnostic%29">Breast Cancer Wisconsin</a>).</p>
+<hr>
+<h3 id="why-do-we-need-to-determine-clusternumber">Why do we need to determine cluster number?</h3>
+<p>The first reason is that the number of clusters must be predetermined for the clustering algorithms to work. For example, many algorithms such as k-means, k-medoids, hierarchical clustering need to know the number of clusters in order to work. Depending on the data set and the work done with that data set, we may know the number of clusters in advance. For example, in the plot below, it is quite possible to determine the number of clusters with a scatter plot.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*b218oEdOwrx8g24HC13B5w.png" alt=""></p>
+<hr>
+<hr>
+<p>However, determining the number of clusters in commonly encountered data sets is too complex to be achieved simply by observing the overall structure of the data set with a scatter plot. For example, when the scatter plot below is analyzed, it is not possible to tell how many clusters the data set is divided into.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*ekHDzQi6HseK6uGd6yv0Zg.png" alt=""></p>
+<p>However, since situations like the one in the above plot are frequently encountered, some methods have been proposed to determine the number of clusters. I will now explain what some of these methods are, how they are calculated step by step and their implementation in R.</p>
+<hr>
+<h3 id="elbow-method">Elbow Method</h3>
+<p>The elbow method, also known as <em>total within sum of squares</em>, is a technique used to determine the optimal number of clusters for a k-means clustering analysis. The idea behind the elbow method is to run k-means clustering on the dataset for a range of values of k (number of clusters), and for each value of k calculate the sum of squared distances of each point from its closest centroid (SSE). The elbow point is the point on the plot of SSE against the number of clusters (k) where the change in SSE begins to level off, indicating that adding more clusters doesn't improve the model much. [1], [2]</p>
+<p>The steps to perform the elbow method are:</p>
+<ol>
+<li>
+<p>Select a range of k values, usually from 1 to 10 or the square root of the number of observations in the dataset.</p>
+</li>
+<li>
+<p>Run k-means clustering for each k value and calculate the SSE (sum of squared distances of each point from its closest centroid).</p>
+</li>
+<li>
+<p>Plot the SSE for each k value.</p>
+</li>
+<li>
+<p>The point on the plot where the SSE starts to decrease at a slower rate is the elbow point, and the corresponding number of clusters is the optimal value for k.</p>
+</li>
+</ol>
+<p>Undoubtedly, the Elbow method is one of the most widely used methods. It can be said to be a method that follows the same logic as k-means. However, it would not be correct to say that it gives good results under all circumstances. Sometimes it can even be said to be misleading. For this reason, although I use the elbow method in every cluster analysis, I do not rely on it alone.</p>
+<p>In R, <code>factoextra</code> packages offers fancy plots for some of the methods to determine optimal number of clusters in this post. I will use <code>fviz_nbclust</code> function to visualize elbow method for the dataset.</p>
+<pre><code>fviz_nbclust(df, # data  
+             kmeans, # clustering algorithm 
+             nstart = 25, # if centers is a number, how many random sets should be chosen?(default is 25)
+             iter.max = 200, # the maximum number of iterations allowed.
+             method = &quot;wss&quot;) # elbow method
+</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*v5FiIzpDhJAHEE7DmosoOA.png" alt=""></p>
+<p>For example, the output above shows that there is no sharp elbow. For this reason, it draws attention as a result open to interpretation. An interpretation based on this elbow may therefore lead to incorrect results.</p>
+<hr>
+<h3 id="average-silhouette-method">Average Silhouette Method</h3>
+<p>Average silhouette method measures how well-defined a particular cluster is, and how well-separated it is from other clusters. At this point, it is necessary to state that Silhouette value is calculated for each observation in the data set. Average of the silhouette value of all observations gives us the average silhouette value, which is the silhouette value of the clustering analysis [3] , [4].</p>
+<p>The steps to calculate silhouette value for a observation are:</p>
+<ol>
+<li>calculate cluster tightness: the average distance purple observation to all blue observations which all are in the same cluster, which is called a(i).</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*oPJ8x71lbkMomHRx4qm2Ug.png" alt="illustration of calculating cluster tightness"></p>
+<p>2. calculate cluster separation: observation's minimum distance to all the observations in a different cluster(yellow cluster), which is called b(i).</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*h0Ues0gLRs2FD5TrOpmFGA.png" alt="illustration of calculating cluster separation"></p>
+<p>3. calculate silhouette coefficient: calculate its silhouette value &quot;s(i)&quot; as the difference between the b(i) and a(i), divided by the maximum of these two distances:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*L2nNHjwqpS7ZOdXZEvTC2g.png" alt="calculation of silhouette coeffiecient"></p>
+<p>After calculating silhouette coefficient of each observation, we can finally, calculate the average silhouette value for all observations: mean(si). To determine the number of clusters, we usually cluster each number of clusters for a range of 2 to 10 clusters and obtain the average silhouette value for each number of clusters. The silhouette value ranges from -1 to 1, where a value of 1 indicates a strong similarity to the other observations in its own cluster, and a value of -1 indicates a strong similarity to observations in another cluster. In other words, the number of clusters with the highest silhouette value is the number of clusters we will determine.</p>
+<p>Again <code>fviz_nbclust</code> function is a way to see average silhoutte plot to decide the optimal number of clusters:</p>
+<pre><code>fviz_nbclust(df, # data
+             kmeans, # clustering algorithm
+             method = &quot;silhouette&quot;) # silhouette
+</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*yxQGOAUuwKUAT66scEaWWg.png" alt=""></p>
+<p>As can be easily seen from the plot, the clustering model with the highest silhouette value is the clustering for 2 clusters. Therefore, it can be inferred that the optimal number of clusters is two. However, when the silhouette values on the y-axis are examined, the silhouette value for the number of clusters 3 is also quite close, although the number of clusters 2 is the highest. For this reason, it would be more useful to always run the clustering algorithm for both 2 and 3 clusters and interpret the results.</p>
+<hr>
+<h3 id="gap-statistic-method">Gap Statistic Method</h3>
+<p>Gap Statistic Method compares the observed within-cluster variation for different values of k with the variation expected under a null reference distribution of the data. [5]</p>
+<p>The steps to perform the gap statistic method are:</p>
+<ol>
+<li>
+<p>Select a range of k values, usually from 1 to 10 or the square root of the number of observations in the dataset.</p>
+</li>
+<li>
+<p>Run the clustering algorithm (such as k-means or hierarchical clustering) for each k value and calculate the within-cluster variation Wk.</p>
+</li>
+<li>
+<p>Generate B reference datasets by randomly sampling the original data and calculate the within-cluster variation W*k for each dataset.</p>
+</li>
+<li>
+<p>Calculate the gap statistic</p>
+</li>
+<li>
+<p>Plot the gap statistic for each k value.</p>
+</li>
+<li>
+<p>The k value that corresponds to the maximum gap statistic is the optimal number of clusters.</p>
+</li>
+</ol>
+<p>Again <code>fviz_nbclust</code> function is a way to see gap statistic plot to decide the optimal number of clusters:</p>
+<pre><code>fviz_nbclust(df, 
+             kmeans ,
+             nstart = 25, 
+             method = &quot;gap_stat&quot;)
+</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*mqekOsPoqAI2qWdSylkhrA.png" alt=""></p>
+<p>Just like Average Silhouette Method, Gap Statistic Method is also offers 2 as the optimal number of clusters.</p>
+<hr>
+<h3 id="calinski---harabaszmethod">Calinski &mdash; Harabasz Method</h3>
+<p>The Calinski-Harabasz index (also known as the Variance Ratio Criterion) is a commonly used evaluation metric for comparing different clustering solutions in unsupervised learning. It is a ratio of the between-cluster variance and the within-cluster variance, and it is used to determine the number of clusters that should be used in a clustering solution[6].</p>
+<p>The steps to perform the calinski-harabasz method are:</p>
+<ol>
+<li>calculate within cluster sum of squares (WCSS): the sum of the squared distances between each observation and its corresponding cluster center(barycenter).</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*4WNGuodDuuGJE_rCGrQwLw.png" alt=""></p>
+<p>2. calculate between cluster sum of squares (BCSS): calculate the sum of the squared distances between each cluster center and the overall mean of all the observation.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*aeLLLdSZe-juNaQIm2irbQ.png" alt=""></p>
+<p>3. (BCSS / WCSS) &mdash; (n-k) / (k-1)</p>
+<p>where,</p>
+<p>k: total cluster number,</p>
+<p>n:total observation number</p>
+<p>The Calinski-Harabasz index ranges from 0 to infinity, with a higher value indicating a better clustering.</p>
+<p>For the Calinski &mdash; Harabasz method, there is no visualization function in R as in the methods I mentioned before. For this reason, I will write a function that calculates and visualizes the Calinski &mdash; Harabasz values for the clusters 2 to 10 using the <code>calinhara</code> function in the <code>fpc</code> package.</p>
+<pre><code>library(fpc) # for calinhara function
+
+fviz_ch &lt;- function(data) {
+  ch &lt;- c()
+  for (i in 2:10) {
+    km &lt;- kmeans(data, i) # perform clustering
+    ch[i] &lt;- calinhara(data, # data
+                       km$cluster, # cluster assignments
+                       cn=max(km$cluster) # total cluster number
+                       )
+  }
+  ch &lt;-ch[2:10]
+  k &lt;- 2:10
+  plot(k, ch,xlab =  &quot;Cluster number k&quot;,
+       ylab = &quot;Caliński - Harabasz Score&quot;,
+       main = &quot;Caliński - Harabasz Plot&quot;, cex.main=1,
+       col = &quot;dodgerblue1&quot;, cex = 0.9 ,
+       lty=1 , type=&quot;o&quot; , lwd=1, pch=4,
+       bty = &quot;l&quot;,
+       las = 1, cex.axis = 0.8, tcl  = -0.2)
+  abline(v=which(ch==max(ch)) + 1, lwd=1, col=&quot;red&quot;, lty=&quot;dashed&quot;)
+}
+
+fviz_ch(df)
+</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*rmXp5yUexMVNx6L_5Mg6DA.jpeg" alt=""></p>
+<p>As the other methods, Calinski &mdash; Harabasz methods is also offered 2 clusters for the dataset.</p>
+<hr>
+<h3 id="davies---bouldinmethod">Davies &mdash; Bouldin Method</h3>
+<p>The Davies-Bouldin index (DBI) is a measure of the similarity between the clusters in a clustering solution. The DBI is calculated as the average similarity between each cluster and its most similar cluster, where the similarity between two clusters is defined as the maximum distance between any observation in one cluster and its closest observation in the other cluster. [7]</p>
+<p>The steps to performDBI are:</p>
+<ol>
+<li>calculate intra-cluster dispersion: the average distance of all the data points in each cluster to the cluster center.</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*aeLLLdSZe-juNaQIm2irbQ.png" alt=""></p>
+<ol>
+<li>calculate separation criteria: the Euclidean distance between the cluster centers for each pair of clusters.</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*HtFg6se9Yzdt8jE5zRnLmw.png" alt=""></p>
+<ol>
+<li>find the most similar cluster: for each pair of clusters, calculate the similarity d(i, j) between the two clusters, as defined in the previous answer. Sum up the maximum similarity between each cluster and its most similar cluster. Divide the sum by the number of clusters to obtain the Davies-Bouldin index.</li>
+</ol>
+<p>The Davies-Bouldin index ranges from 0 to infinity, with a lower value indicating a better clustering solution. A DBI of 0 indicates that there is no similarity between any two clusters, while a high DBI value indicates that there is a high level of similarity between some of the clusters.</p>
+<p>Just like the Calinski-Harabasz method, there is no visualization function in R as for Davies-Bouldin method. For this reason, I will write a function that calculates and visualizes the Davies &mdash; Bouldin value for the clusters 2 to 10 using the <code>NbClust</code> function in the <code>NbClust</code> package.</p>
+<pre><code>library(NbClust)
+
+fviz_db &lt;- function(data) {
+  k &lt;- c(2:10)
+  nb &lt;- NbClust(data, min.nc = 2, max.nc = 10, index = &quot;db&quot;, method = &quot;kmeans&quot;)
+  db &lt;- as.vector(nb$All.index)
+  plot(k, db,xlab =  &quot;Cluster number k&quot;,
+       ylab = &quot;Davies-Bouldin Score&quot;,
+       main = &quot;Davies-Bouldin Plot&quot;, cex.main=1,
+       col = &quot;dodgerblue1&quot;, cex = 0.9 ,
+       lty=1 , type=&quot;o&quot; , lwd=1, pch=4,
+       bty = &quot;l&quot;,
+       las = 1, cex.axis = 0.8, tcl  = -0.2)
+  abline(v=which(db==min(db)) + 1, lwd=1, col=&quot;red&quot;, lty=&quot;dashed&quot;)
+}
+
+
+fviz_db(df)
+</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*JyF0ay_whg6ohuhv1w2pDg.jpeg" alt=""></p>
+<p>Unlike other methods, we see that Davies-Bouldin's suggestion for the number of clusters is 7. Although it gives different results in this data set, it can give more reliable results in other data sets. For this reason, it would be useful to include the Davies-Bouldin method in every clustering analysis.</p>
+<hr>
+<h3 id="dunn-index">Dunn Index</h3>
+<p>The Dunn index is a measure of the compactness and separability of the clusters in a clustering solution. It is calculated as the ratio of the minimum separation to the maximum diameter. [8]</p>
+<p>The steps to perform Dunn Index are:</p>
+<ol>
+<li>calculate minimum separation: the smallest distance between the observations from two different clusters.</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*EHsIVbk6_82UuuxrKn602Q.png" alt=""></p>
+<p>2. calculate maximum diameter: the maximum distance between the observations in the same cluster.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*Fl9-NiLKg17SXiz71CMHDw.png" alt=""></p>
+<p>3. divide minimum separation by maximum diameter</p>
+<p>The Dunn index ranges from 0 to infinity, with a higher value indicating a better clustering solution. A value of 1 indicates that the clusters are perfectly separated and perfectly compact, while a low value indicates that the clusters are either not separated or not compact.</p>
+<p>Just like Calinski-Harabasz and Davies- Bouldin methods, there is no visualization function in R as for Dunn Index. For this reason, I will write a function that calculates and visualizes the Dunn Index values for the clusters 2 to 10 using the <code>dunn</code> function in the <code>clValid</code> package.</p>
+<pre><code>library(clValid)
+
+fviz_dunn &lt;- function(data) {
+  k &lt;- c(2:10)
+  dunnin &lt;- c()
+  for (i in 2:10) {
+    dunnin[i] &lt;- dunn(distance = dist(data), clusters = kmeans(data, i)$cluster)
+  }
+  dunnin &lt;- dunnin[2:10]
+  plot(k, dunnin, xlab =  &quot;Cluster number k&quot;,
+       ylab = &quot;Dunn Index&quot;,
+       main = &quot;Dunn Plot&quot;, cex.main=1,
+       col = &quot;dodgerblue1&quot;, cex = 0.9 ,
+       lty=1 , type=&quot;o&quot; , lwd=1, pch=4,
+       bty = &quot;l&quot;,
+       las = 1, cex.axis = 0.8, tcl  = -0.2)
+  abline(v=which(dunnin==max(dunnin)) + 1, lwd=1, col=&quot;red&quot;, lty=&quot;dashed&quot;)
+}
+
+fviz_dunn(df)
+</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*nB0iTIEA1mnhuiCZHIyecw.jpeg" alt=""></p>
+<p>As the Davies-Bouldin methods, Dunn also suggested different cluster number. As I said before, each method may give different results for each data set. For this reason, it is useful to compare all methods in each clustering analysis.</p>
+<hr>
+<h4 id="references">References</h4>
+<p>[1] Steinley, D., &amp; Brusco, M. J. (2011). Choosing the number of clusters in Κ-means clustering. Psychological methods, 16(3), 285.</p>
+<p>[2] Halkidi, Maria, Yannis Batistakis, and Michalis Vazirgiannis. &quot;On clustering validation techniques.&quot; Journal of intelligent information systems 17 (2001): 107&ndash;145.</p>
+<p>[3] Rousseeuw, Peter J. Silhouettes: a graphical aid to the interpretation and validation of cluster analysis.Journal of computational and applied mathematics, 1987, 20: 53&ndash;65.</p>
+<p>[4] Halkidi, M., Batistakis, Y., &amp; Vazirgiannis, M. (2001). On clustering validation techniques. Journal of intelligent information systems, 17, 107&ndash;145.</p>
+<p>[5] Tibshirani, R., Walther, G., &amp; Hastie, T. (2001). Estimating the number of clusters in a data set via the gap statistic. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 63(2), 411&ndash;423.</p>
+<p>[6] Caliński, T., &amp; Harabasz, J. (1974). A dendrite method for cluster analysis. Communications in Statistics-theory and Methods, 3(1), 1&ndash;27.</p>
+<p>[7] Davies, D. L., &amp; Bouldin, D. W. (1979). A cluster separation measure. IEEE transactions on pattern analysis and machine intelligence, (2), 224&ndash;227.</p>
+<p>[8] Dunn, J. C. (1973). A fuzzy relative of the ISODATA process and its use in detecting compact well-separated clusters.</p>
+
+        </section>
+      </div>
+    </div>
+  </div>  
+  </section>
+<footer class="footer footer-dark">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <img src="/footer.svg" alt="">
+        
+      </div>
+      
+    <div class="column">
+        <div class="footer-column">
+          <div class="footer-header">
+              <h3>Website</h3>
+          </div>
+          <ul class="link-list"><li><a href="/credits/">
+                  <span class="icon"><i class="fa fa-cube"></i></span>
+                  Credits
+                </a></li>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    
+      
+      <div class="column">
+        <div class="footer-column">
+          <div class="footer-header">
+              <h3>Contacts</h3>
+          </div>
+          <ul class="link-list">
+            
+            <li>
+              <a href="https://www.linkedin.com/https://www.linkedin.com/in/ozturkfemre/" target="_blank">
+                <span class="icon"><i class="fab fa-linkedin"></i></span>
+                
+                  linkedIn
+                
+              </a>
+            </li>
+            
+            
+            <li>
+              <a href="https://github.com/https://github.com/ozturkfemre" target="_blank">
+                <span class="icon"><i class="fab fa-github-square"></i></span>
+                
+                  github
+                
+              </a>
+            </li>
+                         
+            
+            <li>
+              <a href="mailto:ozturkfemre@gmail.com" target="_blank">
+                <span class="icon"><i class="fa fa-envelope"></i></span>
+                
+                  email
+                
+              </a>
+            </li>
+            
+                   
+                   
+            
+            
+                         
+       
+          </ul>
+        </div>
+      </div>
+      
+
+      
+      <div class="column">
+        <div class="footer-column">
+          <div class="footer-header">
+              <h3>Copyright</h3>
+          </div>
+          <ul class="link-list">
+            <li>
+              <a>
+                <span class="icon"><i class="fa fa-copyright"></i></span>
+                PippoRJ - 2021
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+
+    </div>
+  </div>
+</footer>
+    <div id="backtotop"><a href="#"></a></div><div class="sidebar scroll">
+  <div class="sidebar-header"><img src="/sidebar.svg" alt="">
+    
+    <a class="sidebar-close" href="javascript:void(0);">
+      <i data-feather="x"></i>
+    </a>
+  </div>
+  <div class="inner">
+    <ul class="sidebar-menu">
+      <li class="no-children"><div class="columns">
+              <table width="100%">  
+                <tr>
+                  <td class="">
+                    <span class="icon"><i class="fa fa-cubes"></i></span>
+                    All Tags
+                  </td>
+                  <td class="has-text-right" >
+                      
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </a></ul>
+  </div>
+</div>
+<script src="/js/jquery-2.2.4.893e90f6230962e42231635df650f20544ad22affc3ee396df768eaa6bc5a6a2.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="></script>
+  <script src="/js/feather.4.22.0.1ab07abeb9975f283f6b5f29451981be680fbf77ea778f991d457511d210476a.js" integrity="sha256-GrB6vrmXXyg/a18pRRmBvmgPv3fqd4&#43;ZHUV1EdIQR2o="></script>
+  <script src="/js/modernizr-3.6.0.e013a1e54e3c19d83537ba42b900d34451e5e4b2e789be27a02ac9b152edb741.js" integrity="sha256-4BOh5U48Gdg1N7pCuQDTRFHl5LLnib4noCrJsVLtt0E="></script>
+  <script src="/js/refresh.62c1a9b7d85bcf4d944cd585a01dfa8fb15112a7d2cf9fb819db20493bfe7484.js" integrity="sha256-YsGpt9hbz02UTNWFoB36j7FREqfSz5&#43;4GdsgSTv&#43;dIQ="></script><script>
+  window.MathJax = {
+    loader: {
+      load: ['core', 'input/tex-base', 'output/chtml'],  
+      source: {
+        'core': '\/js\/mathjax\/core.d48fedf25c74c54fa6bf79646de92b02155872bdc4f5f7d0bbfc662523d8b4f5.js',
+        'input/tex-base': '\/js\/mathjax\/tex-base.1b68b8741dfc54e8f7222f88bea8ffcfc57ac54b2a2d8f4edf6800aa44d49441.js',
+        'output/chtml': '\/js\/mathjax\/chtml.926cd166e0f8c1f8a566a718d60c9c58a2b7142b156d30d5f02cec7c3b0ad60a.js',
+        'output/chtml/fonts/tex': '\/js\/mathjax\/tex_out.b8b2bb939c0dae84bf1390bfe6d32af13e83f647cdac01d544d2a7a517477e9d.js'
+      },
+    },
+    chtml: {
+      fontURL: '/fonts' 
+    },
+  };
+</script><script src="/js/mathjax/startup.234a2513e6bdbc1eee06ca19abceca30fe4034e82afb373c08274c1ba2feb1a6.js" integrity="sha256-I0olE&#43;a9vB7uBsoZq87KMP5ANOgq&#43;zc8CCdMG6L&#43;saY="></script>
+  <script src="/js/highlight.9.18.1.b1c58829c55afcc1f568022af4b08ed8976da404d2990b7535bd8e19c0e3310c.js" integrity="sha256-scWIKcVa/MH1aAIq9LCO2JdtpATSmQt1Nb2OGcDjMQw="></script>
+  <script src="/js/highlightjs-line-numbers.2.7.0.min.ddfe282e07b7ec1ed069c23f92c7c8216ddb3f1879c4e962d37fd52adbd15a05.js" integrity="sha256-3f4oLge37B7QacI/ksfIIW3bPxh5xOli03/VKtvRWgU="></script><script>
+  hljs.initHighlightingOnLoad();
+  hljs.initLineNumbersOnLoad();
+  document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('.codeinline').forEach((block) => {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+</body>
+</html>
