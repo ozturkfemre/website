@@ -7,16 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Fatih Emre Ozturk</copyright>
-    <lastBuildDate>Wed, 22 Mar 2023 16:18:12 +0100</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Data Visualization with Base R</title>
-      <link>https://example.com/post/dataviz/</link>
-      <pubDate>Wed, 22 Mar 2023 16:18:12 +0100</pubDate>
-      
-      <guid>https://example.com/post/dataviz/</guid>
-      <description>Data visualization can be defined as the use of graphical or pictorial representations to present data in a way that makes it easier to understand, analyze, and communicate. It involves the use of visual elements such as charts, graphs, and maps to help users better understand and interpret complex data sets. Data visualization is an important tool for exploratory data analysis, as well as for communicating results to others. By presenting data in a visual format, data visualization can also help to reveal new connections and insights that might not be apparent from a purely numerical or textual analysis.</description>
-    </item>
-    
+    <lastBuildDate>Sun, 19 Mar 2023 19:25:30 +0200</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Logical Fallacies in Data Science (Part II)</title>
       <link>https://example.com/post/fallacies2/</link>
