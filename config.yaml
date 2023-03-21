@@ -1,0 +1,80 @@
+baseURL: https://example.com/
+languageCode: en-us
+title: feo
+theme: personal-web
+copyright: © Fatih Emre Ozturk
+googleAnalytics: ''
+enableEmoji: yes
+enableRobotsTXT: yes
+pygmentsUseClasses: yes
+pygmentsCodeFences: yes
+params:
+  accentColor: '#FD3519'
+  assets:
+    customCSS: ''
+    favicon: ''
+  breadcrumb: yes
+  contact:
+    email: ozturkfemre@gmail.com
+    text: 'email me'
+  intro:
+    main: 'Fatih Emre Ozturk'
+    sub: Data Scientist
+  main:
+    latestPublishHeader: My Latest Post
+  mainSections: post
+  notFound:
+    gopher: /images/gopher.png
+    h1: Bummer!
+    p: It seems that this page doesn't exist.
+  sections:
+    portfolio: project
+    post: article
+  sidebar:
+    backgroundImage: /images/background.jpg
+    gradientOverlay: 
+    logo: /images/feopp.jpeg
+  social:
+    github: https://github.com/ozturkfemre
+    linkedin: https://www.linkedin.com/in/ozturkfemre
+    medium: https://medium.com/@ozturkfemre
+taxonomies:
+  design: designs
+  tech: techs
+blackfriday:
+  hrefTargetBlank: yes
+menu:
+  main:
+    - identifier: about
+      name: About
+      title: About section
+      url: /about/
+      weight: -120
+    - identifier: portfolio
+      name: Technical Training
+      title: Technical Training
+      url: /portfolio/
+      weight: -110
+    - identifier: blog
+      name: Post
+      title: Blog section
+      url: /post/
+      weight: -100
+sitemap:
+  changefreq: monthly
+  filename: sitemap.xml
+  priority: 0.5
+privacy:
+  googleAnalytics:
+    anonymizeIP: yes
+    disable: yes
+    respectDoNotTrack: yes
+    useSessionStorage: no
+  twitter:
+    disable: no
+    enableDNT: yes
+    simple: no
+markup:
+  goldmark:
+    renderer:
+      unsafe: yes
