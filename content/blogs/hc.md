@@ -44,17 +44,17 @@ In hierarchical clustering, there are several linkage methods that can be used t
 
 3.  Average linkage: This method calculates the average distance between all pairs of points in the two clusters being merged. [6]
 
-4.  Ward\'s Minimum Variance linkage: This method minimizes the variance of the distances between points within the same cluster. It merges the clusters that result in the smallest increase in the total sum of squared distances within each cluster.[7]
+4.  Ward's Minimum Variance linkage: This method minimizes the variance of the distances between points within the same cluster. It merges the clusters that result in the smallest increase in the total sum of squared distances within each cluster.[7]
 
-The choice of linkage method can have a significant impact on the resulting clusters, as each method has its own strengths and weaknesses. Therefore, it is important to carefully consider which linkage method is most appropriate for the data and the specific problem being addressed. In this post, I will focus on two metrics which are Ward\'s Minimum Variance Method and Average linkage method.
+The choice of linkage method can have a significant impact on the resulting clusters, as each method has its own strengths and weaknesses. Therefore, it is important to carefully consider which linkage method is most appropriate for the data and the specific problem being addressed. In this post, I will focus on two metrics which are Ward's Minimum Variance Method and Average linkage method.
 
 ------------------------------------------------------------------------
 
-### Ward\'s Minimum Variance Method
+### Ward's Minimum Variance Method
 
 Ward linkage is a hierarchical clustering method that aims to minimize the variance of the distances between points within the same cluster. It merges the clusters that result in the smallest increase in the total sum of squared distances within each cluster.
 
-To understand how Ward linkage works, let\'s assume we have n data points and we start with each point in its own cluster. At each step, we merge the two clusters that result in the smallest increase in the total sum of squared distances within each cluster.
+To understand how Ward linkage works, let's assume we have n data points and we start with each point in its own cluster. At each step, we merge the two clusters that result in the smallest increase in the total sum of squared distances within each cluster.
 
 To measure the increase in the total sum of squared distances within each cluster, we use the following formula:
 
@@ -118,15 +118,15 @@ cor(dist_man,coph_m)
 
 In general, a higher cophenetic correlation coefficient indicates that the dendrogram is a more accurate representation of the pairwise distances between the original data points. The cophenetic correlation coefficient can range between 0 and 1, with a value of 1 indicating a perfect fit between the dendrogram and the pairwise distances.
 
-In this case it can be said that when the correlation between Cophenetic and distance matrix is examined, it is observed that hierarchical clustering with Euclidean distance gives better results. That\'s why I will continue the analysis with Euclidean distance metric.
+In this case it can be said that when the correlation between Cophenetic and distance matrix is examined, it is observed that hierarchical clustering with Euclidean distance gives better results. That's why I will continue the analysis with Euclidean distance metric.
 
-### Ward\'s Minimum Variance Method in R
+### Ward's Minimum Variance Method in R
 
 Hierarchical clustering can be represented by a dendrogram, which is a tree-like structure that shows the hierarchy of clusters and the relations between them. The dendrogram can be cut at a certain height to obtain a flat clustering solution with a specific number of clusters. To determine the number of clusters, as we did in the k-means and k-medoids, we can use methods to determine the optimal number of clusters.
 
 Since I covered [methods to determine the optimal number of clusters](https://medium.com/@ozturkfemre/unsupervised-learning-determination-of-cluster-number-be8842cdb11) in the first post of this series, I will not show you the codes in this post. However, I can state that all of the methods suggested 2 as the optimal number of cluster.
 
-As I mentioned, another way for hierarchical clustering is to check the dendogram to decide where to cut it in order to decide the optimal number of cluster. However, I, personally, find this method \"open-ended\" which I do not think it to be a case for the optimal number of cluster. Nevertheless, I will share codes and dendogram with you.
+As I mentioned, another way for hierarchical clustering is to check the dendogram to decide where to cut it in order to decide the optimal number of cluster. However, I, personally, find this method "open-ended" which I do not think it to be a case for the optimal number of cluster. Nevertheless, I will share codes and dendogram with you.
 
 You can use fviz_dend function in the factoextra package to visualise dendogram of a hierarchical clustering with the object you created from hierarchical clustering with the function hclust from stats package.
 
@@ -201,7 +201,7 @@ When the cluster graph is analyzed, overlap can be observed. It can be seen that
 
 Average linkage, also known as UPGMA (Unweighted Pair Group Method with Arithmetic Mean), is a hierarchical clustering method that calculates the distance between clusters as the average distance between all pairs of points in the two clusters being merged.
 
-To understand how average linkage works, let\'s assume we have n data points and we start with each point in its own cluster. At each step, we merge the two clusters that have the smallest average distance between all pairs of points.
+To understand how average linkage works, let's assume we have n data points and we start with each point in its own cluster. At each step, we merge the two clusters that have the smallest average distance between all pairs of points.
 
 The first step in average linkage is to compute the pairwise distances between all of the data points. This can be done using any distance metric, such as Euclidean distance or Manhattan distance. Next, we compute the average distance between all pairs of points in each cluster. We then merge the two clusters with the smallest average distance, and update the pairwise distances between the new merged cluster and the remaining clusters.
 
@@ -211,7 +211,7 @@ One of the advantages of average linkage is that it tends to produce clusters th
 
 ### Average Linkage Method in R
 
-Since I covered cophenetic distance in the Ward\'s Minimum Variance Method, I will not share it with you in this part. However, I need to state that Euclidean distance again gave the better results. In addition, methods to determine optimal number of clusters, again, suggested 2 as the optimal number of clusters.
+Since I covered cophenetic distance in the Ward's Minimum Variance Method, I will not share it with you in this part. However, I need to state that Euclidean distance again gave the better results. In addition, methods to determine optimal number of clusters, again, suggested 2 as the optimal number of clusters.
 
 Again, you can use fviz_dend function in the factoextra package to visualise dendogram of a hierarchical clustering with the object you created from hierarchical clustering with the function hclust from stats package.
 
@@ -222,9 +222,9 @@ fviz_dend(hc_e2,cex=.5)
 
 ![](https://cdn-images-1.medium.com/max/800/1*USFITshh7dW_xONYXy8CPg.png)
 
-As we can see from the dendogram easily, it is very different from the Ward\'s dendogram. It seems clusters are highly unbalanced with respect to the Ward. This may cause a problem for the cluster analysis. However, it is a beneficial example to show that linkage is highly dependent on the data set. It is crucial to decide the best linkage method for the data. One way to decide the linkage is to check the descriptive statistics of the data set to see if there are outliers. Another way is to try all of the linkage methods to see which dendogram looks fine.
+As we can see from the dendogram easily, it is very different from the Ward's dendogram. It seems clusters are highly unbalanced with respect to the Ward. This may cause a problem for the cluster analysis. However, it is a beneficial example to show that linkage is highly dependent on the data set. It is crucial to decide the best linkage method for the data. One way to decide the linkage is to check the descriptive statistics of the data set to see if there are outliers. Another way is to try all of the linkage methods to see which dendogram looks fine.
 
-Again, it is hard to interpret it from the dendogram, but, we will continue with 2 clusters. One reason is the methods to determine the optimal number of clusters suggested cluster number to be 2. Another reason is to compare the result with Ward\'s Minimum Variance methods.
+Again, it is hard to interpret it from the dendogram, but, we will continue with 2 clusters. One reason is the methods to determine the optimal number of clusters suggested cluster number to be 2. Another reason is to compare the result with Ward's Minimum Variance methods.
 
 ```         
 grupav2 <- cutree(hc_e2, k = 2)
@@ -284,7 +284,7 @@ fviz_cluster(list(data = pcadata, cluster = grupav2),
 
 That was the end of this post. Just like always:
 
-\"In case I don\'t see ya, good afternoon, good evening, and good night!\"
+"In case I don't see ya, good afternoon, good evening, and good night!"
 
 ------------------------------------------------------------------------
 
