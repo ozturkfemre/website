@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kmeans on feo</title>
+    <link>https://hugo-profile.netlify.app/tags/kmeans/</link>
+    <description>Recent content in kmeans on feo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 22 Mar 2023 22:53:58 +0530</lastBuildDate><atom:link href="https://hugo-profile.netlify.app/tags/kmeans/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unsupervised Learning in R | k-means Clustering</title>
+      <link>https://hugo-profile.netlify.app/blogs/kmeans/</link>
+      <pubDate>Wed, 22 Mar 2023 22:53:58 +0530</pubDate>
+      
+      <guid>https://hugo-profile.netlify.app/blogs/kmeans/</guid>
+      <description>kmeans implemantation</description>
+    </item>
+    
+  </channel>
+</rss>

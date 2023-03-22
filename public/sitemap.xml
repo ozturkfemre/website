@@ -5,6 +5,9 @@
     <loc>https://hugo-profile.netlify.app/blogs/</loc>
     <lastmod>2023-03-22T22:53:58+05:30</lastmod>
   </url><url>
+    <loc>https://hugo-profile.netlify.app/tags/clustering/</loc>
+    <lastmod>2023-03-22T22:53:58+05:30</lastmod>
+  </url><url>
     <loc>https://hugo-profile.netlify.app/tags/data-visualization/</loc>
     <lastmod>2023-03-22T22:53:58+05:30</lastmod>
   </url><url>
@@ -14,7 +17,16 @@
     <loc>https://hugo-profile.netlify.app/</loc>
     <lastmod>2023-03-22T22:53:58+05:30</lastmod>
   </url><url>
+    <loc>https://hugo-profile.netlify.app/tags/hierarchical-clustering/</loc>
+    <lastmod>2023-03-22T22:53:58+05:30</lastmod>
+  </url><url>
     <loc>https://hugo-profile.netlify.app/blogs/infmonkey/</loc>
+    <lastmod>2023-03-22T22:53:58+05:30</lastmod>
+  </url><url>
+    <loc>https://hugo-profile.netlify.app/tags/kmeans/</loc>
+    <lastmod>2023-03-22T22:53:58+05:30</lastmod>
+  </url><url>
+    <loc>https://hugo-profile.netlify.app/tags/kmedoids/</loc>
     <lastmod>2023-03-22T22:53:58+05:30</lastmod>
   </url><url>
     <loc>https://hugo-profile.netlify.app/tags/r/</loc>
@@ -26,7 +38,16 @@
     <loc>https://hugo-profile.netlify.app/tags/unsupervised-learning/</loc>
     <lastmod>2023-03-22T22:53:58+05:30</lastmod>
   </url><url>
+    <loc>https://hugo-profile.netlify.app/blogs/hc/</loc>
+    <lastmod>2023-03-22T22:53:58+05:30</lastmod>
+  </url><url>
     <loc>https://hugo-profile.netlify.app/blogs/optimalk/</loc>
+    <lastmod>2023-03-22T22:53:58+05:30</lastmod>
+  </url><url>
+    <loc>https://hugo-profile.netlify.app/blogs/kmeans/</loc>
+    <lastmod>2023-03-22T22:53:58+05:30</lastmod>
+  </url><url>
+    <loc>https://hugo-profile.netlify.app/blogs/kmedoids/</loc>
     <lastmod>2023-03-22T22:53:58+05:30</lastmod>
   </url><url>
     <loc>https://hugo-profile.netlify.app/categories/</loc>

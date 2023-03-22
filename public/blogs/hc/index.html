@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<link rel="icon" href=/images/feopp.jpeg type="image/gif">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      media="print" onload="this.media='all'" />
+<noscript>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+</noscript>
+
+
+<link rel="stylesheet" href="/css/font.css" media="all">
+
+
+
+<meta property="og:title" content="Unsupervised Learning in | Hierarchical Clustering" />
+<meta property="og:description" content="In the previous posts of this series, I covered methods to determine the optimal number of clusters, how k-means and k-medoids clustering algorithms work in detail. In this post, I will try to explain Hierarchical Clustering algorithm. First, I will explain what Hierarchical Clustering is, then I will explain how it works step by step, and then I will explain how to implement it using the R program language." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo-profile.netlify.app/blogs/hc/" /><meta property="article:section" content="blogs" />
+<meta property="article:published_time" content="2023-03-22T22:53:58+05:30" />
+<meta property="article:modified_time" content="2023-03-22T22:53:58+05:30" /><meta property="og:site_name" content="Fatih Emre Ozturk" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unsupervised Learning in | Hierarchical Clustering"/>
+<meta name="twitter:description" content="In the previous posts of this series, I covered methods to determine the optimal number of clusters, how k-means and k-medoids clustering algorithms work in detail. In this post, I will try to explain Hierarchical Clustering algorithm. First, I will explain what Hierarchical Clustering is, then I will explain how it works step by step, and then I will explain how to implement it using the R program language."/>
+
+
+<link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
+<link rel="stylesheet" href="/css/footer.css" media="all">
+
+
+<link rel="stylesheet" href="/css/theme.css" media="all">
+
+
+
+
+<style>
+    :root {
+        --text-color: #343a40;
+        --text-secondary-color: #6c757d;
+        --background-color: #eaedf0;
+        --secondary-background-color: #64ffda1a;
+        --primary-color: #007bff;
+        --secondary-color: #f8f9fa;
+
+         
+        --text-color-dark: #e4e6eb;
+        --text-secondary-color-dark: #b0b3b8;
+        --background-color-dark: #18191a;
+        --secondary-background-color-dark: #212529;
+        --primary-color-dark: #ffffff;
+        --secondary-color-dark: #212529;
+    }
+    body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    html {
+        background-color: var(--background-color) !important;
+    }
+
+    body::-webkit-scrollbar {
+        width: .5em;
+        height: .5em;
+        background-color: var(--background-color);
+    }
+    
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px var(--background-color);
+        border-radius: 1rem;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background-color: var(--secondary-color);
+        outline: 1px solid var(--background-color);
+    }
+
+    #search-content::-webkit-scrollbar {
+        width: .5em;
+        height: .1em;
+        background-color: var(--background-color);
+    }
+</style>
+
+<meta name="description" content="">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-5/all-5.15.4.js"></script>
+
+  <title>
+Unsupervised Learning in | Hierarchical Clustering | feo
+
+  </title>
+</head>
+
+<body class="light">
+  
+  
+<script>
+    let localStorageValue = localStorage.getItem("pref-theme");
+    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    switch (localStorageValue) {
+        case "dark":
+            document.body.classList.add('dark');
+            break;
+        case "light":
+            document.body.classList.remove('dark');
+            break;
+        default:
+            if (mediaQuery) {
+                document.body.classList.add('dark');
+            }
+            break;
+    }
+</script>
+
+
+
+<header>
+    <nav class="pt-3 navbar navbar-expand-lg animate">
+        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
+            
+            <a class="navbar-brand primary-font text-wrap" href="/">
+                
+                <img src="/images/feopp.jpeg" width="30" height="30"
+                    class="d-inline-block align-top">
+                Fatih Emre Ozturk
+                
+            </a>
+
+            
+                <div>
+                    <input id="search" autocomplete="off" class="form-control mr-sm-2 d-none d-md-block" placeholder='Ctrl &#43; k to Search...'
+                        aria-label="Search" oninput="searchOnChange(event)">
+                </div>
+            
+
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
+                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
+                </svg>
+            </button>
+
+            
+            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
+                <ul class="navbar-nav ms-auto text-center">
+                    
+                        <li class="nav-item navbar-text d-block d-md-none">
+                            <div class="nav-link">
+                                <input id="search" autocomplete="off" class="form-control mr-sm-2" placeholder='Ctrl &#43; k to Search...' aria-label="Search" oninput="searchOnChange(event)">
+                            </div>
+                        </li>
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#about" aria-label="about">
+                            About Me
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#education"
+                            aria-label="education">
+                            Education
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#contact"
+                            aria-label="contact">
+                            Contact
+                        </a>
+                    </li>
+                    
+
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/blogs" title="Blog posts">
+                            
+                            Blog
+                        </a>
+                    </li>
+                    
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        
+                        <div class="text-center">
+                            <button id="theme-toggle">
+                                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+                    
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<div id="content">
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">Unsupervised Learning in | Hierarchical Clustering</h1>
+            <div class="text-center">
+               
+              <small>|</small>
+              Mar 22, 2023
+
+              
+              <span id="readingTime">
+                min read
+              </span>
+              
+            </div>
+          </div>
+          
+          <article class="page-content  p-2">
+          <hr>
+<p>In the previous posts of this series, I covered <a href="https://medium.com/@ozturkfemre/unsupervised-learning-determination-of-cluster-number-be8842cdb11">methods to determine the optimal number of clusters</a>, how <a href="https://medium.com/@ozturkfemre/unsupervised-learning-in-r-k-means-clustering-86df8b29ed27">k-means</a> and <a href="https://medium.com/@ozturkfemre/unsupervised-learning-in-r-k-medoids-clustering-8645a6521e4">k-medoids</a> clustering algorithms work in detail. In this post, I will try to explain Hierarchical Clustering algorithm. First, I will explain what Hierarchical Clustering is, then I will explain how it works step by step, and then I will explain how to implement it using the R program language.</p>
+<hr>
+<h3 id="what-hierarchical-clustering-is">What Hierarchical Clustering is?</h3>
+<p>Hierarchical Clustering is a method of clustering in which the objects are organized into a tree-like structure called a dendrogram. The main idea behind hierarchical clustering is to start with each object as a separate cluster and then combine them into larger clusters iteratively based on their similarity. There are two main types of hierarchical clustering: Agglomerative and Divisive. [1], [2], [3]</p>
+<p><strong>Step by Step &mdash; Agglomerative Hierarchical Clustering</strong></p>
+<ol>
+<li>
+<p>Start with each object as a separate cluster</p>
+</li>
+<li>
+<p>Find the two most similar clusters and combine them into a new cluster</p>
+</li>
+<li>
+<p>Repeat step 2 until all objects are in the same cluster</p>
+</li>
+</ol>
+<p><strong>Step by Step &mdash; Divisive Hierarchical Clustering</strong></p>
+<ol>
+<li>
+<p>Start with all objects in the same cluster</p>
+</li>
+<li>
+<p>Divide the largest cluster into two smaller clusters based on their similarity</p>
+</li>
+<li>
+<p>Repeat step 2 until each object forms its own cluster</p>
+</li>
+</ol>
+<p>In hierarchical clustering, there are several linkage methods that can be used to determine the distance between clusters. These linkage methods include:</p>
+<ol>
+<li>
+<p>Single linkage: Also known as the nearest-neighbor method, this method calculates the distance between the closest points of the two clusters being merged. [4]</p>
+</li>
+<li>
+<p>Complete linkage: Also known as the farthest-neighbor method, this method calculates the distance between the furthest points of the two clusters being merged.[5]</p>
+</li>
+<li>
+<p>Average linkage: This method calculates the average distance between all pairs of points in the two clusters being merged. [6]</p>
+</li>
+<li>
+<p>Ward's Minimum Variance linkage: This method minimizes the variance of the distances between points within the same cluster. It merges the clusters that result in the smallest increase in the total sum of squared distances within each cluster.[7]</p>
+</li>
+</ol>
+<p>The choice of linkage method can have a significant impact on the resulting clusters, as each method has its own strengths and weaknesses. Therefore, it is important to carefully consider which linkage method is most appropriate for the data and the specific problem being addressed. In this post, I will focus on two metrics which are Ward's Minimum Variance Method and Average linkage method.</p>
+<hr>
+<h3 id="wards-minimum-variancemethod">Ward's Minimum Variance Method</h3>
+<p>Ward linkage is a hierarchical clustering method that aims to minimize the variance of the distances between points within the same cluster. It merges the clusters that result in the smallest increase in the total sum of squared distances within each cluster.</p>
+<p>To understand how Ward linkage works, let's assume we have n data points and we start with each point in its own cluster. At each step, we merge the two clusters that result in the smallest increase in the total sum of squared distances within each cluster.</p>
+<p>To measure the increase in the total sum of squared distances within each cluster, we use the following formula:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*x6DZmde3LRTGdfHF.gif" alt=""></p>
+<p>The first step in Ward linkage is to calculate the centroids of each individual point, since each point starts as its own cluster. Then, we calculate the pairwise distances between each centroid. Next, we merge the two clusters with the smallest value of the total sum of squared, and calculate the new centroid of the merged cluster. We repeat this process until all the points are in a single cluster.</p>
+<p>As I said in the previous post, there are lots of distance metrics that are used in clustering analysis. In the case of Hierarchical Clustering, there is a way to decide distance metric which is called cophenetic distance.</p>
+<h4 id="cophenetic-distance">Cophenetic Distance</h4>
+<p>The cophenetic distance is a measure used in hierarchical clustering to evaluate the similarity between two observations in the dendrogram produced by the clustering algorithm. It is defined as the distance between two observations in the original data space at the level in the dendrogram where they first merge into the same cluster[8].</p>
+<p>The cophenetic distance is calculated as follows:</p>
+<ol>
+<li>
+<p>Perform hierarchical clustering on the data to produce a dendrogram</p>
+</li>
+<li>
+<p>For each pair of observations, find the level in the dendrogram where they first merge into the same cluster.</p>
+</li>
+<li>
+<p>Compute the distance between the two observations in the original data space. Repeat steps 2 and 3 for all pairs of observations.</p>
+</li>
+</ol>
+<p>The cophenetic distance is used to evaluate the quality of the clustering solution by comparing it to the original data space. A high correlation between the cophenetic distance and the original distance between observations in the data space indicates that the clustering solution is preserving the structure of the data well.</p>
+<h4 id="cophenetic-distance-inr">Cophenetic Distance in R</h4>
+<p>There are many packages and functions available to implement the k-means algorithm in R. In this article, I will show you the cophenetic function in the<code>stats</code>package. I will again use the same dataset, <a href="https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+%28diagnostic%29">Breast Cancer Wisconsin</a> from the UCI Machine Learning Repository in the analysis.</p>
+<p>At first, we need to calculate Euclidean and Manhattan distances between observations:</p>
+<pre tabindex="0"><code>dist_euc &lt;- dist(pcadf, method=&#34;euclidean&#34;) # data, distance metric
+dist_man &lt;- dist(pcadf, method=&#34;manhattan&#34;) # data, distance metric
+</code></pre><p>Secondly, we need to hierarchically cluster dataset with both distance metric.</p>
+<pre tabindex="0"><code>hc_e &lt;- hclust(d=dist_euc, method=&#34;ward.D2&#34;)
+hc_m &lt;- hclust(d=dist_man, method=&#34;ward.D2&#34;)
+</code></pre><p>Lastly, we need to calculate cophenetic distance for both of the clusterings, and check the correlation coefficient between distance metric and cophenetic distance.</p>
+<pre tabindex="0"><code># for euclidean distance
+coph_e &lt;- cophenetic(hc_e)
+cor(dist_euc,coph_e)
+
+# for manhattan distance
+coph_m &lt;- cophenetic(hc_m)
+cor(dist_man,coph_m)
+</code></pre><pre tabindex="0"><code>&gt; cor(dist_euc,coph_e)
+[1] 0.6711685
+
+&gt; cor(dist_man,coph_m)
+[1] 0.6018289
+</code></pre><p>In general, a higher cophenetic correlation coefficient indicates that the dendrogram is a more accurate representation of the pairwise distances between the original data points. The cophenetic correlation coefficient can range between 0 and 1, with a value of 1 indicating a perfect fit between the dendrogram and the pairwise distances.</p>
+<p>In this case it can be said that when the correlation between Cophenetic and distance matrix is examined, it is observed that hierarchical clustering with Euclidean distance gives better results. That's why I will continue the analysis with Euclidean distance metric.</p>
+<h3 id="wards-minimum-variance-method-inr">Ward's Minimum Variance Method in R</h3>
+<p>Hierarchical clustering can be represented by a dendrogram, which is a tree-like structure that shows the hierarchy of clusters and the relations between them. The dendrogram can be cut at a certain height to obtain a flat clustering solution with a specific number of clusters. To determine the number of clusters, as we did in the k-means and k-medoids, we can use methods to determine the optimal number of clusters.</p>
+<p>Since I covered <a href="https://medium.com/@ozturkfemre/unsupervised-learning-determination-of-cluster-number-be8842cdb11">methods to determine the optimal number of clusters</a> in the first post of this series, I will not show you the codes in this post. However, I can state that all of the methods suggested 2 as the optimal number of cluster.</p>
+<p>As I mentioned, another way for hierarchical clustering is to check the dendogram to decide where to cut it in order to decide the optimal number of cluster. However, I, personally, find this method &quot;open-ended&quot; which I do not think it to be a case for the optimal number of cluster. Nevertheless, I will share codes and dendogram with you.</p>
+<p>You can use fviz_dend function in the factoextra package to visualise dendogram of a hierarchical clustering with the object you created from hierarchical clustering with the function hclust from stats package.</p>
+<pre tabindex="0"><code>hc_e &lt;- hclust(d=dist_euc, method=&#34;ward.D2&#34;)
+fviz_dend(hc_e,cex=.5) 
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/800/1*3FYK9dE9_a4ZWZntQ5nRow.png" alt=""></p>
+<p>According to the dendogram, it can be said that the best height value to cut the dendogram is 35&ndash;40. This also refers to 2 clusters. Lets hierarchically cluster the data set with 2 clusters. I will use cutree function from the stats package to do that.</p>
+<pre tabindex="0"><code>grupward2 &lt;- cutree(hc_e, k = 2)
+table(grupward2) # gives observation number in each cluster
+grupward2 # gives cluster assignments for each observation
+</code></pre><pre tabindex="0"><code>grupward2
+  1   2 
+180 389 
+&gt; grupward2
+  [1] 1 1 1 1 1 1 1 1 1 1 2 2 1 2 1 1 2 1 1 2 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
+ [38] 2 2 2 2 1 1 1 2 1 2 1 2 2 2 2 2 1 2 2 1 1 2 2 2 2 1 2 1 1 2 2 1 2 1 2 1 2
+ [75] 2 2 1 1 1 2 2 1 1 1 2 1 2 1 2 1 2 2 2 2 1 1 2 2 2 2 2 2 2 2 2 1 2 2 1 2 2
+[112] 2 1 2 2 2 2 1 1 2 2 1 1 2 2 2 2 2 1 1 2 2 2 2 1 2 2 2 1 2 2 2 2 2 2 2 1 2
+[149] 2 2 2 2 1 2 2 2 1 2 2 2 2 1 1 2 1 2 2 2 1 2 2 2 1 2 2 2 2 1 2 2 1 1 2 2 2
+[186] 2 2 2 2 2 1 2 2 1 1 2 1 2 1 2 2 2 1 1 2 2 2 2 1 2 1 2 1 1 2 1 2 2 1 1 2 2
+[223] 2 2 2 2 2 2 2 1 1 2 2 1 2 2 1 1 2 1 2 2 2 2 1 2 2 2 2 2 1 2 1 1 1 2 1 1 1
+[260] 1 1 2 1 2 1 1 2 2 2 2 2 2 1 2 2 2 2 2 2 2 1 2 1 1 2 2 2 2 2 2 2 2 2 2 2 2
+[297] 2 2 2 2 1 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 2 2 1 2 1 2 2 2 2 1 1 2 2 2
+[334] 2 2 1 2 1 2 1 2 2 2 1 2 2 2 2 2 2 2 1 1 2 2 2 1 2 2 2 2 2 2 2 2 1 1 2 1 1
+[371] 1 2 1 1 2 2 1 2 2 1 2 2 2 2 2 2 2 2 2 1 2 2 1 1 2 2 2 2 2 2 1 2 2 2 2 2 2
+[408] 2 1 2 2 2 2 2 2 2 2 1 2 2 2 1 2 2 2 2 2 2 2 2 1 2 1 1 2 2 2 2 2 2 2 2 2 2
+[445] 1 2 1 2 2 1 2 1 2 2 2 2 2 2 2 2 1 1 2 2 2 2 2 2 1 1 2 2 2 2 2 2 2 2 2 1 2
+[482] 2 2 2 2 1 2 1 2 2 2 2 1 2 2 2 2 2 1 1 2 1 2 1 1 1 2 2 2 1 2 2 1 2 2 2 1 1
+[519] 1 2 2 1 2 2 2 2 2 2 1 2 2 2 2 1 2 1 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+[556] 2 2 2 2 2 2 2 1 1 1 1 2 1 2
+</code></pre><p>Now, we can again visualize the dendogram. However, this time, we can color the clusters.</p>
+<pre tabindex="0"><code>fviz_dend(hc_e, # clustering result
+          k = 2, # cluster number
+          cex = 0.5, 
+          color_labels_by_k = TRUE, 
+          rect = TRUE )
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/800/1*EyrVh74aoMBjifzRUNQyWA.png" alt=""></p>
+<p>Just as we did in the previous clustering algorithms, we can also visualize cluster graph with fviz_cluster function in the factoextra package:</p>
+<pre tabindex="0"><code>fviz_cluster(list(data = pcadata, cluster = grupward2),
+             ellipse.type = &#34;convex&#34;, 
+             repel = TRUE, 
+             show.clust.cent = FALSE, ggtheme = theme_minimal())
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/800/1*DRWNNQzNCsCQJDBPIbdn4Q.png" alt=""></p>
+<hr>
+<p>When the cluster graph is analyzed, overlap can be observed. It can be seen that the separation occurs only in both PC1 and PC2. While the variance in the first cluster shown in red is high, the variance in the second cluster shown in green is low.</p>
+<hr>
+<h3 id="average-linkagemethod">Average Linkage Method</h3>
+<p>Average linkage, also known as UPGMA (Unweighted Pair Group Method with Arithmetic Mean), is a hierarchical clustering method that calculates the distance between clusters as the average distance between all pairs of points in the two clusters being merged.</p>
+<p>To understand how average linkage works, let's assume we have n data points and we start with each point in its own cluster. At each step, we merge the two clusters that have the smallest average distance between all pairs of points.</p>
+<p>The first step in average linkage is to compute the pairwise distances between all of the data points. This can be done using any distance metric, such as Euclidean distance or Manhattan distance. Next, we compute the average distance between all pairs of points in each cluster. We then merge the two clusters with the smallest average distance, and update the pairwise distances between the new merged cluster and the remaining clusters.</p>
+<p>One of the advantages of average linkage is that it tends to produce clusters that are well-separated and roughly equal in size. However, it can also be sensitive to outliers, since it takes the average of all pairwise distances between clusters.</p>
+<hr>
+<h3 id="average-linkage-method-inr">Average Linkage Method in R</h3>
+<p>Since I covered cophenetic distance in the Ward's Minimum Variance Method, I will not share it with you in this part. However, I need to state that Euclidean distance again gave the better results. In addition, methods to determine optimal number of clusters, again, suggested 2 as the optimal number of clusters.</p>
+<p>Again, you can use fviz_dend function in the factoextra package to visualise dendogram of a hierarchical clustering with the object you created from hierarchical clustering with the function hclust from stats package.</p>
+<pre tabindex="0"><code>hc_e2 &lt;- hclust(d=dist_euc, method=&#34;average&#34;)
+fviz_dend(hc_e2,cex=.5) 
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/800/1*USFITshh7dW_xONYXy8CPg.png" alt=""></p>
+<p>As we can see from the dendogram easily, it is very different from the Ward's dendogram. It seems clusters are highly unbalanced with respect to the Ward. This may cause a problem for the cluster analysis. However, it is a beneficial example to show that linkage is highly dependent on the data set. It is crucial to decide the best linkage method for the data. One way to decide the linkage is to check the descriptive statistics of the data set to see if there are outliers. Another way is to try all of the linkage methods to see which dendogram looks fine.</p>
+<p>Again, it is hard to interpret it from the dendogram, but, we will continue with 2 clusters. One reason is the methods to determine the optimal number of clusters suggested cluster number to be 2. Another reason is to compare the result with Ward's Minimum Variance methods.</p>
+<pre tabindex="0"><code>grupav2 &lt;- cutree(hc_e2, k = 2)
+grupav2
+table(grupav2)
+</code></pre><pre tabindex="0"><code>&gt; grupav2
+  [1] 1 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2
+ [38] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+ [75] 2 2 2 2 1 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2
+[112] 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+[149] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 2 2 2
+[186] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2
+[223] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1
+[260] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+[297] 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2
+[334] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+[371] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 1 2 2 2 2 2 2
+[408] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+[445] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+[482] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+[519] 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+[556] 2 2 2 2 2 2 2 2 1 2 2 2 1 2
+&gt; table(grupav2)
+grupav2
+  1   2 
+ 23 546 
+</code></pre><p>As we can see from the output, clusters are highly unbalanced. This output was expected since we observe dendogram.</p>
+<p>Again, we can again visualize the dendogram. However, this time, we can color the clusters.</p>
+<pre tabindex="0"><code>fviz_dend(hc_e2, k = 2, 
+          cex = 0.5, 
+          color_labels_by_k = TRUE, 
+          rect = TRUE )
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/800/1*eWg4svkfdthcRTuh1tpbeA.png" alt=""></p>
+<p>Again, just as we did in the previous clustering algorithms, we can also visualize cluster graph with fviz_cluster function in the factoextra package:</p>
+<pre tabindex="0"><code>fviz_cluster(list(data = pcadata, cluster = grupav2),
+             ellipse.type = &#34;convex&#34;, 
+             repel = TRUE, 
+             show.clust.cent = FALSE, ggtheme = theme_minimal())
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/800/1*glHE7nwCyRxoN7OYhCKoyA.png" alt=""></p>
+<hr>
+<p>That was the end of this post. Just like always:</p>
+<p>&quot;In case I don't see ya, good afternoon, good evening, and good night!&quot;</p>
+<hr>
+<p><strong>References</strong></p>
+<p>[1] Ward Jr, J. H. (1963). Hierarchical grouping to optimize an objective function. Journal of the American statistical association, 58(301), 236&ndash;244.</p>
+<p>[2] Roux, M. (2015). A comparative study of divisive hierarchical clustering algorithms. arXiv preprint arXiv:1506.08977.</p>
+<p>[3] Kassambara, Alboukadel. Practical guide to cluster analysis in R: Unsupervised machine learning. Vol. 1. Sthda, 2017.</p>
+<p>[4] Kassambara, Alboukadel. Practical guide to cluster analysis in R: Unsupervised machine learning. Vol. 1. Sthda, 2017.</p>
+<p>[5] Kassambara, Alboukadel. Practical guide to cluster analysis in R: Unsupervised machine learning. Vol. 1. Sthda, 2017.</p>
+<p>[6] Kassambara, Alboukadel. Practical guide to cluster analysis in R: Unsupervised machine learning. Vol. 1. Sthda, 2017.</p>
+<p>[7] Ward Jr, J. H. (1963). Hierarchical grouping to optimize an objective function. Journal of the American statistical association, 58(301), 236&ndash;244.</p>
+<p>[8] Triayudi, A., &amp; Fitri, I. (2018). Comparison of parameter-free agglomerative hierarchical clustering methods. ICIC Express Letters, 12(10), 973&ndash;980.</p>
+
+          </article>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div class="sticky-sidebar">
+          
+          <aside class="toc">
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#what-hierarchical-clustering-is">What Hierarchical Clustering is?</a></li>
+        <li><a href="#wards-minimum-variancemethod">Ward's Minimum Variance Method</a></li>
+        <li><a href="#wards-minimum-variance-method-inr">Ward's Minimum Variance Method in R</a></li>
+        <li><a href="#average-linkagemethod">Average Linkage Method</a></li>
+        <li><a href="#average-linkage-method-inr">Average Linkage Method in R</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+              </div>
+          </aside>
+          
+
+          
+          <aside class="tags">
+            <h5>Tags</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              
+              <li class="list-inline-item"><a href="https://hugo-profile.netlify.app/tags/r" target="_blank">R</a></li>
+              
+              <li class="list-inline-item"><a href="https://hugo-profile.netlify.app/tags/unsupervised-learning" target="_blank">Unsupervised Learning</a></li>
+              
+              <li class="list-inline-item"><a href="https://hugo-profile.netlify.app/tags/hierarchical-clustering" target="_blank">Hierarchical Clustering</a></li>
+              
+            </ul>
+          </aside>
+          
+
+          
+          <aside class="social">
+            <h5>Social</h5>
+            <div class="social-content">
+              <ul class="list-inline">
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://twitter.com/share?text=Unsupervised%20Learning%20in%20%7c%20Hierarchical%20Clustering&url=https%3a%2f%2fhugo-profile.netlify.app%2fblogs%2fhc%2f">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://api.whatsapp.com/send?text=Unsupervised%20Learning%20in%20%7c%20Hierarchical%20Clustering: https%3a%2f%2fhugo-profile.netlify.app%2fblogs%2fhc%2f">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='mailto:?subject=Unsupervised%20Learning%20in%20%7c%20Hierarchical%20Clustering&amp;body=Check%20out%20this%20site https%3a%2f%2fhugo-profile.netlify.app%2fblogs%2fhc%2f'>
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
+
+  </div><footer>
+    <div class="container py-3" id="recent-posts">
+    
+</div><div class="text-center pt-2">
+    
+    <span class="px-1">
+        <a href="https://github.com/ozturkfemre" aria-label="github">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2.7em" height="2.7em" viewBox="0 0 1792 1792">
+                <path
+                    d="M522 1352q-8 9-20-3-13-11-4-19 8-9 20 3 12 11 4 19zm-42-61q9 12 0 19-8 6-17-7t0-18q9-7 17 6zm-61-60q-5 7-13 2-10-5-7-12 3-5 13-2 10 5 7 12zm31 34q-6 7-16-3-9-11-2-16 6-6 16 3 9 11 2 16zm129 112q-4 12-19 6-17-4-13-15t19-7q16 5 13 16zm63 5q0 11-16 11-17 2-17-11 0-11 16-11 17-2 17 11zm58-10q2 10-14 14t-18-8 14-15q16-2 18 9zm964-956v960q0 119-84.5 203.5t-203.5 84.5h-224q-16 0-24.5-1t-19.5-5-16-14.5-5-27.5v-239q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-121-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-86-13.5q-44 113-7 204-79 85-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-40 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 103t.5 68q0 22-11 33.5t-22 13-33 1.5h-224q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z" />
+
+                <metadata>
+                    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+                        <rdf:Description about="https://iconscout.com/legal#licenses"
+                            dc:title="Github, Online, Project, Hosting, Square"
+                            dc:description="Github, Online, Project, Hosting, Square" dc:publisher="Iconscout"
+                            dc:date="2016-12-14" dc:format="image/svg+xml" dc:language="en">
+                            <dc:creator>
+                                <rdf:Bag>
+                                    <rdf:li>Font Awesome</rdf:li>
+                                </rdf:Bag>
+                            </dc:creator>
+                        </rdf:Description>
+                    </rdf:RDF>
+                </metadata>
+            </svg>
+        </a>
+    </span>
+    
+
+    
+    <span class="px-1">
+        <a href="https://www.linkedin.com/in/ozturkfemre/" aria-label="linkedin">
+            <svg xmlns="http://www.w3.org/2000/svg" width='2.4em' height='2.4em' fill="#fff" aria-label="LinkedIn"
+                viewBox="0 0 512 512">
+                <rect width="512" height="512" fill="#0077b5" rx="15%" />
+                <circle cx="142" cy="138" r="37" />
+                <path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198" />
+                <path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32" />
+            </svg>
+        </a>
+    </span>
+    
+
+    
+    <a href="https://twitter.com/ozturkfemre" aria-label="twitter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
+            <path fill="#03a9f4"
+                d="M42,37c0,2.762-2.239,5-5,5H11c-2.762,0-5-2.238-5-5V11c0-2.762,2.238-5,5-5h26c2.761,0,5,2.238,5,5 V37z" />
+            <path fill="#fff"
+                d="M36,17.12c-0.882,0.391-1.999,0.758-3,0.88c1.018-0.604,2.633-1.862,3-3 c-0.951,0.559-2.671,1.156-3.793,1.372C31.311,15.422,30.033,15,28.617,15C25.897,15,24,17.305,24,20v2c-4,0-7.9-3.047-10.327-6 c-0.427,0.721-0.667,1.565-0.667,2.457c0,1.819,1.671,3.665,2.994,4.543c-0.807-0.025-2.335-0.641-3-1c0,0.016,0,0.036,0,0.057 c0,2.367,1.661,3.974,3.912,4.422C16.501,26.592,16,27,14.072,27c0.626,1.935,3.773,2.958,5.928,3c-1.686,1.307-4.692,2-7,2 c-0.399,0-0.615,0.022-1-0.023C14.178,33.357,17.22,34,20,34c9.057,0,14-6.918,14-13.37c0-0.212-0.007-0.922-0.018-1.13 C34.95,18.818,35.342,18.104,36,17.12" />
+        </svg>
+    </a>
+    
+
+    
+    <a href="https://instagram.com/ozturkfemre" aria-label="instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
+            <radialGradient id="yOrnnhliCrdS2gy~4tD8ma" cx="19.38" cy="42.035" r="44.899"
+                gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#fd5" />
+                <stop offset=".328" stop-color="#ff543f" />
+                <stop offset=".348" stop-color="#fc5245" />
+                <stop offset=".504" stop-color="#e64771" />
+                <stop offset=".643" stop-color="#d53e91" />
+                <stop offset=".761" stop-color="#cc39a4" />
+                <stop offset=".841" stop-color="#c837ab" />
+            </radialGradient>
+            <path fill="url(#yOrnnhliCrdS2gy~4tD8ma)"
+                d="M34.017,41.99l-20,0.019c-4.4,0.004-8.003-3.592-8.008-7.992l-0.019-20	c-0.004-4.4,3.592-8.003,7.992-8.008l20-0.019c4.4-0.004,8.003,3.592,8.008,7.992l0.019,20	C42.014,38.383,38.417,41.986,34.017,41.99z" />
+            <radialGradient id="yOrnnhliCrdS2gy~4tD8mb" cx="11.786" cy="5.54" r="29.813"
+                gradientTransform="matrix(1 0 0 .6663 0 1.849)" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#4168c9" />
+                <stop offset=".999" stop-color="#4168c9" stop-opacity="0" />
+            </radialGradient>
+            <path fill="url(#yOrnnhliCrdS2gy~4tD8mb)"
+                d="M34.017,41.99l-20,0.019c-4.4,0.004-8.003-3.592-8.008-7.992l-0.019-20	c-0.004-4.4,3.592-8.003,7.992-8.008l20-0.019c4.4-0.004,8.003,3.592,8.008,7.992l0.019,20	C42.014,38.383,38.417,41.986,34.017,41.99z" />
+            <path fill="#fff"
+                d="M24,31c-3.859,0-7-3.14-7-7s3.141-7,7-7s7,3.14,7,7S27.859,31,24,31z M24,19c-2.757,0-5,2.243-5,5	s2.243,5,5,5s5-2.243,5-5S26.757,19,24,19z" />
+            <circle cx="31.5" cy="16.5" r="1.5" fill="#fff" />
+            <path fill="#fff"
+                d="M30,37H18c-3.859,0-7-3.14-7-7V18c0-3.86,3.141-7,7-7h12c3.859,0,7,3.14,7,7v12	C37,33.86,33.859,37,30,37z M18,13c-2.757,0-5,2.243-5,5v12c0,2.757,2.243,5,5,5h12c2.757,0,5-2.243,5-5V18c0-2.757-2.243-5-5-5H18z" />
+        </svg>
+    </a>
+    
+
+    
+</div><div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            <div class="pb-2">
+                <a href="https://hugo-profile.netlify.app" title="feo">
+                    <img alt="Footer logo" src="/images/feopp.jpeg"
+                        height="40px" width="40px">
+                </a>
+            </div>
+            &copy; 2023  All rights reserved
+            <div class="text-secondary">
+                Made with
+                <span class="text-danger">
+                    &#10084;
+                </span>
+                and
+                <a href="https://github.com/gurusabarish/hugo-profile" target="_blank"
+                    title="Designed and developed by gurusabarish">
+                    Hugo Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div></footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+</script>
+
+
+    <script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+  <section id="search-content" class="py-2">
+    <div class="container" id="search-results"></div>
+  </section>
+</body>
+
+</html>

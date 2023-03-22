@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<link rel="icon" href=/images/feopp.jpeg type="image/gif">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      media="print" onload="this.media='all'" />
+<noscript>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+</noscript>
+
+
+<link rel="stylesheet" href="/css/font.css" media="all">
+
+
+
+<meta property="og:title" content="Unsupervised Learning in R | k-means Clustering" />
+<meta property="og:description" content="kmeans implemantation" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo-profile.netlify.app/blogs/kmeans/" /><meta property="article:section" content="blogs" />
+<meta property="article:published_time" content="2023-03-22T22:53:58+05:30" />
+<meta property="article:modified_time" content="2023-03-22T22:53:58+05:30" /><meta property="og:site_name" content="Fatih Emre Ozturk" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unsupervised Learning in R | k-means Clustering"/>
+<meta name="twitter:description" content="kmeans implemantation"/>
+
+
+<link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
+<link rel="stylesheet" href="/css/footer.css" media="all">
+
+
+<link rel="stylesheet" href="/css/theme.css" media="all">
+
+
+
+
+<style>
+    :root {
+        --text-color: #343a40;
+        --text-secondary-color: #6c757d;
+        --background-color: #eaedf0;
+        --secondary-background-color: #64ffda1a;
+        --primary-color: #007bff;
+        --secondary-color: #f8f9fa;
+
+         
+        --text-color-dark: #e4e6eb;
+        --text-secondary-color-dark: #b0b3b8;
+        --background-color-dark: #18191a;
+        --secondary-background-color-dark: #212529;
+        --primary-color-dark: #ffffff;
+        --secondary-color-dark: #212529;
+    }
+    body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    html {
+        background-color: var(--background-color) !important;
+    }
+
+    body::-webkit-scrollbar {
+        width: .5em;
+        height: .5em;
+        background-color: var(--background-color);
+    }
+    
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px var(--background-color);
+        border-radius: 1rem;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background-color: var(--secondary-color);
+        outline: 1px solid var(--background-color);
+    }
+
+    #search-content::-webkit-scrollbar {
+        width: .5em;
+        height: .1em;
+        background-color: var(--background-color);
+    }
+</style>
+
+<meta name="description" content="">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-5/all-5.15.4.js"></script>
+
+  <title>
+Unsupervised Learning in R | k-means Clustering | feo
+
+  </title>
+</head>
+
+<body class="light">
+  
+  
+<script>
+    let localStorageValue = localStorage.getItem("pref-theme");
+    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    switch (localStorageValue) {
+        case "dark":
+            document.body.classList.add('dark');
+            break;
+        case "light":
+            document.body.classList.remove('dark');
+            break;
+        default:
+            if (mediaQuery) {
+                document.body.classList.add('dark');
+            }
+            break;
+    }
+</script>
+
+
+
+<header>
+    <nav class="pt-3 navbar navbar-expand-lg animate">
+        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
+            
+            <a class="navbar-brand primary-font text-wrap" href="/">
+                
+                <img src="/images/feopp.jpeg" width="30" height="30"
+                    class="d-inline-block align-top">
+                Fatih Emre Ozturk
+                
+            </a>
+
+            
+                <div>
+                    <input id="search" autocomplete="off" class="form-control mr-sm-2 d-none d-md-block" placeholder='Ctrl &#43; k to Search...'
+                        aria-label="Search" oninput="searchOnChange(event)">
+                </div>
+            
+
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
+                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
+                </svg>
+            </button>
+
+            
+            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
+                <ul class="navbar-nav ms-auto text-center">
+                    
+                        <li class="nav-item navbar-text d-block d-md-none">
+                            <div class="nav-link">
+                                <input id="search" autocomplete="off" class="form-control mr-sm-2" placeholder='Ctrl &#43; k to Search...' aria-label="Search" oninput="searchOnChange(event)">
+                            </div>
+                        </li>
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#about" aria-label="about">
+                            About Me
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#education"
+                            aria-label="education">
+                            Education
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#contact"
+                            aria-label="contact">
+                            Contact
+                        </a>
+                    </li>
+                    
+
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/blogs" title="Blog posts">
+                            
+                            Blog
+                        </a>
+                    </li>
+                    
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        
+                        <div class="text-center">
+                            <button id="theme-toggle">
+                                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+                    
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<div id="content">
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">Unsupervised Learning in R | k-means Clustering</h1>
+            <div class="text-center">
+               
+              <small>|</small>
+              Mar 22, 2023
+
+              
+              <span id="readingTime">
+                min read
+              </span>
+              
+            </div>
+          </div>
+          
+          <article class="page-content  p-2">
+          <hr>
+<p>In the second post of the unsupervised statistical learning in R series, I will share with you the k-means clustering algorithm. I believe, at first, it is beneficial to define what clustering is, before explaining k-means clustering. Clustering can be defined as partitioning observation in a data set according to their similarity. We expect that observations in the same cluster to be similar as much as possible. Conversely, observations in the different clusters need to be dissimilar. What do we mean by this <em>similarity</em>? Similarity in the clustering algorithms are calculating as distance. Observations which are closest to each other are considered as the similar observations. There are more than 30 metrics that can bu used to calculate distance between two points. However, Euclidean and Manhattan distance are the most widely used distance metrics.</p>
+<hr>
+<h3 id="what-isk-means">What is k-means?</h3>
+<p>The center of each cluster, or centroid, in k-means clustering corresponds to the mean of the points allocated to the cluster. The fundamental principle of k-means clustering is to define clusters with the goal of minimizing total intra-cluster variation, also referred to as total within-cluster variation. Various k-means algorithms are available. The common approach is the Hartigan-Wong algorithm (1979), which sums the squared distances between items and the matching centroid to determine the total within-cluster variation[1],[2],[3]. The most crucial point in k-means is to decide the cluster number k. There are lots of methods to determine optimum number of cluster, however, you can see the most common ones in <a href="https://medium.com/@ozturkfemre/unsupervised-learning-determination-of-cluster-number-be8842cdb11">here</a>.</p>
+<p>Mathematical formula of the k-means is as follows:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*VHABEGVOjy9ZiTKz2l5XOA.png" alt=""></p>
+<p>where:</p>
+<ul>
+<li>
+<p>xi is a data point belonging to the cluster Ck</p>
+</li>
+<li>
+<p>μk is the mean value of the points assigned to the cluster Ck</p>
+</li>
+</ul>
+<h4 id="step-bystep">Step by Step</h4>
+<p>The steps to perform k-means clustering are:</p>
+<p><strong>Step 1:</strong></p>
+<p>Select k, the number of clusters, that you want to form in the data. As I mentioned before, there are lots of methods to determine the optimal number of clusters. You can see the <a href="https://medium.com/@ozturkfemre/unsupervised-learning-determination-of-cluster-number-be8842cdb11">first post </a>of this series for detailed information about optimal cluster number determination.</p>
+<p><strong>Step 2:</strong></p>
+<p>Select k random points from the dataset as the initial centroids (cluster center).</p>
+<p>As first assume we have a data like the follows:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*pJDM6rCwC9L5JipM" alt=""></p>
+<p>We need to select a random points to be cluster center. This will look like the following:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*CSgBnWMfH9x0nF-m" alt=""></p>
+<p><strong>Step 3:</strong></p>
+<p>Assign each observation to the cluster whose centroid is closest to it. We will start to assign each point as follows.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*sdznnu0uK86FnD9P" alt=""></p>
+<p>At the end of this step, our process will look like the follows.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*Necb5b0iV-aWdofa" alt=""></p>
+<p><strong>Step 4:</strong></p>
+<p>Recalculate the centroids as the mean of all the observations in each cluster. Consider the last step. All of the points in the data is clustered. At this step, we are calculating the new centroids as follows.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*N_2eU_8ZhPeeaL-F" alt=""></p>
+<p><strong>Step 5:</strong></p>
+<p>Repeat steps 3 and 4 until the cluster assignments no longer change or reach a maximum number of iterations. At the end of these iterations our clustering will look like the follows:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*6G4K1Pq9PgTCPfaH" alt=""></p>
+<hr>
+<hr>
+<h3 id="data-preparation-fork-means">Data Preparation for k-means</h3>
+<p>In general, the data preparation for a cluster analysis in unsupervised learning should go as follows:</p>
+<ol>
+<li>
+<p>Missing values in the data should be eliminated/estimated.</p>
+</li>
+<li>
+<p>To make variables comparable, the data must be scaled or normalized. The process of standardization entails altering the variables so that their means are 0 and standard deviations are 1.[4]</p>
+</li>
+<li>
+<p>PCA can help to enhance the performance of a clustering algorithm by transforming the data into a new coordinate system that better separates the underlying clusters. This can lead to more accurate and meaningful results, especially for datasets with complex structures. [5]</p>
+</li>
+<li>
+<p>PCA can be used to reduce the number of features in a high-dimensional dataset, which can help improve the performance of a clustering algorithm. By reducing the dimensionality, PCA can also help to reduce noise and eliminate multicollinearity in the data, making it easier to interpret the results of a clustering analysis.[6]</p>
+</li>
+</ol>
+<hr>
+<h3 id="k-means-inr">k-means in R</h3>
+<p>There are many packages and functions available to implement the k-means algorithm in R. In this article, I will show you the <code>kmeans</code> function in the <code>stats</code>package and the <code>eclust</code>function in the <code>factoextra</code>package. I will use <a href="https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+%28diagnostic%29">Breast Cancer Wisconsin</a> dataset from the UCI Machine Learning Repository.</p>
+<p>The dataset contains information about tumor cells. The task in this project was to extract the variable containing the information labeled as benign or malignant from the dataset and cluster the tumors as benign or malignant using clustering algorithms. There are 569 observations and 32 variables in the dataset. However, some variables are mean of the other variables. Thus, these variables are removed from the dataset. Moreover, ID and variable about class information is also removed. Given the high correlation between pairs of variables and the high dimensionality, I applied PCA to the dataset. I have not included this step as it is not the subject of this paper.</p>
+<p>If you read the first post, you will remember that I compared cluster number determination methods on the same dataset. All methods predominantly suggested two cluster numbers. That is why I will cluster the data for 2 clusters.</p>
+<p>We do clustering with the <code>kmeans</code>function and then we store the clustering result in the <code>km_data</code>object. Then we print this object with the <code>print</code>function.</p>
+<pre tabindex="0"><code>km_data &lt;- kmeans(df, # data to cluster
+                  2, # k, cluster number
+                  nstart=25 # number of iteration
+                  ) 
+print(km_data)
+</code></pre><pre tabindex="0"><code>K-means clustering with 2 clusters of sizes 398, 171
+
+Cluster means:
+        PC1         PC2
+1  1.289695 -0.03214799
+2 -3.001746  0.07482399
+
+Clustering vector:
+  [1] 2 2 2 2 2 2 2 2 2 2 1 2 2 1 2 2 1 2 2 1 1 1 2 2 2 2 2 2 2 2 2 1 2 2 2 2 1 1 1 1 1 1 2 1 1 2 1 1 1 1 1 1 1 2 1 1 2 2 1 1 1 1 2 1 1 2 1 1
+ [69] 1 1 2 1 2 1 1 1 1 2 2 1 1 1 2 2 1 2 1 2 1 2 1 1 1 1 2 2 1 1 1 1 1 1 1 1 1 2 1 1 2 1 1 1 2 1 1 1 1 2 2 1 1 2 2 1 1 1 1 2 2 2 1 2 2 1 2 1
+[137] 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 2 1 1 1 2 1 1 1 1 2 2 1 2 1 1 1 2 1 1 1 2 1 1 1 1 2 1 1 2 2 1 1 1 1 1 1 1 1 2 1 1 1 2 1 2 2 2 1 1 2 2 2
+[205] 1 1 1 1 1 1 2 1 2 2 2 1 1 1 2 2 1 1 1 2 1 1 1 1 1 2 2 1 1 2 1 1 2 2 1 2 1 1 1 1 2 1 1 1 1 1 2 1 2 2 2 1 2 2 2 2 2 1 2 1 2 2 1 1 1 1 1 1
+[273] 2 1 1 1 1 1 1 1 2 1 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 2 1 2 1 1 1 1 2 2 2 1 1 1 1 2 1 2 1 2
+[341] 1 1 1 2 1 1 1 1 1 1 1 2 2 1 1 1 1 1 1 1 1 1 1 1 1 2 2 1 2 2 2 1 2 2 1 2 1 1 1 2 1 1 1 1 1 1 1 1 1 2 1 1 2 2 1 1 1 1 1 1 2 1 1 1 1 1 1 1
+[409] 2 1 1 1 1 1 1 1 1 2 1 1 1 2 1 1 1 1 1 1 1 1 2 1 2 2 1 1 1 1 1 1 1 2 1 1 2 1 2 1 1 2 1 2 1 1 1 1 1 1 1 1 2 2 1 1 1 1 1 1 2 1 1 1 1 1 1 1
+[477] 1 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 2 1 1 1 1 1 2 2 1 2 1 2 2 1 1 1 1 2 1 1 2 1 1 1 2 2 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 2 1 2 1 1 1 1 1 1 1 1
+[545] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 1 2 1
+
+Within cluster sum of squares by cluster:
+[1] 1121.768 1216.540
+ (between_SS / total_SS =  48.5 %)
+</code></pre><p>When we examine the output, we first see how many elements there are for each cluster. It is noticed that there are 398 observations in the first cluster and 171 observations in the second cluster. It is possible to say that this is unbalanced. Then the cluster means section appears. In this section, we see the values taken by the centroids of each cluster. Since k-means takes the centroids as the mean of the cluster, it would not be wrong to say that we see the means of the clusters. In the clustering vector section, we see to which cluster each observation in the dataset is assigned. Each clustering algorithm assigns cluster names as 1,2,3&hellip;. The last section shows the within cluster sum of squares values for each cluster. This is an important value for the explanatory power of clustering. We want it to be as high as possible.</p>
+<p>Of course, it is quite possible to make a more detailed comment on this output. But this is not our only option. We can visualize the clustering result with the <code>fviz_cluster</code> function in the <code>factoextra</code> package. Since the factoextra package uses the <code>ggplot2</code> package for all visualizations, you can make the same changes to the ggplot2 plots that you can make to the graphs you plot with the fviz_cluster function.</p>
+<pre tabindex="0"><code>library(factoextra)
+fviz_cluster(km_data,# clustering result 
+             data = pcadata, # data 
+             ellipse.type = &#34;convex&#34;, 
+             star.plot = TRUE, 
+             repel = TRUE, 
+             ggtheme = theme_minimal()
+) 
+</code></pre><p><img src="https://cdn-images-1.medium.com/max/800/1*WYloUhMHjri_B-AbijSYVw.png" alt=""></p>
+<p>It may be possible to interpret this plot as follows:</p>
+<ul>
+<li>
+<p>Separation can be observed only in PC1 dimension.</p>
+</li>
+<li>
+<p>Within sum of square of the cluster 2 is much than the cluster 1.</p>
+</li>
+<li>
+<p>The reason of this needs to be the difference between observation numbers of the clusters.</p>
+</li>
+<li>
+<p>There is no visible overlap between clusters.</p>
+</li>
+</ul>
+<p>It is also possible to cluster data with <code>eclust</code>function from <code>factoextra package.</code></p>
+<pre tabindex="0"><code>k2m_data &lt;- factoextra::eclust(df, # data
+                               &#34;kmeans&#34;, # clustering algorithm
+                               k = 2, # cluster number
+                               nstart = 25, # iteration number
+                               graph = F)
+k2m_data
+</code></pre><pre tabindex="0"><code>K-means clustering with 2 clusters of sizes 171, 398
+
+Cluster means:
+        PC1         PC2
+1 -3.001746  0.07482399
+2  1.289695 -0.03214799
+
+Clustering vector:
+  [1] 1 1 1 1 1 1 1 1 1 1 2 1 1 2 1 1 2 1 1 2 2 2 1 1 1 1 1 1 1 1 1 2 1 1 1 1 2 2 2 2 2 2 1 2 2 1 2 2 2 2 2 2 2 1 2 2 1 1 2 2 2 2 1 2 2 1 2 2
+ [69] 2 2 1 2 1 2 2 2 2 1 1 2 2 2 1 1 2 1 2 1 2 1 2 2 2 2 1 1 2 2 2 2 2 2 2 2 2 1 2 2 1 2 2 2 1 2 2 2 2 1 1 2 2 1 1 2 2 2 2 1 1 1 2 1 1 2 1 2
+[137] 2 2 1 2 2 2 2 2 2 2 1 2 2 2 2 2 1 2 2 2 1 2 2 2 2 1 1 2 1 2 2 2 1 2 2 2 1 2 2 2 2 1 2 2 1 1 2 2 2 2 2 2 2 2 1 2 2 2 1 2 1 1 1 2 2 1 1 1
+[205] 2 2 2 2 2 2 1 2 1 1 1 2 2 2 1 1 2 2 2 1 2 2 2 2 2 1 1 2 2 1 2 2 1 1 2 1 2 2 2 2 1 2 2 2 2 2 1 2 1 1 1 2 1 1 1 1 1 2 1 2 1 1 2 2 2 2 2 2
+[273] 1 2 2 2 2 2 2 2 1 2 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 1 2 1 2 2 2 2 1 1 1 2 2 2 2 1 2 1 2 1
+[341] 2 2 2 1 2 2 2 2 2 2 2 1 1 2 2 2 2 2 2 2 2 2 2 2 2 1 1 2 1 1 1 2 1 1 2 1 2 2 2 1 2 2 2 2 2 2 2 2 2 1 2 2 1 1 2 2 2 2 2 2 1 2 2 2 2 2 2 2
+[409] 1 2 2 2 2 2 2 2 2 1 2 2 2 1 2 2 2 2 2 2 2 2 1 2 1 1 2 2 2 2 2 2 2 1 2 2 1 2 1 2 2 1 2 1 2 2 2 2 2 2 2 2 1 1 2 2 2 2 2 2 1 2 2 2 2 2 2 2
+[477] 2 2 2 1 2 2 2 2 2 2 2 1 2 2 2 2 1 2 2 2 2 2 1 1 2 1 2 1 1 2 2 2 2 1 2 2 1 2 2 2 1 1 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 1 2 1 2 2 2 2 2 2 2 2
+[545] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 2 1 2
+
+Within cluster sum of squares by cluster:
+[1] 1216.540 1121.768
+ (between_SS / total_SS =  48.5 %)
+
+Available components:
+
+ [1] &#34;cluster&#34;      &#34;centers&#34;      &#34;totss&#34;        &#34;withinss&#34;     &#34;tot.withinss&#34; &#34;betweenss&#34;    &#34;size&#34;         &#34;iter&#34;         &#34;ifault&#34;      
+[10] &#34;clust_plot&#34;   &#34;silinfo&#34;      &#34;nbclust&#34;      &#34;data&#34;   
+</code></pre><p>If you examine the output of the k2m_data object, you can see that it gives almost the same output as the kmeans function. There will be other information that you can get from the clustering done with the <code>eclust</code>function. For example, with <code>k2m_data$silinfo</code> you can get the silhouette values for each observation. This can help you to question the validity of your clustering. In addition, you can also plot the clustering plot without the need for the fviz_cluster function. There are two ways to do this.</p>
+<p>At first you can change graph argument in the function as follows:</p>
+<pre tabindex="0"><code>k2m_data &lt;- factoextra::eclust(pcadata, 
+                               &#34;kmeans&#34;,
+                               k = 2, 
+                               nstart = 25, 
+                               graph = T)
+</code></pre><p>You can also reach the plot with the following code:</p>
+<pre tabindex="0"><code>k2m_data$clust_plot
+</code></pre><p>At the end, you will have a plot like the follows:</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*VS5TXdAnXl7EDyHOZ8u-Xw.png" alt=""></p>
+<hr>
+<p>Just like always:</p>
+<p>&quot;In case I don't see ya, good afternoon, good evening, and good night!&quot;</p>
+<hr>
+<p><strong>References</strong></p>
+<p>[1] Hartigan, John A., Manchek A. Wong. Algorithm AS 136: A k-means clustering algorithm. Journal of the royal statistical society. series c (applied statistics) 28., 100&ndash;108, 1979</p>
+<p>[2] Kassambara, Alboukadel. Practical guide to cluster analysis in R: Unsupervised machine learning. Vol. 1. Sthda, 2017.</p>
+<p>[3] James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2013). An introduction to statistical learning (Vol. 112, p. 18). New York: springer.</p>
+<p>[4] Kassambara, Alboukadel. Practical guide to cluster analysis in R: Unsupervised machine learning. Vol. 1. Sthda, 2017.</p>
+<p>[5] Ben-Hur, Asa, and Isabelle Guyon. Detecting stable clusters using principal component analysis. Functional genomics. Humana press, 159&ndash;182, 2003.</p>
+<p>[6] Ding, Chris, and Xiaofeng He. K-means clustering via principal component analysis. Proceedings of the twenty-first international conference on Machine learning. 2004.</p>
+
+          </article>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div class="sticky-sidebar">
+          
+          <aside class="toc">
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#what-isk-means">What is k-means?</a></li>
+        <li><a href="#data-preparation-fork-means">Data Preparation for k-means</a></li>
+        <li><a href="#k-means-inr">k-means in R</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+              </div>
+          </aside>
+          
+
+          
+          <aside class="tags">
+            <h5>Tags</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              
+              <li class="list-inline-item"><a href="https://hugo-profile.netlify.app/tags/r" target="_blank">R</a></li>
+              
+              <li class="list-inline-item"><a href="https://hugo-profile.netlify.app/tags/unsupervised-learning" target="_blank">Unsupervised Learning</a></li>
+              
+              <li class="list-inline-item"><a href="https://hugo-profile.netlify.app/tags/clustering" target="_blank">Clustering</a></li>
+              
+              <li class="list-inline-item"><a href="https://hugo-profile.netlify.app/tags/kmeans" target="_blank">kmeans</a></li>
+              
+            </ul>
+          </aside>
+          
+
+          
+          <aside class="social">
+            <h5>Social</h5>
+            <div class="social-content">
+              <ul class="list-inline">
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://twitter.com/share?text=Unsupervised%20Learning%20in%20R%20%7c%20k-means%20Clustering&url=https%3a%2f%2fhugo-profile.netlify.app%2fblogs%2fkmeans%2f">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://api.whatsapp.com/send?text=Unsupervised%20Learning%20in%20R%20%7c%20k-means%20Clustering: https%3a%2f%2fhugo-profile.netlify.app%2fblogs%2fkmeans%2f">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='mailto:?subject=Unsupervised%20Learning%20in%20R%20%7c%20k-means%20Clustering&amp;body=Check%20out%20this%20site https%3a%2f%2fhugo-profile.netlify.app%2fblogs%2fkmeans%2f'>
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
+
+  </div><footer>
+    <div class="container py-3" id="recent-posts">
+    
+</div><div class="text-center pt-2">
+    
+    <span class="px-1">
+        <a href="https://github.com/ozturkfemre" aria-label="github">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2.7em" height="2.7em" viewBox="0 0 1792 1792">
+                <path
+                    d="M522 1352q-8 9-20-3-13-11-4-19 8-9 20 3 12 11 4 19zm-42-61q9 12 0 19-8 6-17-7t0-18q9-7 17 6zm-61-60q-5 7-13 2-10-5-7-12 3-5 13-2 10 5 7 12zm31 34q-6 7-16-3-9-11-2-16 6-6 16 3 9 11 2 16zm129 112q-4 12-19 6-17-4-13-15t19-7q16 5 13 16zm63 5q0 11-16 11-17 2-17-11 0-11 16-11 17-2 17 11zm58-10q2 10-14 14t-18-8 14-15q16-2 18 9zm964-956v960q0 119-84.5 203.5t-203.5 84.5h-224q-16 0-24.5-1t-19.5-5-16-14.5-5-27.5v-239q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-121-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-86-13.5q-44 113-7 204-79 85-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-40 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 103t.5 68q0 22-11 33.5t-22 13-33 1.5h-224q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z" />
+
+                <metadata>
+                    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+                        <rdf:Description about="https://iconscout.com/legal#licenses"
+                            dc:title="Github, Online, Project, Hosting, Square"
+                            dc:description="Github, Online, Project, Hosting, Square" dc:publisher="Iconscout"
+                            dc:date="2016-12-14" dc:format="image/svg+xml" dc:language="en">
+                            <dc:creator>
+                                <rdf:Bag>
+                                    <rdf:li>Font Awesome</rdf:li>
+                                </rdf:Bag>
+                            </dc:creator>
+                        </rdf:Description>
+                    </rdf:RDF>
+                </metadata>
+            </svg>
+        </a>
+    </span>
+    
+
+    
+    <span class="px-1">
+        <a href="https://www.linkedin.com/in/ozturkfemre/" aria-label="linkedin">
+            <svg xmlns="http://www.w3.org/2000/svg" width='2.4em' height='2.4em' fill="#fff" aria-label="LinkedIn"
+                viewBox="0 0 512 512">
+                <rect width="512" height="512" fill="#0077b5" rx="15%" />
+                <circle cx="142" cy="138" r="37" />
+                <path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198" />
+                <path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32" />
+            </svg>
+        </a>
+    </span>
+    
+
+    
+    <a href="https://twitter.com/ozturkfemre" aria-label="twitter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
+            <path fill="#03a9f4"
+                d="M42,37c0,2.762-2.239,5-5,5H11c-2.762,0-5-2.238-5-5V11c0-2.762,2.238-5,5-5h26c2.761,0,5,2.238,5,5 V37z" />
+            <path fill="#fff"
+                d="M36,17.12c-0.882,0.391-1.999,0.758-3,0.88c1.018-0.604,2.633-1.862,3-3 c-0.951,0.559-2.671,1.156-3.793,1.372C31.311,15.422,30.033,15,28.617,15C25.897,15,24,17.305,24,20v2c-4,0-7.9-3.047-10.327-6 c-0.427,0.721-0.667,1.565-0.667,2.457c0,1.819,1.671,3.665,2.994,4.543c-0.807-0.025-2.335-0.641-3-1c0,0.016,0,0.036,0,0.057 c0,2.367,1.661,3.974,3.912,4.422C16.501,26.592,16,27,14.072,27c0.626,1.935,3.773,2.958,5.928,3c-1.686,1.307-4.692,2-7,2 c-0.399,0-0.615,0.022-1-0.023C14.178,33.357,17.22,34,20,34c9.057,0,14-6.918,14-13.37c0-0.212-0.007-0.922-0.018-1.13 C34.95,18.818,35.342,18.104,36,17.12" />
+        </svg>
+    </a>
+    
+
+    
+    <a href="https://instagram.com/ozturkfemre" aria-label="instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
+            <radialGradient id="yOrnnhliCrdS2gy~4tD8ma" cx="19.38" cy="42.035" r="44.899"
+                gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#fd5" />
+                <stop offset=".328" stop-color="#ff543f" />
+                <stop offset=".348" stop-color="#fc5245" />
+                <stop offset=".504" stop-color="#e64771" />
+                <stop offset=".643" stop-color="#d53e91" />
+                <stop offset=".761" stop-color="#cc39a4" />
+                <stop offset=".841" stop-color="#c837ab" />
+            </radialGradient>
+            <path fill="url(#yOrnnhliCrdS2gy~4tD8ma)"
+                d="M34.017,41.99l-20,0.019c-4.4,0.004-8.003-3.592-8.008-7.992l-0.019-20	c-0.004-4.4,3.592-8.003,7.992-8.008l20-0.019c4.4-0.004,8.003,3.592,8.008,7.992l0.019,20	C42.014,38.383,38.417,41.986,34.017,41.99z" />
+            <radialGradient id="yOrnnhliCrdS2gy~4tD8mb" cx="11.786" cy="5.54" r="29.813"
+                gradientTransform="matrix(1 0 0 .6663 0 1.849)" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#4168c9" />
+                <stop offset=".999" stop-color="#4168c9" stop-opacity="0" />
+            </radialGradient>
+            <path fill="url(#yOrnnhliCrdS2gy~4tD8mb)"
+                d="M34.017,41.99l-20,0.019c-4.4,0.004-8.003-3.592-8.008-7.992l-0.019-20	c-0.004-4.4,3.592-8.003,7.992-8.008l20-0.019c4.4-0.004,8.003,3.592,8.008,7.992l0.019,20	C42.014,38.383,38.417,41.986,34.017,41.99z" />
+            <path fill="#fff"
+                d="M24,31c-3.859,0-7-3.14-7-7s3.141-7,7-7s7,3.14,7,7S27.859,31,24,31z M24,19c-2.757,0-5,2.243-5,5	s2.243,5,5,5s5-2.243,5-5S26.757,19,24,19z" />
+            <circle cx="31.5" cy="16.5" r="1.5" fill="#fff" />
+            <path fill="#fff"
+                d="M30,37H18c-3.859,0-7-3.14-7-7V18c0-3.86,3.141-7,7-7h12c3.859,0,7,3.14,7,7v12	C37,33.86,33.859,37,30,37z M18,13c-2.757,0-5,2.243-5,5v12c0,2.757,2.243,5,5,5h12c2.757,0,5-2.243,5-5V18c0-2.757-2.243-5-5-5H18z" />
+        </svg>
+    </a>
+    
+
+    
+</div><div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            <div class="pb-2">
+                <a href="https://hugo-profile.netlify.app" title="feo">
+                    <img alt="Footer logo" src="/images/feopp.jpeg"
+                        height="40px" width="40px">
+                </a>
+            </div>
+            &copy; 2023  All rights reserved
+            <div class="text-secondary">
+                Made with
+                <span class="text-danger">
+                    &#10084;
+                </span>
+                and
+                <a href="https://github.com/gurusabarish/hugo-profile" target="_blank"
+                    title="Designed and developed by gurusabarish">
+                    Hugo Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div></footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+</script>
+
+
+    <script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+  <section id="search-content" class="py-2">
+    <div class="container" id="search-results"></div>
+  </section>
+</body>
+
+</html>
