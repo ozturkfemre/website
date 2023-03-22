@@ -2,62 +2,62 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>feo</title>
-    <link>https://hugo-profile.netlify.app/</link>
+    <link>https://fatihemreozturk.netlify.app/</link>
     <description>Recent content on feo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Mar 2023 22:53:58 +0530</lastBuildDate><atom:link href="https://hugo-profile.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Mar 2023 22:53:58 +0530</lastBuildDate><atom:link href="https://fatihemreozturk.netlify.app/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Data Visualization</title>
-      <link>https://hugo-profile.netlify.app/blogs/dataviz/</link>
+      <link>https://fatihemreozturk.netlify.app/blogs/dataviz/</link>
       <pubDate>Wed, 22 Mar 2023 22:53:58 +0530</pubDate>
       
-      <guid>https://hugo-profile.netlify.app/blogs/dataviz/</guid>
+      <guid>https://fatihemreozturk.netlify.app/blogs/dataviz/</guid>
       <description>Data visualization can be defined as the use of graphical or pictorial representations to present data in a way that makes it easier to understand, analyze, and communicate. It involves the use of visual elements such as charts, graphs, and maps to help users better understand and interpret complex data sets. Data visualization is an important tool for exploratory data analysis, as well as for communicating results to others. By presenting data in a visual format, data visualization can also help to reveal new connections and insights that might not be apparent from a purely numerical or textual analysis.</description>
     </item>
     
     <item>
       <title>Infinite Monkey</title>
-      <link>https://hugo-profile.netlify.app/blogs/infmonkey/</link>
+      <link>https://fatihemreozturk.netlify.app/blogs/infmonkey/</link>
       <pubDate>Wed, 22 Mar 2023 22:53:58 +0530</pubDate>
       
-      <guid>https://hugo-profile.netlify.app/blogs/infmonkey/</guid>
+      <guid>https://fatihemreozturk.netlify.app/blogs/infmonkey/</guid>
       <description>Infinite Monkey Theorem</description>
     </item>
     
     <item>
       <title>Unsupervised Learning in | Hierarchical Clustering</title>
-      <link>https://hugo-profile.netlify.app/blogs/hc/</link>
+      <link>https://fatihemreozturk.netlify.app/blogs/hc/</link>
       <pubDate>Wed, 22 Mar 2023 22:53:58 +0530</pubDate>
       
-      <guid>https://hugo-profile.netlify.app/blogs/hc/</guid>
+      <guid>https://fatihemreozturk.netlify.app/blogs/hc/</guid>
       <description>In the previous posts of this series, I covered methods to determine the optimal number of clusters, how k-means and k-medoids clustering algorithms work in detail. In this post, I will try to explain Hierarchical Clustering algorithm. First, I will explain what Hierarchical Clustering is, then I will explain how it works step by step, and then I will explain how to implement it using the R program language.</description>
     </item>
     
     <item>
       <title>Unsupervised Learning in R | Determination of Cluster Number</title>
-      <link>https://hugo-profile.netlify.app/blogs/optimalk/</link>
+      <link>https://fatihemreozturk.netlify.app/blogs/optimalk/</link>
       <pubDate>Wed, 22 Mar 2023 22:53:58 +0530</pubDate>
       
-      <guid>https://hugo-profile.netlify.app/blogs/optimalk/</guid>
+      <guid>https://fatihemreozturk.netlify.app/blogs/optimalk/</guid>
       <description>Comparison of the methods to determine the optimal number of clusters</description>
     </item>
     
     <item>
       <title>Unsupervised Learning in R | k-means Clustering</title>
-      <link>https://hugo-profile.netlify.app/blogs/kmeans/</link>
+      <link>https://fatihemreozturk.netlify.app/blogs/kmeans/</link>
       <pubDate>Wed, 22 Mar 2023 22:53:58 +0530</pubDate>
       
-      <guid>https://hugo-profile.netlify.app/blogs/kmeans/</guid>
+      <guid>https://fatihemreozturk.netlify.app/blogs/kmeans/</guid>
       <description>kmeans implemantation</description>
     </item>
     
     <item>
       <title>Unsupervised Learning in R | k-medoids clustering</title>
-      <link>https://hugo-profile.netlify.app/blogs/kmedoids/</link>
+      <link>https://fatihemreozturk.netlify.app/blogs/kmedoids/</link>
       <pubDate>Wed, 22 Mar 2023 22:53:58 +0530</pubDate>
       
-      <guid>https://hugo-profile.netlify.app/blogs/kmedoids/</guid>
+      <guid>https://fatihemreozturk.netlify.app/blogs/kmedoids/</guid>
       <description>In the previous post of this series, I covered how k-means clustering works in detail. In this post, I will try to explain the k-medoids algorithm, also known as Partitioning Around Medoids. First, I will explain what k-medoids is, then I will explain how it works step by step, and then I will explain how to implement it using the R program language.
 What is k-medoids? k-medoids is a clustering algorithm that is similar to k-means, but instead of using the mean of the observations in each cluster as the centroid, it uses one of the observations in the cluster as the &amp;quot;medoid.</description>
     </item>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data Visualization on feo</title>
-    <link>https://hugo-profile.netlify.app/tags/data-visualization/</link>
+    <link>https://fatihemreozturk.netlify.app/tags/data-visualization/</link>
     <description>Recent content in Data Visualization on feo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Mar 2023 22:53:58 +0530</lastBuildDate><atom:link href="https://hugo-profile.netlify.app/tags/data-visualization/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Mar 2023 22:53:58 +0530</lastBuildDate><atom:link href="https://fatihemreozturk.netlify.app/tags/data-visualization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Data Visualization</title>
-      <link>https://hugo-profile.netlify.app/blogs/dataviz/</link>
+      <link>https://fatihemreozturk.netlify.app/blogs/dataviz/</link>
       <pubDate>Wed, 22 Mar 2023 22:53:58 +0530</pubDate>
       
-      <guid>https://hugo-profile.netlify.app/blogs/dataviz/</guid>
+      <guid>https://fatihemreozturk.netlify.app/blogs/dataviz/</guid>
       <description>Data visualization can be defined as the use of graphical or pictorial representations to present data in a way that makes it easier to understand, analyze, and communicate. It involves the use of visual elements such as charts, graphs, and maps to help users better understand and interpret complex data sets. Data visualization is an important tool for exploratory data analysis, as well as for communicating results to others. By presenting data in a visual format, data visualization can also help to reveal new connections and insights that might not be apparent from a purely numerical or textual analysis.</description>
     </item>
     

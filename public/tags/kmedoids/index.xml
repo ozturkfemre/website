@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>kmedoids on feo</title>
-    <link>https://hugo-profile.netlify.app/tags/kmedoids/</link>
+    <link>https://fatihemreozturk.netlify.app/tags/kmedoids/</link>
     <description>Recent content in kmedoids on feo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Mar 2023 22:53:58 +0530</lastBuildDate><atom:link href="https://hugo-profile.netlify.app/tags/kmedoids/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Mar 2023 22:53:58 +0530</lastBuildDate><atom:link href="https://fatihemreozturk.netlify.app/tags/kmedoids/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Unsupervised Learning in R | k-medoids clustering</title>
-      <link>https://hugo-profile.netlify.app/blogs/kmedoids/</link>
+      <link>https://fatihemreozturk.netlify.app/blogs/kmedoids/</link>
       <pubDate>Wed, 22 Mar 2023 22:53:58 +0530</pubDate>
       
-      <guid>https://hugo-profile.netlify.app/blogs/kmedoids/</guid>
+      <guid>https://fatihemreozturk.netlify.app/blogs/kmedoids/</guid>
       <description>In the previous post of this series, I covered how k-means clustering works in detail. In this post, I will try to explain the k-medoids algorithm, also known as Partitioning Around Medoids. First, I will explain what k-medoids is, then I will explain how it works step by step, and then I will explain how to implement it using the R program language.
 What is k-medoids? k-medoids is a clustering algorithm that is similar to k-means, but instead of using the mean of the observations in each cluster as the centroid, it uses one of the observations in the cluster as the &amp;quot;medoid.</description>
     </item>
