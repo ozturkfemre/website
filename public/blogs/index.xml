@@ -25,5 +25,14 @@
       <description>Infinite Monkey Theorem</description>
     </item>
     
+    <item>
+      <title>Unsupervised Learning in R | Determination of Cluster Number</title>
+      <link>https://hugo-profile.netlify.app/blogs/optimalk/</link>
+      <pubDate>Wed, 22 Mar 2023 22:53:58 +0530</pubDate>
+      
+      <guid>https://hugo-profile.netlify.app/blogs/optimalk/</guid>
+      <description>Comparison of the methods to determine the optimal number of clusters</description>
+    </item>
+    
   </channel>
 </rss>
