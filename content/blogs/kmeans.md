@@ -37,7 +37,7 @@ The steps to perform k-means clustering are:
 
 **Step 1:**
 
-Select k, the number of clusters, that you want to form in the data. As I mentioned before, there are lots of methods to determine the optimal number of clusters. You can see the [first post ](https://medium.com/@ozturkfemre/unsupervised-learning-determination-of-cluster-number-be8842cdb11)of this series for detailed information about optimal cluster number determination.
+Select k, the number of clusters, that you want to form in the data. As I mentioned before, there are lots of methods to determine the optimal number of clusters. You can see the [first post](https://medium.com/@ozturkfemre/unsupervised-learning-determination-of-cluster-number-be8842cdb11)of this series for detailed information about optimal cluster number determination.
 
 **Step 2:**
 
@@ -131,7 +131,6 @@ Clustering vector:
 Within cluster sum of squares by cluster:
 [1] 1121.768 1216.540
  (between_SS / total_SS =  48.5 %)
-
 ```
 
 When we examine the output, we first see how many elements there are for each cluster. It is noticed that there are 398 observations in the first cluster and 171 observations in the second cluster. It is possible to say that this is unbalanced. Then the cluster means section appears. In this section, we see the values taken by the centroids of each cluster. Since k-means takes the centroids as the mean of the cluster, it would not be wrong to say that we see the means of the clusters. In the clustering vector section, we see to which cluster each observation in the dataset is assigned. Each clustering algorithm assigns cluster names as 1,2,3.... The last section shows the within cluster sum of squares values for each cluster. This is an important value for the explanatory power of clustering. We want it to be as high as possible.
@@ -227,7 +226,7 @@ At the end, you will have a plot like the follows:
 
 Just like always:
 
-\"In case I don\'t see ya, good afternoon, good evening, and good night!\"
+"In case I don't see ya, good afternoon, good evening, and good night!"
 
 ------------------------------------------------------------------------
 
