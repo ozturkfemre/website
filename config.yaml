@@ -1,80 +1,379 @@
-baseURL: https://example.com/
-languageCode: en-us
-title: feo
-theme: personal-web
-copyright: © Fatih Emre Ozturk
-googleAnalytics: ''
-enableEmoji: yes
-enableRobotsTXT: yes
-pygmentsUseClasses: yes
-pygmentsCodeFences: yes
-params:
-  accentColor: '#FD3519'
-  assets:
-    customCSS: ''
-    favicon: ''
-  breadcrumb: yes
-  contact:
-    email: ozturkfemre@gmail.com
-    text: 'email me'
-  intro:
-    main: 'Fatih Emre Ozturk'
-    sub: Data Scientist
-  main:
-    latestPublishHeader: My Latest Post
-  mainSections: post
-  notFound:
-    gopher: /images/gopher.png
-    h1: Bummer!
-    p: It seems that this page doesn't exist.
-  sections:
-    portfolio: project
-    post: article
-  sidebar:
-    backgroundImage: /images/background.jpg
-    gradientOverlay: 
-    logo: /images/feopp.jpeg
-  social:
-    github: https://github.com/ozturkfemre
-    linkedin: https://www.linkedin.com/in/ozturkfemre
-    medium: https://medium.com/@ozturkfemre
-taxonomies:
-  design: designs
-  tech: techs
-blackfriday:
-  hrefTargetBlank: yes
-menu:
-  main:
-    - identifier: about
-      name: About
-      title: About section
-      url: /about/
-      weight: -120
-    - identifier: portfolio
-      name: Technical Training
-      title: Technical Training
-      url: /portfolio/
-      weight: -110
-    - identifier: blog
-      name: Post
-      title: Blog section
-      url: /post/
-      weight: -100
-sitemap:
-  changefreq: monthly
-  filename: sitemap.xml
-  priority: 0.5
-privacy:
-  googleAnalytics:
-    anonymizeIP: yes
-    disable: yes
-    respectDoNotTrack: yes
-    useSessionStorage: no
-  twitter:
-    disable: yes
-    enableDNT: yes
-    simple: no
+baseURL: "https://hugo-profile.netlify.app"
+languageCode: "en-us"
+title: "feo"
+theme: "hugo-profile"
+
+outputs:
+  home:
+    - "HTML"
+    - "RSS"
+    - "JSON"
+  page:
+    - "HTML"
+    - "RSS"
+
+Paginate: 3
+enableRobotsTXT: true
+# disqusShortname: your-disqus-shortname
+# googleAnalytics: G-MEASUREMENT_ID
+
 markup:
   goldmark:
     renderer:
-      unsafe: yes
+      unsafe: true
+
+Menus:
+  main:
+    - identifier: blog
+      name: Blog
+      title: Blog posts
+      url: /blogs
+      weight: 1
+
+    #Dropdown menu
+    # - identifier: dropdown
+    #   title: Example dropdown menu
+    #   name: Dropdown
+    #   weight: 3
+    # - identifier: dropdown1
+    #   title: example dropdown 1
+    #   name: example 1
+    #   url: /#
+    #   parent: dropdown
+    #   weight: 1
+    # - identifier: dropdown2
+    #   title: example dropdown 2
+    #   name: example 2
+    #   url: /#
+    #   parent: dropdown
+    #   weight: 2
+
+params:
+  title: "Fatih Emre Ozturk"
+  description: feo's personal website
+  # staticPath: ""  # The path to serve the static files from
+  favicon: "/images/feopp.jpeg"
+
+  # Whether to serve bootstrap css and js files from CDN or not. Can be set to true, "css" or "js" to choose between
+  # serving both, only the css, or only the js files through the CDN. Any other value will make so that CDN is not used.
+  # Note the lack of "" in true, it should be of boolean type.
+  useBootstrapCDN: false
+
+  # If you want to load dynamically responsive images from Cloudinary
+  # This requires your images to be uploaded + hosted on Cloudinary
+  # Uncomment and change YOUR_CLOUD_NAME to the Cloud Name in your Cloudinary console
+  # cloudinary_cloud_name: "YOUR_CLOUD_NAME"
+
+  # Whether the fade animations on the home page will be enabled
+  animate: true
+
+  theme:
+    # disableThemeToggle: true
+    # defaultTheme: "light" # dark
+
+  font:
+    fontSize: 1rem # default: 1rem
+    fontWeight: 400 # default: 400
+    lineHeight: 1.5 # default: 1.5
+    textAlign: left # default: left
+
+  # color preference
+  # color:
+  #   textColor:
+  #   secondaryTextColor:
+  #   backgroundColor:
+  #   secondaryBackgroundColor:
+  #   primaryColor:
+  #   secondaryColor:
+
+  #   darkmode:
+  #     textColor:
+  #     secondaryTextColor:
+  #     backgroundColor:
+  #     secondaryBackgroundColor:
+  #     primaryColor:
+  #     secondaryColor:
+
+  # If you want to customize the menu, you can change it here
+  navbar:
+    align: ms-auto # Left: ms-auto | center: mx-auto | right: me-auto | Default: ms-auto
+    # brandLogo: "/logo.png" # Logo for the brand | default is the favicon variable
+    # showBrandLogo: false # Show brand logo in nav bar | default is true
+    brandName: "Fatih Emre Ozturk" # Brand name for the brand | default is the title variable
+    disableSearch: false
+    # searchPlaceholder: "Search"
+    menus:
+      disableAbout: false
+      disableExperience: false
+      disableEducation: false
+      disableProjects: false
+      disableAchievements: false
+      disableContact: false
+
+  # Hero
+  hero:
+    enable: true
+    intro: "Hi, my name is"
+    title: "Fatih Emre Ozturk."
+    subtitle: "I'm a Data Scientist"
+    image: /images/feopp.jpeg
+    bottomImage:
+      enable: true
+    # roundImage: true # Make hero image circular | default false
+    button:
+      enable: true
+      name: "Resume"
+      url: "#"
+      download: true
+      newPage: false
+    socialLinks:
+      fontAwesomeIcons:
+        - icon: fab fa-github
+          url: https://github.com/ozturkfemre
+        - icon: fab fa-linkedin
+          url: https://www.linkedin.com/in/ozturkfemre/
+        - icon: fab fa-medium
+          url: https://medium.com/@ozturkfemre
+
+
+  # About
+  about:
+    enable: true
+    title: "About Me"
+    image: "/images/feopp.jpeg"
+    content: |-
+      My name is Fatih Emre Öztürk. I was given the opportunity for a good undergraduate education at Bilkent University, a private institution with a completely English curriculum, through a full scholarship offered to me based on academic performance. My interest in logic, finding patterns and problem-solving led me to major in philosophy. Throughout those university years I was attracted to contemporary issues involving technology, which incited me to take a programming course, which in turn reinforced my curiosity and led me to write my bachelor’s thesis on artificial intelligence. 
+      
+      During my studies at Bilkent and following my graduation, I pursued a passion for writing; I have written and published science fiction novels, and have worked as an editor, translator, and subtitle translator for movies and TV series. After this short hiatus from university, I found myself drawn back to academic life by a strong desire to learn. I still felt an enduring fascination with artificial intelligence and machine learning, and I realized that to fully satisfy my interests I had to transition from philosophy to a more applied field and one more directly related to computer science. Considering how the current era is defined by data, not only for its indispensable value in a full spectrum of different fields but also for the important questions surrounding it that are being raised, data science felt like a fitting direction to take. 
+      
+      This has led me to my current MSc in Data Science at Dokuz Eylul University. While my undergraduate degree was in a different field, it developed my logic and analytical skills. During that time I took programming and statistics courses which were relevant to my current studies, though the jump from a bachelor’s in philosophy to a master’s in data science required me to catch up on a lot of missing knowledge and I saw to it during the months prior to the start of my courses. I searched for the best sources of information and absorbed it; I read textbooks, watched tutorials, coded, practiced, so that by the start of the program I was not only ready but ahead. In doing so I proved to myself that I had the resourcefulness, determination and independence necessary for graduate studies. In addition, throughout this past year I have been leading study sessions and have given supervised learning, unsupervised learning, R, R Markdown and Shiny lectures to undergraduate and graduate students. In December I gave an oral presentation, in English, at a national conference on data science. 
+      
+      I have a great interest in data science. The path that has led me to be a data scientist has not been linear for me nor simple; rather it has been willfully shaped by passion and resolve. I am hard-working, independent and determined. I know that the research process can be painful and full of obstacles, but encountering problems and devoting the time and effort necessary to solve them is what drives me. I love to learn, I find teaching rewarding, I enjoy writing and I value feedback. I welcome any tool that helps me grow as a student of data science and as a person. 
+      
+      ------------------------------------------------------------------------
+      ### Technical Training:
+      
+      
+      #### University courses
+      - Calculus I & Calculus II \| Sep 2013 & Jan 2014
+      - Introduction to Computing and Programming \| Jan 2014 
+      - Introduction to Probability and Statistics \| Jun 2014
+      - Python for Data Science \| Jan 2022
+      - Exploratory Data Analysis and Data Visualization \| Jan 2022
+      - Unsupervised Statistical Learning \| Jan 2022 
+      - Supervised Statistical Learning \| Sep 2022
+      - R for Statistical Computing and Programming \| Sep 2022
+      - Probability and Statistics for Data Science \| Sep 2022
+      
+      
+      #### Online courses
+      - Python for Data Science and Artificial Intelligence \| Udemy\| Nov 2021
+      - Python for Data Science and Machine Learning Bootcamp \| Udemy \| Dec 2021
+      - Data Management with SQL for Social Scientists \| Data Carpentry \| Nov 2021
+      - Introduction to Geospatial Concepts \| Data Carpentry \| Jan 2022
+      - Introduction to R for Geospatial Data \| Data Carpentry \| Jan 2022
+      - Programming with Python \| Software Carpentry \| Nov 2021
+      - Programming with R \| Software Carpentry \| Nov 2021
+      - Version Control with Git \| Software Carpentry \| Dec 2021
+      
+      ------------------------------------------------------------------------
+      #### Conference Workshops
+      
+      - Lessons for Designing Scalable and Maintainable Shiny Apps \| useR! Jun 2022
+      - Introduction to Git and Github \| useR! Jun 2022
+      - Regression Modelling Strategies \| useR Jun 2022
+      ------------------------------------------------------------------------
+      
+      ### ACADEMIC SERVICE
+      
+      Artificial Intelligence Symposium \| Mar 2015 \| Organizing Committee Member of the Bilkent University Philosophy Society
+      
+      ------------------------------------------------------------------------
+      
+      ### CONFERENCES
+      
+      Oral talk titled "Comparison of the methods to determine the optimal number of clusters" \| Dec 2, 2022 \| Dokuz Eylul University International Graduate Research Symposium
+      
+      Participation \| Jun 20-23, 2022 \| Virtual \| useR! 2022
+      
+      ------------------------------------------------------------------------
+      
+      ### AWARDS
+      - Full Scholarship 2012-2019 Bilkent University
+      - Honor, 2014 Bilkent University
+      - Honor, 2014 Bilkent University
+      - High Honor, 2022 Dokuz Eylul University
+      - High Honor, 2023 Dokuz Eylul University
+      
+      ------------------------------------------------------------------------
+      
+      ### LANGUAGES
+      
+      - **Turkish:** *Native*
+      - **English:** *IELTS 7.0*
+      - **French:** *Beginner*
+      ------------------------------------------------------------------------
+      
+      ### SKILLS
+    skills:
+      enable: true
+      #title: "Here are a few technologies I've been working with recently:"
+      content: "My skills are:"
+      items:
+        - "Python"
+        - "R"
+        - "MySQL"
+        - "SQLite"
+        - "DBBrowser"
+        - "MatLab"
+        - "Bash"
+        - "Microsoft Office"
+        - "Statistical Analysis"
+        - "Machine Learning"
+        - "Data Visualization"
+        - "Data Management"
+
+  # Education
+  education:
+    enable: true
+    # title: "Custom Name"
+    index: false
+    items:
+      - title: "Master of Science in Data Science"
+        school:
+          name: "Dokuz Eylul University, Izmir"
+          url: ""
+        date: "2022 - 2023"
+        GPA: "3.81 out of 4.0"
+      
+      - title: "Bachelor in Philosophy"
+        school:
+          name: "Bilkent University, Ankara"
+          url: ""
+        date: "2012 - 2019"
+        GPA: "2.75 out of 4.0"
+        content: 
+
+
+  # Achievements
+  training:
+    enable: false
+    # title: "Custom Name"
+    items:
+      - title: Google kickstart runner
+        content: I solved all problems with optimal solution.
+        url: https://example.com
+      - title: Facebook Hackathon Winner
+        content: Developed a product using Artificial Intelligence.
+      - title: Hugo Profile
+        content: Developed a theme and getting 1K+ downloads per month.
+        url: "https://github.com/gurusabarish/hugo-profile"
+      - title: Microsoft Imagine Runner
+        content: We are developed a product which can help others.
+      - title: Google Summer of Code
+        content: Contributed to a open source project.
+        url: https://example.com
+
+  # projects
+  projects:
+    enable: false
+    # title: "Custom Name"
+    items:
+      - title: Hugo Profile
+        content: A highly customizable and mobile first Hugo template for personal portfolio and blog.
+        image: /images/projects/profile.png
+        featured:
+          name: Demo
+          link: https://hugo-profile.netlify.app
+        badges:
+          - "Hugo"
+          - "Bootstrap"
+          - "Javascript"
+        links:
+          - icon: fa fa-envelope
+            url: mailto:?subject=Hugo%20Profile%20Template&body=Check%20it%20out:%20https%3a%2f%2fhugo-profile.netlify.app%2fblog%2fmarkdown-syntax%2f
+          - icon: fab fa-github
+            url: https://github.com/gurusabarish/hugo-profile
+          - icon: fab fa-twitter
+            url: https://twitter.com/intent/tweet?text=Check+it+out:&url=https%3A%2F%2Fgithub.com%2Fgurusabarish%2Fhugo-profile
+
+      - title: Image Converter
+        content: A web app to convert image to pdf, png to jpg, png to jpg and png to webp without database using django.
+        image: /images/projects/converter.jpg
+        featured:
+          name: Demo
+          link: https://django-converter.herokuapp.com
+        badges:
+          - "Django"
+          - "Bootstrap"
+        links:
+          - icon: fab fa-github
+            url: https://github.com/gurusabarish/converter
+
+      - title: Hugo Profile V2
+        content: A clean and simple Hugo template for personal portfolio and blog.
+        image: /images/projects/profile2.jpg
+        featured:
+          name: Demo V2
+          link: https://hugo-profile-2.netlify.app
+        badges:
+          - "Hugo"
+          - "Bootstrap"
+          - "Javascript"
+        links:
+          - icon: fab fa-github
+            url: https://github.com/gurusabarish/HugoProfileV2
+
+  #Contact
+  contact:
+    enable: true
+    # title: "Custom Name"
+    content: My inbox is always open. Whether you have a question or just want to say hi, I’ll try my best to get back to you!
+    email: ozturkfemre@gmail.com
+    btnName: Mail me
+    # formspree:
+    #   enable: true # `contact.email` value will be ignored
+    #   formId: abcdefgh # Take it from your form's endpoint, like 'https://formspree.io/f/abcdefgh'
+    #   emailCaption: "Enter your email address"
+    #   messageCaption: "Enter your message here"
+    
+
+
+  footer:
+    recentPosts:
+      path: "blogs"
+      count: 3
+      title: Recent Posts
+      enable: true
+      disableFeaturedImage: false
+    socialNetworks:
+      github: https://github.com/ozturkfemre
+      linkedin: https://www.linkedin.com/in/ozturkfemre/
+      twitter: https://twitter.com/ozturkfemre
+      instagram: https://instagram.com/ozturkfemre
+
+
+  # List pages like blogs and posts
+  listPages:
+    disableFeaturedImage: false
+
+  # Single pages like blog and post
+  singlePages:
+    readTime:
+      enable: true
+      content: "min read"
+    scrollprogress:
+      enable: true
+
+  # For translations
+  terms:
+    read: "Read"
+    toc: "Table Of Contents"
+    copyright: "All rights reserved"
+    pageNotFound: "Page not found"
+    emailText: "Check out this site"
+
+  datesFormat:
+    article: "Jan 2, 2006"
+    articleList: "Jan 2, 2006"
+    articleRecent: "Jan 2, 2006"
