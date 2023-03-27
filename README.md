@@ -5,7 +5,7 @@
 This is a github repository for [my personal website](https://fatihemreozturk.netlify.app/).
 
 
-In my website, you can reach information about me, my resume, and blogposts about machine learning and prgoramming.
+In my website, you can reach information about me, my resume, and blogposts about machine learning and programming.
 
 
 Here is the preview:
