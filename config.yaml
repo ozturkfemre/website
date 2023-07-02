@@ -142,7 +142,7 @@ params:
     title: "About Me"
     image: "/images/feopp.jpeg"
     content: |-
-     "Hello there! I'm Fatih Emre Öztürk, a data wizard in the enchanting world of data science (or let's say, a bit of an R guru and a bit of a data bender). My title says Data Scientist, but I'm a rookie in terms of previous experience. However, my educational journey has been quite magical.
+     Hello there! I'm Fatih Emre Öztürk, a data wizard in the enchanting world of data science (or let's say, a bit of an R guru and a bit of a data bender). My title says Data Scientist, but I'm a rookie in terms of previous experience. However, my educational journey has been quite magical.
      
      After waltzing with philosophy at Bilkent University, I decided to embark on a thrilling adventure of pursuing a master's degree in Data Science at Dokuz Eylül University. I got lost in the enchanting realms of Python and R, and befriended magical tools like SQL, JavaScript, Matlab, and Excel. I also have a surprisingly good rapport with Bash (I'm quite spellbound by the power of commands). I possess magical skills like machine learning, data analysis, and crafting ML pipelines.
      
@@ -155,7 +155,8 @@ params:
      Among my magical language skills, I possess English (at a professional working proficiency) and I can also converse in beginner-level French (Bonjour, ça va?). And of course, my native tongue is the enchanting Turkish!
      
      If you're up for a magical adventure in the world of data, feel free to reach out in a magically enchanting way! Remember, let the data be with you!"
-      ------------------------------------------------------------------------
+    
+     ------------------------------------------------------------------------
       ### Technical Training:
       
       
