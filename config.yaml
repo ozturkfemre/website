@@ -142,14 +142,19 @@ params:
     title: "About Me"
     image: "/images/feopp.jpeg"
     content: |-
-      My name is Fatih Emre Öztürk. I was given the opportunity for a good undergraduate education at Bilkent University, a private institution with a completely English curriculum, through a full scholarship offered to me based on academic performance. My interest in logic, finding patterns and problem-solving led me to major in philosophy. Throughout those university years I was attracted to contemporary issues involving technology, which incited me to take a programming course, which in turn reinforced my curiosity and led me to write my bachelor’s thesis on artificial intelligence. 
-      
-      During my studies at Bilkent and following my graduation, I pursued a passion for writing; I have written and published science fiction novels, and have worked as an editor, translator, and subtitle translator for movies and TV series. After this short hiatus from university, I found myself drawn back to academic life by a strong desire to learn. I still felt an enduring fascination with artificial intelligence and machine learning, and I realized that to fully satisfy my interests I had to transition from philosophy to a more applied field and one more directly related to computer science. Considering how the current era is defined by data, not only for its indispensable value in a full spectrum of different fields but also for the important questions surrounding it that are being raised, data science felt like a fitting direction to take. 
-      
-      This has led me to my current MSc in Data Science at Dokuz Eylul University. While my undergraduate degree was in a different field, it developed my logic and analytical skills. During that time I took programming and statistics courses which were relevant to my current studies, though the jump from a bachelor’s in philosophy to a master’s in data science required me to catch up on a lot of missing knowledge and I saw to it during the months prior to the start of my courses. I searched for the best sources of information and absorbed it; I read textbooks, watched tutorials, coded, practiced, so that by the start of the program I was not only ready but ahead. In doing so I proved to myself that I had the resourcefulness, determination and independence necessary for any study. In addition, throughout this past year I have been leading study sessions and have given supervised learning, unsupervised learning, R, R Markdown and Shiny lectures to undergraduate and graduate students. In December I gave an oral presentation, in English, at a national conference on data science. 
-      
-      I have a great interest in data science. The path that has led me to be a data scientist has not been linear for me nor simple; rather it has been willfully shaped by passion and resolve. I am hard-working, independent and determined. I know that the research process can be painful and full of obstacles, but encountering problems and devoting the time and effort necessary to solve them is what drives me. I love to learn, I find teaching rewarding, I enjoy writing and I value feedback. I welcome any tool that helps me grow as a student of data science and as a person. 
-      
+     "Hello there! I'm Fatih Emre Öztürk, a data wizard in the enchanting world of data science (or let's say, a bit of an R guru and a bit of a data bender). My title says Data Scientist, but I'm a rookie in terms of previous experience. However, my educational journey has been quite magical.
+     
+     After waltzing with philosophy at Bilkent University, I decided to embark on a thrilling adventure of pursuing a master's degree in Data Science at Dokuz Eylül University. I got lost in the enchanting realms of Python and R, and befriended magical tools like SQL, JavaScript, Matlab, and Excel. I also have a surprisingly good rapport with Bash (I'm quite spellbound by the power of commands). I possess magical skills like machine learning, data analysis, and crafting ML pipelines.
+     
+     During this enchanting journey, I've achieved some milestones. I completed my studies at Dokuz Eylül University with High Honor (no magic hat required!). Oh, and I have a passion for writing too—I've penned down two novels (guess I can weave data into characters' lives as well).
+     
+     Among my passions, you'll find me indulging in science fiction and fantasy books, movies, and series (I might be a bit of a geek). Additionally, I have a special interest in ethical issues related to AI—tackling the moral quandaries of artificial intelligence is right up my alley (I prefer embracing AI with a friendly approach instead of pushing its limits). If you ever get lost in the data realm, I can transform into a magical source of R!
+     
+     As for my professional goals, I aspire to develop algorithms that empower individuals and organizations to make better decisions, contributing to the advancement of AI and machine learning. I also aim to make our enchanting world more accessible by creating open-source resources alongside R and Python packages.
+     
+     Among my magical language skills, I possess English (at a professional working proficiency) and I can also converse in beginner-level French (Bonjour, ça va?). And of course, my native tongue is the enchanting Turkish!
+     
+     If you're up for a magical adventure in the world of data, feel free to reach out in a magically enchanting way! Remember, let the data be with you!"
       ------------------------------------------------------------------------
       ### Technical Training:
       
@@ -227,12 +232,15 @@ params:
         - "DBBrowser"
         - "MatLab"
         - "Bash"
+        - "Git"
+        - "MongoDB"
+        - "JavaScript"
         - "Microsoft Office"
         - "Statistical Analysis"
         - "Machine Learning"
         - "Data Visualization"
         - "Data Management"
-
+        
   # Education
   education:
     enable: true
