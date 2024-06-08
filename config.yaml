@@ -317,22 +317,14 @@ params:
       - title: Comparison of the methods to determine optimal number of clusters
         content: In this project, I compared the methods to determine optimal number of clusters(Average Silhouette, Calinski-Harabasz, Davies-Bouldin, and Dunn Index) on nine different data sets. I tested which method works better in which cases and for which types of data sets they fail. This study was published in 'Veri Bilimi', a national peer-reviewed journal.
         links:
-          - icon: 
+          - icon: fab fa-github
             url: https://github.com/ozturkfemre/optimal_k
 
-      - title: Hugo Profile V2
-        content: A clean and simple Hugo template for personal portfolio and blog.
-        image: /images/projects/profile2.jpg
-        featured:
-          name: Demo V2
-          link: https://hugo-profile-2.netlify.app
-        badges:
-          - "Hugo"
-          - "Bootstrap"
-          - "Javascript"
+      - title: Analyse Your Spotify Listening
+        content: Spotify offers its users analyses according to their listening habits every year. However, each user can access their own data at any time. I made a web application for users by combining these two features. With this app users can analyse their Spotify data with simple plots. All they have to do is request their data from Spotify!
         links:
           - icon: fab fa-github
-            url: https://github.com/gurusabarish/HugoProfileV2
+            url: https://github.com/ozturkfemre/spotify.app
 
   #Contact
   contact:
