@@ -157,6 +157,28 @@ params:
      If you're up for a magical adventure in the world of data, feel free to reach out in a magically enchanting way! Remember, let the data be with you!"
     
      ------------------------------------------------------------------------
+     
+     ### EDUCATION
+     - Master of Science in Data Science | Dokuz Eylul University, İzmir/Turkey	
+     Feb 2022 — Aug 2023
+     Department of Statistics | Advisor: Neslihan Demirel
+     
+     - Bachelor in Philosophy | Bilkent University, Ankara/Turkey
+     Sep 2012  —  Jan 2019
+     Department of Philosophy | Advisor: Bill Wringe
+     
+     ------------------------------------------------------------------------
+     
+     ### EXPERIENCE
+     - Data Scientist | FinancialPredictionAI, Remote	
+     April 2024 — Still
+     
+     - Subtitle Editor/Translator | Private Contractor,  Remote
+     Sep 2021  —  Feb 2022
+     
+     
+     ------------------------------------------------------------------------
+
       ### Technical Training:
       
       
@@ -193,6 +215,7 @@ params:
       ### ACADEMIC SERVICE
       
       Artificial Intelligence Symposium \| Mar 2015 \| Organizing Committee Member of the Bilkent University Philosophy Society
+      DSM 5008 Unsupervised Statistical Learning Course \| May 24, 2023 \| Guest Lecturer | Dokuz Eylul University
       
       ------------------------------------------------------------------------
       
@@ -220,31 +243,38 @@ params:
       - **French:** *Beginner*
       ------------------------------------------------------------------------
       
+      ### INTERESTS
+      - Chess 
+      - Reading and Watching Sci-fi 
+      - Fitness
+      - Writing
+      - Collecting Playing Cards
+      - Game Development
+      
+      ------------------------------------------------------------------------
+      
+      
       ### SKILLS
-    skills:
-      enable: true
-      title: "Here are a few technologies I've been working with recently:"
-      content: "My skills are:"
-      items:
-        - "Python"
-        - "R"
-        - "MySQL"
-        - "SQLite"
-        - "DBBrowser"
-        - "MatLab"
-        - "Bash"
-        - "Git"
-        - "MongoDB"
-        - "JavaScript"
-        - "Microsoft Office"
-        - "Statistical Analysis"
-        - "Machine Learning"
-        - "Data Visualization"
-        - "Data Management"
+      
+      - Programming: 
+      Python, R, Sql, Bash, Git, Google Sheets, JavaScript
+      - Documentation: 
+      Microsoft PowerPoint, Microsoft Word, Markdown, Obsidian, Google Docs, Google Slides
+      - Data Management: 
+      MongoDB, DBBrowser
+      - Statistical Analysis: 
+      A/B Tests, RFM, KPIs, Hypothesis Testing, Anomaly Detection, Ethics and Privacy Awareness, Pandas(Python), Numpy(Python), Tidyverse(R), d3(JavaScript), Financial Analysis 
+      - Machine Learning: 
+      Regression, Classification, Clustering, Artificial Neural Networks, Tensorflow(Python), Sklearn(Python), PyTorch(Python)
+      - Data Visualization/Storytelling: 
+      Matplotlib(Python), Seaborn(Python), Plotnine(Python), Plotly(Python), Ggplot(R), Shiny(R) 
+      - Soft Skills:
+      Identifying & Solving Problems, Researching, Mentoring/Supervising, Report Writing, Project Management, Attention to Details, Workflow Development 
+      
+
         
-  # Education
   education:
-    enable: true
+    enable: false
     # title: "Custom Name"
     index: false
     items:
@@ -263,19 +293,19 @@ params:
         content: 
   # Experience
   experience:
-    enable: true
+    enable: false
     # title: "Custom Name"
     index: false
     items:
       - title: "Data Scientist"
-        firm:
+        school:
           name: "Financial Preediction AI"
           url: ""
         date: "April 2024 - Still"
         
       
       - title: "Subtitle Translator/Editor"
-        firm:
+        school:
           name: "Private Contractor"
           url: ""
         date: "Sep 2021 - Feb 2022"
@@ -317,14 +347,22 @@ params:
       - title: Comparison of the methods to determine optimal number of clusters
         content: In this project, I compared the methods to determine optimal number of clusters(Average Silhouette, Calinski-Harabasz, Davies-Bouldin, and Dunn Index) on nine different data sets. I tested which method works better in which cases and for which types of data sets they fail. This study was published in 'Veri Bilimi', a national peer-reviewed journal.
         links:
-          - icon: fab fa-github
+          - icon: 
             url: https://github.com/ozturkfemre/optimal_k
 
       - title: Analyse Your Spotify Listening
         content: Spotify offers its users analyses according to their listening habits every year. However, each user can access their own data at any time. I made a web application for users by combining these two features. With this app users can analyse their Spotify data with simple plots. All they have to do is request their data from Spotify!
+        image: /images/projects/profile2.jpg
+        featured:
+          name: Demo V2
+          link: https://hugo-profile-2.netlify.app
+        badges:
+          - "Hugo"
+          - "Bootstrap"
+          - "Javascript"
         links:
           - icon: fab fa-github
-            url: https://github.com/ozturkfemre/spotify.app
+            url: https://github.com/gurusabarish/HugoProfileV2
 
   #Contact
   contact:
