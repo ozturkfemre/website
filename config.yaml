@@ -345,8 +345,9 @@ params:
     # title: "Custom Name"
     items:
       - title: Examining Prefrontal Oxygenation Parameter in Migraine Classification
-        content: A highly customizable and mobile first Hugo template for personal portfolio and blog.
-        image: My tasks included data cleaning, feature extraction, feature reduction, and building machine learning pipelines. We carried out this study in coordination with the Department of Statistics and the Department of Biophysics at Dokuz Eylul University. 
+        content: My tasks included data cleaning, feature extraction, feature reduction, and building machine learning pipelines. We carried out this study in coordination with the Department of Statistics and the Department of Biophysics at Dokuz Eylul University. 
+        image: /images/projects/migraine.png
+        image: 
         featured:
           name: 
           link: 
@@ -354,13 +355,14 @@ params:
 
       - title: Comparison of the methods to determine optimal number of clusters
         content: In this project, I compared the methods to determine optimal number of clusters(Average Silhouette, Calinski-Harabasz, Davies-Bouldin, and Dunn Index) on nine different data sets. I tested which method works better in which cases and for which types of data sets they fail. This study was published in 'Veri Bilimi', a national peer-reviewed journal.
+        image: /images/projects/clustering.png
         links:
           - icon: 
             url: https://github.com/ozturkfemre/optimal_k
 
-      - title: Analyse Your Spotify Listening
-        content: Spotify offers its users analyses according to their listening habits every year. However, each user can access their own data at any time. I made a web application for users by combining these two features. With this app users can analyse their Spotify data with simple plots. All they have to do is request their data from Spotify!
-        image: /images/projects/profile2.jpg
+      - title: One Piece Bounties
+        content: With this app, you can dive deep into the bounties of all 199 characters straight from the hallowed pages of the One Piece manga. But wait, there's more! You can also sort them by bounties and categorize by the crews they sail with. 
+        image: /images/projects/op.jpeg
         featured:
           name: Demo V2
           link: https://hugo-profile-2.netlify.app
