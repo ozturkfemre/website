@@ -393,15 +393,6 @@ params:
     enable: true
     # title: "Custom Name"
     items:
-      - title: Examining Prefrontal Oxygenation Parameter in Migraine Classification
-        content: My tasks included data cleaning, feature extraction, feature reduction, and building machine learning pipelines. We carried out this study in coordination with the Department of Statistics and the Department of Biophysics at Dokuz Eylul University. 
-        image: /images/projects/migraine.png
-        image: 
-        featured:
-          name: 
-          link: 
-
-
       - title: Comparison of the methods to determine optimal number of clusters
         content: In this project, I compared the methods to determine optimal number of clusters(Average Silhouette, Calinski-Harabasz, Davies-Bouldin, and Dunn Index) on nine different data sets. I tested which method works better in which cases and for which types of data sets they fail. This study was published in 'Veri Bilimi', a national peer-reviewed journal.
         image: /images/projects/clustering.png
@@ -428,6 +419,14 @@ params:
         links:
           - icon: fab fa-github
             url: https://github.com/ozturkfemre/unsupervised_learning_with_feo
+            
+      - title: Examining Prefrontal Oxygenation Parameter in Migraine Classification
+        content: My tasks included data cleaning, feature extraction, feature reduction, and building machine learning pipelines. We carried out this study in coordination with the Department of Statistics and the Department of Biophysics at Dokuz Eylul University. 
+        image: /images/projects/migraine.png
+        image: 
+        featured:
+          name: 
+          link: 
 
   #Contact
   contact:
