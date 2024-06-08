@@ -176,33 +176,35 @@ params:
      - Subtitle Editor/Translator | Private Contractor,  Remote
      Sep 2021  —  Feb 2022
      
-     
      ------------------------------------------------------------------------
-
-      ### Technical Training:
       
       
-      #### University courses
-      - Calculus I & Calculus II \| Sep 2013 & Jan 2014
-      - Introduction to Computing and Programming \| Jan 2014 
-      - Introduction to Probability and Statistics \| Jun 2014
-      - Python for Data Science \| Jan 2022
-      - Exploratory Data Analysis and Data Visualization \| Jan 2022
-      - Unsupervised Statistical Learning \| Jan 2022 
-      - Supervised Statistical Learning \| Sep 2022
-      - R for Statistical Computing and Programming \| Sep 2022
-      - Probability and Statistics for Data Science \| Sep 2022
+      ### SKILLS
       
+      - Programming: 
+      Python, R, Sql, Bash, Git, Google Sheets, JavaScript
+      - Documentation: 
+      Microsoft PowerPoint, Microsoft Word, Markdown, Obsidian, Google Docs, Google Slides
+      - Data Management: 
+      MongoDB, DBBrowser
+      - Statistical Analysis: 
+      A/B Tests, RFM, KPIs, Hypothesis Testing, Anomaly Detection, Ethics and Privacy Awareness, Pandas(Python), Numpy(Python), Tidyverse(R), d3(JavaScript), Financial Analysis 
+      - Machine Learning: 
+      Regression, Classification, Clustering, Artificial Neural Networks, Tensorflow(Python), Sklearn(Python), PyTorch(Python)
+      - Data Visualization/Storytelling: 
+      Matplotlib(Python), Seaborn(Python), Plotnine(Python), Plotly(Python), Ggplot(R), Shiny(R) 
+      - Soft Skills:
+      Identifying & Solving Problems, Researching, Mentoring/Supervising, Report Writing, Project Management, Attention to Details, Workflow Development 
       
-      #### Online courses
-      - Python for Data Science and Artificial Intelligence \| Udemy\| Nov 2021
-      - Python for Data Science and Machine Learning Bootcamp \| Udemy \| Dec 2021
-      - Data Management with SQL for Social Scientists \| Data Carpentry \| Nov 2021
-      - Introduction to Geospatial Concepts \| Data Carpentry \| Jan 2022
-      - Introduction to R for Geospatial Data \| Data Carpentry \| Jan 2022
-      - Programming with Python \| Software Carpentry \| Nov 2021
-      - Programming with R \| Software Carpentry \| Nov 2021
-      - Version Control with Git \| Software Carpentry \| Dec 2021
+            
+      ------------------------------------------------------------------------
+      
+      ### LANGUAGES
+      
+      - **Turkish:** *Native*
+      - **English:** *IELTS 7.0*
+      - **French:** *Beginner*
+      
       
       ------------------------------------------------------------------------
       #### Conference Workshops
@@ -236,11 +238,36 @@ params:
       
       ------------------------------------------------------------------------
       
-      ### LANGUAGES
+      ### PUBLICATIONS
+      Öztürk, F. E. and Demirel, N. (2023). Comparison of the methods to determine optimal number of clusters. Veri Bilimi Derg 6 (1) , 34-45
       
-      - **Turkish:** *Native*
-      - **English:** *IELTS 7.0*
-      - **French:** *Beginner*
+      
+      ------------------------------------------------------------------------
+
+      ### Technical Training:
+      
+      
+      #### University courses
+      - Calculus I & Calculus II \| Sep 2013 & Jan 2014
+      - Introduction to Computing and Programming \| Jan 2014 
+      - Introduction to Probability and Statistics \| Jun 2014
+      - Python for Data Science \| Jan 2022
+      - Exploratory Data Analysis and Data Visualization \| Jan 2022
+      - Unsupervised Statistical Learning \| Jan 2022 
+      - Supervised Statistical Learning \| Sep 2022
+      - R for Statistical Computing and Programming \| Sep 2022
+      - Probability and Statistics for Data Science \| Sep 2022
+      
+      
+      #### Online courses
+      - Python for Data Science and Artificial Intelligence \| Udemy\| Nov 2021
+      - Python for Data Science and Machine Learning Bootcamp \| Udemy \| Dec 2021
+      - Data Management with SQL for Social Scientists \| Data Carpentry \| Nov 2021
+      - Introduction to Geospatial Concepts \| Data Carpentry \| Jan 2022
+      - Introduction to R for Geospatial Data \| Data Carpentry \| Jan 2022
+      - Programming with Python \| Software Carpentry \| Nov 2021
+      - Programming with R \| Software Carpentry \| Nov 2021
+      - Version Control with Git \| Software Carpentry \| Dec 2021
       ------------------------------------------------------------------------
       
       ### INTERESTS
@@ -251,26 +278,7 @@ params:
       - Collecting Playing Cards
       - Game Development
       
-      ------------------------------------------------------------------------
-      
-      
-      ### SKILLS
-      
-      - Programming: 
-      Python, R, Sql, Bash, Git, Google Sheets, JavaScript
-      - Documentation: 
-      Microsoft PowerPoint, Microsoft Word, Markdown, Obsidian, Google Docs, Google Slides
-      - Data Management: 
-      MongoDB, DBBrowser
-      - Statistical Analysis: 
-      A/B Tests, RFM, KPIs, Hypothesis Testing, Anomaly Detection, Ethics and Privacy Awareness, Pandas(Python), Numpy(Python), Tidyverse(R), d3(JavaScript), Financial Analysis 
-      - Machine Learning: 
-      Regression, Classification, Clustering, Artificial Neural Networks, Tensorflow(Python), Sklearn(Python), PyTorch(Python)
-      - Data Visualization/Storytelling: 
-      Matplotlib(Python), Seaborn(Python), Plotnine(Python), Plotly(Python), Ggplot(R), Shiny(R) 
-      - Soft Skills:
-      Identifying & Solving Problems, Researching, Mentoring/Supervising, Report Writing, Project Management, Attention to Details, Workflow Development 
-      
+
 
         
   education:
