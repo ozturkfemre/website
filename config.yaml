@@ -406,22 +406,28 @@ params:
         content: In this project, I compared the methods to determine optimal number of clusters(Average Silhouette, Calinski-Harabasz, Davies-Bouldin, and Dunn Index) on nine different data sets. I tested which method works better in which cases and for which types of data sets they fail. This study was published in 'Veri Bilimi', a national peer-reviewed journal.
         image: /images/projects/clustering.png
         links:
-          - icon: 
+          - icon: fab fa-github
             url: https://github.com/ozturkfemre/optimal_k
 
       - title: One Piece Bounties
         content: With this app, you can dive deep into the bounties of all 199 characters straight from the hallowed pages of the One Piece manga. But wait, there's more! You can also sort them by bounties and categorize by the crews they sail with. 
-        image: /images/projects/op.jpeg
+        image: /images/projects/op.jpg
         featured:
-          name: Demo V2
-          link: https://hugo-profile-2.netlify.app
-        badges:
-          - "Hugo"
-          - "Bootstrap"
-          - "Javascript"
+          name: app
+          link: https://ozturkfemre.shinyapps.io/OnePieceBounties/
         links:
           - icon: fab fa-github
-            url: https://github.com/gurusabarish/HugoProfileV2
+            url: https://github.com/ozturkfemre/OnePiece
+            
+      - title: Unsupervised Learning with feo
+        content: In this project, I covered topics that every data wizard should know about Unsupervised Learning, one of the most fundamental building blocks of machine learning. 
+        image: /images/projects/ulwfeo.png
+        featured:
+          name: booklet
+          link: https://ozturkfemre.github.io/unsupervised_learning_with_feo/
+        links:
+          - icon: fab fa-github
+            url: https://github.com/ozturkfemre/unsupervised_learning_with_feo
 
   #Contact
   contact:

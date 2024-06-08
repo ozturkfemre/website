@@ -20,7 +20,7 @@ In this post, I will describe a number of feature selection methods with linear 
 
 In this method, first univariate models, then bivariate models, then trivariate models (until the total number of predictors is reached). The best model is decided by considering some criteria. If there are k candidate variables, 2\^k possible models are obtained.
 
-At this point, \"some criteria\" needs to be explained. The best model with \$k\$ predictors is chosen with the tradeoff between bias and variance, along with the more subjective desire for parsimony. There are number of criteria you can use: R², Adjusted R², C_p, PRESS_p , AIC(Akaike Information Criteria), and BIC(Bayesian Information Criteria). I have aldready write a post explaining R² and Adjusted R² . You can read that post [in here](https://medium.com/@ozturkfemre/demystifying-regression-evaluation-metrics-understanding-ssr-mse-r%C2%B2-and-adjusted-r%C2%B2-b9a22ac2643d).
+At this point, "some criteria" needs to be explained. The best model with \$k\$ predictors is chosen with the tradeoff between bias and variance, along with the more subjective desire for parsimony. There are number of criteria you can use: R², Adjusted R², C_p, PRESS_p , AIC(Akaike Information Criteria), and BIC(Bayesian Information Criteria). I have aldready write a post explaining R² and Adjusted R² . You can read that post [in here](https://medium.com/@ozturkfemre/demystifying-regression-evaluation-metrics-understanding-ssr-mse-r%C2%B2-and-adjusted-r%C2%B2-b9a22ac2643d).
 
 ## **Cp**
 
@@ -166,7 +166,7 @@ Taking all variables at the same time may cause Multicollinearity, which is one 
 
 Just like always:
 
-\"In case I don\'t see ya, good afternoon, good evening, and good night!\"
+"In case I don't see ya, good afternoon, good evening, and good night!"
 
 ***Reference and Further Reading***
 
