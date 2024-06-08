@@ -253,14 +253,13 @@ params:
           name: "Dokuz Eylul University, Izmir"
           url: ""
         date: "2022 - 2023"
-        GPA: "3.81 out of 4.0"
+        
       
       - title: "Bachelor in Philosophy"
         school:
           name: "Bilkent University, Ankara"
           url: ""
         date: "2012 - 2019"
-        GPA: "2.75 out of 4.0"
         content: 
 
 
