@@ -1,5 +1,5 @@
 ---
-date: "2023-07-02T22:53:58+05:30"
+date: "2023-10-02T22:53:58+05:30"
 draft: false
 hideLastModified: true
 summary: theme() function in the ggplot2 package is used to customize the appearance of the drawn plots. It is a comprehensive function with dozens of arguments, although I don't know exactly how many. Below you can find some widely used arguments and what they do

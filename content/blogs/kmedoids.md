@@ -1,6 +1,6 @@
 ---
-date: "2023-03-22T22:53:58+05:30"
-draft: true
+date: "2023-04-22T22:53:58+05:30"
+draft: false
 hideLastModified: true
 summary: 
 tags:
@@ -18,7 +18,7 @@ In the previous post of this series, I covered [how k-means clustering works](ht
 
 ### **What is k-medoids?**
 
-k-medoids is a clustering algorithm that is similar to k-means, but instead of using the mean of the observations in each cluster as the centroid, it uses one of the observations in the cluster as the \"medoid.\" The main idea behind k-medoids is to define clusters where the total dissimilarity between observations and the medoid is minimized. The k-medoids algorithm is also known as Partitioning Around Medoids (PAM) algorithm.[1], [2]
+k-medoids is a clustering algorithm that is similar to k-means, but instead of using the mean of the observations in each cluster as the centroid, it uses one of the observations in the cluster as the "medoid." The main idea behind k-medoids is to define clusters where the total dissimilarity between observations and the medoid is minimized. The k-medoids algorithm is also known as Partitioning Around Medoids (PAM) algorithm.[1], [2]
 
 #### Step by Step
 
@@ -60,7 +60,7 @@ The gif below repeats all the steps of k-medoids. I included it in the article b
 
 ------------------------------------------------------------------------
 
-It\'s important to note that k-medoids is more robust to noise and outliers than k-means, it\'s also more efficient for handling categorical variables. However, k-medoids is more computationally expensive than k-means because it requires the calculation of all pairwise distances between observations at each iteration. Like k-means, k-medoids is sensitive to the initial conditions and it\'s recommended to run the algorithm multiple times and choose the best solution.
+It's important to note that k-medoids is more robust to noise and outliers than k-means, it's also more efficient for handling categorical variables. However, k-medoids is more computationally expensive than k-means because it requires the calculation of all pairwise distances between observations at each iteration. Like k-means, k-medoids is sensitive to the initial conditions and it's recommended to run the algorithm multiple times and choose the best solution.
 
 ------------------------------------------------------------------------
 
@@ -103,7 +103,7 @@ Available components:
  [1] "medoids"    "id.med"     "clustering" "objective"  "isolation"  "clusinfo"   "silinfo"    "diss"       "call"       "data"
 ```
 
-If we examine the output obtained with the print function; at first we can access the medoid information of each cluster for both PC1 and PC2 dimensions. In addition, we can also see how many observations are in each cluster. As a result of this analysis, there are 499 observations in the first cluster and 269 elements in the second cluster. The medoid of the first cluster is (-2.357211, 0.30131315). The second cluster\'s medoid is (1.358672, 0.03762238). Then we see the clustering vector, which contains the information to which cluster each observation is assigned. Finally, we see the objective function. build represents the first step that I explained in the step-by-step calculation section and swap represents the third step.
+If we examine the output obtained with the print function; at first we can access the medoid information of each cluster for both PC1 and PC2 dimensions. In addition, we can also see how many observations are in each cluster. As a result of this analysis, there are 499 observations in the first cluster and 269 elements in the second cluster. The medoid of the first cluster is (-2.357211, 0.30131315). The second cluster's medoid is (1.358672, 0.03762238). Then we see the clustering vector, which contains the information to which cluster each observation is assigned. Finally, we see the objective function. build represents the first step that I explained in the step-by-step calculation section and swap represents the third step.
 
 Of course, it is quite possible to make a more detailed comment on this output. But this is not our only option. We can visualize the clustering result with the `fviz_cluster` function in the `factoextra` package. Since the factoextra package uses the `ggplot2` package for all visualizations, you can make the same changes to the ggplot2 plots that you can make to the graphs you plot with the fviz_cluster function.
 
@@ -123,7 +123,7 @@ According to the cluster plot, no overlap is observed .The separation occurs on
 
 Just like always:
 
-\"In case I don\'t see ya, good afternoon, good evening, and good night!\"
+"In case I don't see ya, good afternoon, good evening, and good night!"
 
 ------------------------------------------------------------------------
 
