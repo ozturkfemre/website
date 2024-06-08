@@ -2,7 +2,7 @@
 date: "2023-09-22T22:53:58+05:30"
 draft: false
 hideLastModified: true
-summary: Comparison of the methods to determine the optimal number of clusters
+summary: Average silhouette method measures how well-defined a particular cluster is, and how well-separated it is from other clusters. At this point, it is necessary to state that Silhouette value is calculated for each observation in the data set. Average of the silhouette value of all observations gives us the average silhouette value, which is the silhouette value of the clustering analysis.
 tags:
 - R
 - Unsupervised Learning

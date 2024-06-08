@@ -2,7 +2,7 @@
 date: "2023-03-22T22:53:58+05:30"
 draft: false
 hideLastModified: true
-summary: kmeans implemantation
+summary: The center of each cluster, or centroid, in k-means clustering corresponds to the mean of the points allocated to the cluster. The fundamental principle of k-means clustering is to define clusters with the goal of minimizing total intra-cluster variation, also referred to as total within-cluster variation. Various k-means algorithms are available. 
 tags:
 - R
 - Unsupervised Learning

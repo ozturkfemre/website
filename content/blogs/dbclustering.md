@@ -2,7 +2,7 @@
 date: "2023-06-02T22:53:58+05:30"
 draft: false
 hideLastModified: true
-summary: Density Based Clustering
+summary: Density-based clustering is a type of clustering algorithm that groups together data points that are closely packed together, while separating those that are more sparsely distributed. The main idea behind density-based clustering is to identify regions in the feature space where the data points are dense, and then to extract clusters based on these regions.
 tags:
 - R
 title: DBSCAN
@@ -22,7 +22,7 @@ In density-based clustering, the number of clusters does not need to be predeter
 
 The ***eps*** parameter defines the radius of the neighbors around a point x. This is called the epsilon neighborhood of x.
 
-The ***MinPts*** parameter is the minimum number of neighbors within the \"eps\" radius. KNN distplot can be used to determine these values.
+The ***MinPts*** parameter is the minimum number of neighbors within the "eps" radius. KNN distplot can be used to determine these values.
 
 In the DBSCAN (Density-Based Spatial Clustering of Applications with Noise) algorithm, there are three types of points: core points, border points, and noise points.
 
@@ -72,7 +72,7 @@ Some of the disadvantages can be listed as follows:
 
 3.  Density-based clustering algorithms typically require more memory than some other clustering algorithms, especially when dealing with high-dimensional datasets.
 
-4.  Density-based clustering algorithms can be less effective on datasets with high dimensionality or large numbers of features, as they suffer from the \"curse of dimensionality\" which can make it difficult to identify meaningful clusters.
+4.  Density-based clustering algorithms can be less effective on datasets with high dimensionality or large numbers of features, as they suffer from the "curse of dimensionality" which can make it difficult to identify meaningful clusters.
 
 Overall, density-based clustering algorithms can be very effective for many clustering tasks, especially when the data has varying densities and shapes. However, it is important to carefully tune the parameters and consider the limitations of the algorithm when applying it to a particular dataset.
 
@@ -88,7 +88,7 @@ abline(h = 1, lty = 2)
 abline(h = 0.6, lty = 2)
 ```
 
-In the code, k stands for MinPts. After several trials, 10 was decided upon. When analyzing the kNNdisplot, just like the Elbow Method, the point where the line makes an \"elbow\" should be determined. This point should be chosen as the eps value. After various trials, the most appropriate value was decided to be 0.6.
+In the code, k stands for MinPts. After several trials, 10 was decided upon. When analyzing the kNNdisplot, just like the Elbow Method, the point where the line makes an "elbow" should be determined. This point should be chosen as the eps value. After various trials, the most appropriate value was decided to be 0.6.
 
 > In the analysis with minPts 10, eps 1, the number of clusters was found to be one. Since one cluster means no cluster, it was decided not to include it in the post.
 
@@ -127,7 +127,7 @@ When the plot is examined, it can be seen that the observation difference betwee
 
 That was the end of this post. Just like always:
 
-\"In case I don\'t see ya, good afternoon, good evening, and good night!\"
+"In case I don't see ya, good afternoon, good evening, and good night!"
 
 **References**
 

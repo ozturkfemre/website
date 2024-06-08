@@ -6,10 +6,13 @@ draft: false
 tags:
 - R
 - Data Visualization
-
 title: Data Visualization
 toc: null
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
+
 Data visualization can be defined as the use of graphical or pictorial
 representations to present data in a way that makes it easier to
 understand, analyze, and communicate. It involves the use of visual
@@ -412,7 +415,7 @@ the distribution of the mpg variable for both graphs. For this reason,
 there are several methods for determining the appropriate number of
 bins, rules can be applied to `hist` function are:
 
--   [Sturges\'
+-   [Sturges'
     formula](https://www.tandfonline.com/doi/abs/10.1080/01621459.1926.10502161):
     This method uses the following formula to determine the number of
     bins: k = 1 + log2(n), where k is the number of bins and n is the
@@ -422,13 +425,13 @@ bins, rules can be applied to `hist` function are:
     rule](https://link.springer.com/article/10.1007/BF01025868): This
     method uses the interquartile range (IQR) to determine the width of
     each bin. The formula for the bin width is: bin width = 2 \* IQR /
-    (n^(1/3)), where n is the number of data points.
+    (n\^(1/3)), where n is the number of data points.
 
--   [Scott\'s
+-   [Scott's
     rule](https://academic.oup.com/biomet/article-abstract/66/3/605/232642?redirectedFrom=fulltext):
     This method uses the standard deviation of the data to determine the
     width of each bin. The formula for the bin width is: bin width = 3.5
-    \* sd / (n^(1/3)), where sd is the standard deviation of the data
+    \* sd / (n\^(1/3)), where sd is the standard deviation of the data
     and n is the number of data points.
 
 Here are some of the most commonly used arguments of `hist()`function:
@@ -438,8 +441,8 @@ Here are some of the most commonly used arguments of `hist()`function:
 
 -   *breaks: A specification of the breakpoints (i.e., the edges of the
     bins) to use in the histogram. This can be a numeric vector, or a
-    function such as breaks = \"FD\" to use the Freedman-Diaconis rule
-    for determining the bin widths.*
+    function such as breaks = "FD" to use the Freedman-Diaconis rule for
+    determining the bin widths.*
 
 -   *freq: A logical value that specifies whether the y-axis should
     represent the frequency (i.e., the count of values in each bin) or
@@ -725,9 +728,9 @@ function:
 -   *x and y: the data to be plotted on the x-axis and y-axis,
     respectively.*
 
--   *type: the type of plot to be created. For example, \"p\" creates a
-    scatter plot with points, \"l\" creates a line plot, \"b\" creates
-    both points and lines, and \"h\" creates a histogram.*
+-   *type: the type of plot to be created. For example, "p" creates a
+    scatter plot with points, "l" creates a line plot, "b" creates both
+    points and lines, and "h" creates a histogram.*
 
 -   *main: the main title of the plot.*
 
@@ -831,14 +834,14 @@ arguments for the par() function:
     the edge of the plotting region and the main title, axis labels, and
     so on, in the form c(bottom, left, top, right).*
 
--   *pty: the type of plot region to be used, either \"s\" (square) or
-    \"m\" (maximal).*
+-   *pty: the type of plot region to be used, either "s" (square) or "m"
+    (maximal).*
 
--   *xaxs and yaxs: the style of the axis ranges. A value of \"r\"
+-   *xaxs and yaxs: the style of the axis ranges. A value of "r"
     (default) indicates that the axis limits should be rounded to the
-    nearest integer multiple of the tick interval, while a value of
-    \"i\" indicates that the axis limits should be exactly at the data
-    range limits.*
+    nearest integer multiple of the tick interval, while a value of "i"
+    indicates that the axis limits should be exactly at the data range
+    limits.*
 
 -   *col: the color palette to be used for subsequent plots.*
 
@@ -857,16 +860,15 @@ arguments for the par() function:
     to the axis.*
 
 -   *log: whether the x- and/or y-axis should be plotted on a
-    logarithmic scale. A value of \"x\" indicates a logarithmic x-axis,
-    while \"y\" indicates a logarithmic y-axis, and \"xy\" indicates a
+    logarithmic scale. A value of "x" indicates a logarithmic x-axis,
+    while "y" indicates a logarithmic y-axis, and "xy" indicates a
     logarithmic scale for both axes.*
 
 -   *xlim and ylim: the limits of the x- and y-axis, respectively.*
 
--   *xaxt and yaxt: the style of the axis ticks. A value of \"n\"
-    indicates that no axis should be drawn, while \"s\" indicates a
-    small axis, \"m\" indicates a medium axis, and \"l\" indicates a
-    large axis.*
+-   *xaxt and yaxt: the style of the axis ticks. A value of "n"
+    indicates that no axis should be drawn, while "s" indicates a small
+    axis, "m" indicates a medium axis, and "l" indicates a large axis.*
 
 I will use the last example to show `par` function. However, line will
 not be in the same graph this time.
@@ -896,8 +898,7 @@ for (i in 1:length(df) ) {
 
 Just like always:
 
-\"In case I don\'t see ya, good afternoon, good evening, and good
-night!\"
+"In case I don't see ya, good afternoon, good evening, and good night!"
 
 ------------------------------------------------------------------------
 
